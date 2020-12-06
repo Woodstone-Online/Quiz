@@ -104,11 +104,22 @@ export default class Quiz {
 
 customElements.define('quiz-configurator', class extends HTMLElement {
     connectedCallback() {
-        this.attachShadow({mode: 'open'}).append(configurator.content.cloneNode(true))
+        this.attachShadow({mode: 'open'}).append(configurator.content.cloneNode(true));
+        const form = this.shadowRoot.querySelector('form')
+        const slot = this.shadowRoot.querySelector('slot');
+        slot.addEventListener('slotchange', () => {
+            setTimeout(() => {
+                for (let field of slot.assignedNodes()) {
+                    form.insertBefore(field, slot)
+                }
+            });
+        })
     }
 });
 customElements.define('quiz-step', class extends HTMLElement {
     connectedCallback() {
+        if (this.connected) return;
+        this.connected = true;
         this.attachShadow({mode: 'open'}).append(step.content.cloneNode(true));
         this.shadowRoot.querySelector('.title').innerText = this.getAttribute('title');
     }
