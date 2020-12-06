@@ -40,7 +40,7 @@ export default class Quiz {
                 break;
             case 3:
                 const checkedValue = this.getAnswer(step.data.fieldname, false, 0);
-                step.data.options.forEach(item => element.innerHTML += `<div><input ${item.value === checkedValue ? 'checked' : ''} id="${step.data.fieldname}_${item.value}" name="${step.data.fieldname}" value="${item.value}" type="radio" onchange="app.setAnswer('${step.data.fieldname}',false,parseInt(this.form.${step.data.fieldname}.value))">
+                step.data.options.forEach(item => element.innerHTML += `<div><input ${item.value === checkedValue ? 'checked' : ''} id="${step.data.fieldname}_${item.value}" name="${step.data.fieldname}" value="${item.value}" type="radio" onchange="app.setAnswer('${step.data.fieldname}',false,parseInt(Object.fromEntries(new FormData(this.form).entries()).${step.data.fieldname}))">
 <label for="${step.data.fieldname}_${item.value}">${item.title}</label></div>`);
                 break;
             default:
