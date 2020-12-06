@@ -79,11 +79,14 @@ export default class Quiz {
     }
 
     async createUser() {
+        const preferences = Object.create(this.preferences);
+        for (let item in preferences) if (preferences.hasOwnProperty(item) && typeof preferences[item] !== "object")
+            preferences[item] = {value: preferences[item]};
         const data = {
             "name": "User Name",
             "phone": "+79920129664",
             "email": "example@example.com",
-            "preferences": this.preferences,
+            "preferences": preferences,
             "project": {
                 "areaIds": ["7f3737c1-4634-42af-954d-c8d82e7e6a50", "4216b04b-b288-49cf-a2a6-f942273898e9"],
                 "cottageVillageIds": ["438fbb3d-1d46-44dc-affb-dfc2df9427be", "2348b481-569f-4a02-8350-dd69cc9bf1a7"],
