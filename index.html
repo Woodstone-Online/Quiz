@@ -20,6 +20,17 @@
     </script>
 </head>
 <body>
-
+<template id="configurator">
+    <h1>Конфигуратор</h1>
+    <form>
+        <slot></slot>
+    </form>
+    <br><br>
+    <button onclick="app.createUser()">Создать юзера</button>
+</template>
+<template id="step">
+    <h2 class="title">Заголовок</h2>
+    <slot></slot>
+</template>
 </body>
 </html>

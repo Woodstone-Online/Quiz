@@ -18,8 +18,8 @@ export default class Quiz {
     }
 
     async renderQuiz() {
-        const element = document.createElement('quiz-page');
-        element.innerHTML = `<h1>Конфигуратор</h1><form id="quiz"></form>`;
+        const element = document.createElement('quiz-configurator');
+        // element.innerHTML = `<h1>Конфигуратор</h1><form id="quiz"></form>`;
         document.body.appendChild(element);
         return await this.quizSteps.forEach(await this.renderStep, this);
     }
@@ -27,7 +27,8 @@ export default class Quiz {
     async renderStep(step) {
         const element = document.createElement('quiz-step');
         element.id = step.data.fieldname;
-        element.innerHTML += `<h2>${step.title}</h2>`;
+        element.title = step.title;
+        // element.innerHTML += `<h2>${step.title}</h2>`;
         switch (step.typeId) {
             case 1:
                 step.data.counters.forEach(item => element.innerHTML += `<div><label for="${item.fieldname}">${item.title}</label>
@@ -45,7 +46,8 @@ export default class Quiz {
             default:
                 return false;
         }
-        document.getElementById('quiz').appendChild(element);
+        // document.getElementById('quiz').appendChild(element);
+        document.querySelector('quiz-configurator').appendChild(element);
     }
 
     setAnswer(step, item, value) {
@@ -76,4 +78,30 @@ export default class Quiz {
         }
     }
 
+    async createUser() {
+        const data = {
+            "name": "User Name",
+            "phone": "+79920129664",
+            "email": "example@example.com",
+            "preferences": this.preferences
+        }
+        const response = await fetch(this.endpointURL + 'user', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        }).then(r => r.json());
+        return console.debug(response);
+    }
+
 }
+
+customElements.define('quiz-configurator', class extends HTMLElement {
+    connectedCallback() {
+        this.attachShadow({mode: 'open'}).append(configurator.content.cloneNode(true))
+    }
+});
+customElements.define('quiz-step', class extends HTMLElement {
+    connectedCallback() {
+        this.attachShadow({mode: 'open'}).append(step.content.cloneNode(true));
+        this.shadowRoot.querySelector('.title').innerText = this.getAttribute('title');
+    }
+});
