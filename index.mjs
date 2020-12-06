@@ -95,6 +95,9 @@ export default class Quiz {
         }
         const response = await fetch(this.endpointURL + 'user', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(data)
         }).then(r => r.json());
         return console.debug(response);
