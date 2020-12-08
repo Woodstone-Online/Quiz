@@ -27,22 +27,23 @@ export default class Quiz {
 
     async renderStep(step) {
         const element = document.createElement('quiz-step');
-        element.id = step.data.fieldname;
+        element.id = step.fieldname;
         element.title = step.title;
         // element.innerHTML += `<h2>${step.title}</h2>`;
-        switch (step.typeId) {
-            case 1:
-                step.data.counters.forEach(item => element.innerHTML += `<div><label for="${item.fieldname}">${item.title}</label>
-<input id="${item.fieldname}" name="${item.fieldname}" type="number" value="${this.getAnswer(step.data.fieldname, item.fieldname, 0)}" onchange="app.setAnswer('${step.data.fieldname}','${item.fieldname}',parseInt(this.value))"></div>`);
+        switch (step.type) {
+            case 'counters':
+                step.data.forEach(item => element.innerHTML += `<div><label for="${item.fieldname}">${item.title}</label>
+<input id="${item.fieldname}" name="${item.fieldname}" type="number" value="${this.getAnswer(step.fieldname, item.fieldname, 0)}" onchange="app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.value))"></div>`);
                 break;
-            case 2:
-                step.data.ranges.forEach(item => element.innerHTML += `<div><label for="${item.fieldname}">${item.title}</label>
-<input id="${item.fieldname}" name="${item.fieldname}" type="range" min="${item.minValue}" max="${item.maxValue}" value="${this.getAnswer(step.data.fieldname, item.fieldname, item.minValue)}" onchange="app.setAnswer('${step.data.fieldname}','${item.fieldname}',parseInt(this.value))"></div>`);
+            case 'ranges':
+                step.data.forEach(item => element.innerHTML += `<div><label for="${item.fieldname}">${item.title}</label>
+<input id="${item.fieldname}" name="${item.fieldname}" type="range" min="${item.minValue}" max="${item.maxValue}" value="${this.getAnswer(step.fieldname, item.fieldname, item.minValue)}" onchange="app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.value))"></div>`);
                 break;
-            case 3:
-                const checkedValue = this.getAnswer(step.data.fieldname, false, 0);
-                step.data.options.forEach(item => element.innerHTML += `<div><input ${item.value === checkedValue ? 'checked' : ''} id="${step.data.fieldname}_${item.value}" name="${step.data.fieldname}" value="${item.value}" type="radio" onchange="app.setAnswer('${step.data.fieldname}',false,parseInt(Object.fromEntries(new FormData(this.form).entries()).${step.data.fieldname}))">
-<label for="${step.data.fieldname}_${item.value}">${item.title}</label></div>`);
+            case 'options-small':
+            case 'options-regular':
+                const checkedValue = this.getAnswer(step.fieldname, false, 0);
+                step.data.forEach(item => element.innerHTML += `<div><input ${item.value === checkedValue ? 'checked' : ''} id="${step.fieldname}_${item.value}" name="${step.fieldname}" value="${item.value}" type="radio" onchange="app.setAnswer('${step.fieldname}',false,parseInt(Object.fromEntries(new FormData(this.form).entries()).${step.fieldname}))">
+<label for="${step.fieldname}_${item.value}">${item.title}</label></div>`);
                 break;
             default:
                 return false;
