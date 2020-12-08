@@ -8,12 +8,13 @@ export default class Quiz {
     }
 
     async init() {
-        await this.loadConfiguration();
+        await this.loadConfiguration('quizSteps');
+        await this.loadConfiguration('areas');
         await this.renderQuiz();
     }
 
-    async loadConfiguration() {
-        return Object.assign(this, await fetch(this.endpointURL + 'quizSteps').then(r => r.json())
+    async loadConfiguration(route) {
+        return Object.assign(this, await fetch(this.endpointURL + route).then(r => r.json())
             .catch(e => console.error(e) || {}));
     }
 
@@ -125,5 +126,75 @@ customElements.define('quiz-step', class extends HTMLElement {
         this.connected = true;
         this.attachShadow({mode: 'open'}).append(step.content.cloneNode(true));
         this.shadowRoot.querySelector('.title').innerText = this.getAttribute('title');
+    }
+});
+customElements.define("quiz-map", class extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({mode: "open"});
+        this.IFrame = null;
+        this.IFrameDocument = null;
+        this.IFrameWindow = null;
+    }
+
+    connectedCallback() {
+        this.render();
+        this.initIframe();
+        this.initMap();
+    }
+
+    initIframe() {
+        this.IFrame = this.shadowRoot.querySelector("iframe");
+        this.IFrameDocument = this.IFrame.contentDocument;
+        this.IFrameWindow = this.IFrame.contentWindow;
+        // создадим скрипт который подтянет в iframe карту
+        const script = document.createElement("script");
+        script.setAttribute(
+            "src",
+            "https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=d1df8012-8243-4242-b139-4a7c6c298e2c"
+        );
+        script.onload = this.initMap.bind(this);
+        this.mapElement = document.createElement("div");
+        this.mapElement.style.height = "100vh";
+        this.mapElement.style.width = "100vw";
+        this.IFrameDocument.body.appendChild(script);
+        this.IFrameDocument.body.appendChild(this.mapElement);
+        this.IFrameDocument.body.style.margin = "0";
+    }
+
+    initMap() {
+        const {ymaps} = this.IFrameWindow;
+        ymaps.ready(() => {
+            this.myMap = new ymaps.Map(this.mapElement, {
+                center: [60.56, 56.86],
+                zoom: 10
+            });
+            if (!app.areas) return console.debug('No polygons');
+            app.areas.forEach(area => {
+                let myPolygon = new ymaps.Polygon([
+                    area.polygon
+                ], {
+                    hintContent: area.title
+                }, {});
+                this.myMap.geoObjects.add(myPolygon);
+            });
+        });
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+        <style>
+            :host {
+                height: 400px;
+                width: 400px;
+                display: block;
+            }
+            iframe {
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+        <iframe scrolling="no" frameborder="0"></iframe>
+    `;
     }
 });
