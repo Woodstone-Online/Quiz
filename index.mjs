@@ -167,7 +167,7 @@ customElements.define("quiz-map", class extends HTMLElement {
         const {ymaps} = this.IFrameWindow;
         ymaps.ready(() => {
             this.myMap = new ymaps.Map(this.mapElement, {
-                center: [60.56, 56.86],
+                center: [56.86, 60.56],
                 zoom: 10
             });
             if (!app.areas) return console.debug('No polygons');
