@@ -82,6 +82,11 @@ export default class Quiz {
         return this.preferences[step][item] ? this.preferences[step][item] : defaultValue;
     }
 
+    getState(type, id) {
+        if (!type || !id || !this[type] || !this[type][id]) return null;
+        return this[type][id];
+    }
+
     saveAnswers(key = 'preferences') {
         localStorage.setItem(key, JSON.stringify(this[key]));
     }
@@ -233,7 +238,7 @@ customElements.define('quiz-areas', class extends HTMLElement {
         // this.attachShadow({mode: 'open'}).append(step.content.cloneNode(true));
         // this.shadowRoot.querySelector('.title').innerText = this.getAttribute('title');
         this.shadowRoot.innerHTML = '<h2 class="title">Выберите районы</h2>';
-        app.areas.forEach(area => this.shadowRoot.innerHTML += `<div><input type="checkbox" id="area_${area.areaId}" onchange="app.toggleArea('${area.areaId}',this.checked)">
+        app.areas.forEach(area => this.shadowRoot.innerHTML += `<div><input type="checkbox" id="area_${area.areaId}" ${app.getState('selectedAreas', area.areaId) ? 'checked' : ''} onchange="app.toggleArea('${area.areaId}',this.checked)">
 <label for="area_${area.areaId}">${area.title}</label></div>`);
         // this.shadowRoot.innerHTML += `<br><button onclick="app.showVillages()">Показать поселки</button>`;
     }
