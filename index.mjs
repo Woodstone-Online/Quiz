@@ -3,6 +3,8 @@ export default class Quiz {
 
     constructor() {
         this.loadAnswers();
+        this.loadAnswers('selectedAreas');
+        this.loadAnswers('selectedVillages');
         this.init();
         return this;
     }
@@ -61,22 +63,35 @@ export default class Quiz {
         this.saveAnswers();
     }
 
+    toggleArea(id, state = true) {
+        if (!id) return false;
+        if (state) this.selectedAreas[id] = state;
+        else delete this.selectedAreas[id];
+        this.saveAnswers('selectedAreas');
+    }
+
+    toggleVillage(id) {
+        if (!id) return false;
+        this.selectedVillages[id] = true;
+        this.saveAnswers('selectedVillages');
+    }
+
     getAnswer(step, item, defaultValue = '') {
         if (!item) return this.preferences[step] ? this.preferences[step] : defaultValue;
         if (!this.preferences[step]) return defaultValue;
         return this.preferences[step][item] ? this.preferences[step][item] : defaultValue;
     }
 
-    saveAnswers() {
-        localStorage.setItem('preferences', JSON.stringify(this.preferences));
+    saveAnswers(key = 'preferences') {
+        localStorage.setItem(key, JSON.stringify(this[key]));
     }
 
-    loadAnswers() {
+    loadAnswers(key = 'preferences') {
         try {
-            this.preferences = localStorage.getItem('preferences') ? JSON.parse(localStorage.getItem('preferences')) : {}
+            this[key] = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : {}
         } catch (e) {
             console.error(e);
-            this.preferences = {}
+            this[key] = {}
         }
     }
 
@@ -103,6 +118,17 @@ export default class Quiz {
             body: JSON.stringify(data)
         }).then(r => r.json());
         return console.debug(response);
+    }
+
+    async showVillages() {
+        await this.loadConfiguration('cottage-villages?areaIds=[' + Object.keys(app.selectedAreas).toString() + ']');
+        const node = document.querySelector('quiz-configurator').shadowRoot.querySelector('quiz-villages').shadowRoot;
+        node.innerHTML = '<h2 class="title">Посмотрите и отметьте понравившиеся поселки</h2>';
+        this.cottageVillages.forEach(village => {
+            let source = `<div><img src="${village.image}"><br><h3>${village.title}</h3><p>${village.address}</p>`;
+            village.data.icons.forEach(icon => source += `<img src="${icon.icon}" title="${icon.description}">`);
+            node.innerHTML += source + `<button onclick="app.toggleVillage('${village.cottageVillageId}')">Мне нравится</button></div>`;
+        })
     }
 
 }
@@ -172,11 +198,7 @@ customElements.define("quiz-map", class extends HTMLElement {
             });
             if (!app.areas) return console.debug('No polygons');
             app.areas.forEach(area => {
-                let myPolygon = new ymaps.Polygon([
-                    area.polygon
-                ], {
-                    hintContent: area.title
-                }, {});
+                let myPolygon = new ymaps.Polygon([area.polygon], {hintContent: area.title}, {});
                 this.myMap.geoObjects.add(myPolygon);
             });
         });
@@ -197,5 +219,30 @@ customElements.define("quiz-map", class extends HTMLElement {
         </style>
         <iframe scrolling="no" frameborder="0"></iframe>
     `;
+    }
+});
+customElements.define('quiz-areas', class extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({mode: "open"});
+    }
+
+    connectedCallback() {
+        // this.attachShadow({mode: 'open'}).append(step.content.cloneNode(true));
+        // this.shadowRoot.querySelector('.title').innerText = this.getAttribute('title');
+        this.shadowRoot.innerHTML = '<h2 class="title">Выберите районы</h2>';
+        app.areas.forEach(area => this.shadowRoot.innerHTML += `<div><input type="checkbox" id="area_${area.areaId}" onchange="app.toggleArea('${area.areaId}',this.checked)">
+<label for="area_${area.areaId}">${area.title}</label></div>`);
+        // this.shadowRoot.innerHTML += `<br><button onclick="app.showVillages()">Показать поселки</button>`;
+    }
+});
+customElements.define('quiz-villages', class extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({mode: "open"});
+    }
+
+    connectedCallback() {
+        this.shadowRoot.innerHTML = `<br><button onclick="app.showVillages()">Показать поселки</button>`;
     }
 });
