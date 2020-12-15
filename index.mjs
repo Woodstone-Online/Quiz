@@ -202,6 +202,7 @@ export default class Quiz {
             preferences[item] = {value: preferences[item]};
         preferences.communication = {"email": false, "whatsapp": true, "phone": true}
         preferences.interest = {"value": 1}
+        delete preferences.budget.total; // TODO: Backward compatibility
         const areaIds = Object.keys(this.selectedAreas);
         const cottageVillageIds = Object.keys(this.selectedVillages);
         const data = Object.assign({
