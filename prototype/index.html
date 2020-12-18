@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Woodstone Quiz</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <style>
+        :root {
+            font-family: Helvetica, sans-serif;
+        }
+
+        input {
+            font-size: 16px;
+        }
+    </style>
+    <script async defer type="module">
+        import Quiz from "./index.mjs";
+
+        window.app = new Quiz();
+    </script>
+</head>
+<body>
+<template id="configurator">
+    <h1>Конфигуратор</h1>
+    <form>
+        <slot></slot>
+    </form>
+    <br>
+    <quiz-map></quiz-map>
+    <quiz-areas></quiz-areas>
+    <quiz-villages></quiz-villages>
+    <quiz-homes></quiz-homes>
+    <quiz-profile></quiz-profile>
+    <br><br>
+    <button onclick="app.createUser()">Создать юзера</button>
+</template>
+<template id="step">
+    <h2 class="title">Заголовок</h2>
+    <slot></slot>
+</template>
+</body>
+</html>

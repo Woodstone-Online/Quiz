@@ -1,42 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Woodstone Quiz</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Woodstone</title>
     <style>
         :root {
             font-family: Helvetica, sans-serif;
+            height: 100%;
         }
 
-        input {
-            font-size: 16px;
+        :root, body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body {
+            margin: auto;
+            width: 80%;
+            max-width: 1024px;
+        }
+
+        img {
+            padding-bottom: 100px;
+            max-width: 100%;
+        }
+
+        h1 {
+            color: #c8c8c8;
+            text-align: center;
+            font-size: 1.6rem;
+            width: 80%;
+            max-width: 800px;
+            font-weight: lighter;
+        }
+
+        @media (max-width: 1024px) {
+            :root {
+                font-size: 12px;
+            }
+
+            h1 {
+                font-weight: normal;
+            }
         }
     </style>
-    <script async defer type="module">
-        import Quiz from "./index.mjs";
-
-        window.app = new Quiz();
-    </script>
 </head>
 <body>
-<template id="configurator">
-    <h1>Конфигуратор</h1>
-    <form>
-        <slot></slot>
-    </form>
-    <br>
-    <quiz-map></quiz-map>
-    <quiz-areas></quiz-areas>
-    <quiz-villages></quiz-villages>
-    <quiz-homes></quiz-homes>
-    <quiz-profile></quiz-profile>
-    <br><br>
-    <button onclick="app.createUser()">Создать юзера</button>
-</template>
-<template id="step">
-    <h2 class="title">Заголовок</h2>
-    <slot></slot>
-</template>
+<img alt="Woodstone" src="logo.png" title="Woodstone">
+<h1>Скоро тут будет портал в вашу новую загородную жизнь</h1>
 </body>
 </html>
