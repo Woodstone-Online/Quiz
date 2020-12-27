@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-family: Helvetica, sans-serif;
+    height: 100%;
+}
+
+body {
+    margin: unset;
+    height: 100%;
+}
+
+input {
+    font-size: 16px;
+}
