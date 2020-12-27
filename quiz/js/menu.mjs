@@ -39,6 +39,26 @@ window.customElements.define('quiz-menu', class extends LitElement {
           nav > a.active {
             opacity: initial;
           }
+
+          @media (min-width: 1440px) {
+            :host {
+              display: flex;
+              flex-direction: column;
+            }
+
+            header {
+              background: initial;
+              box-shadow: initial;
+            }
+
+            aside {
+              height: 100%;
+            }
+
+            nav {
+              flex-direction: column;
+            }
+          }
         `;
     }
 

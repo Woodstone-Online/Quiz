@@ -23,6 +23,20 @@ window.customElements.define('quiz-app', class extends LitElement {
             padding-top: 15px;
             margin-top: -15px;
           }
+
+          @media (min-width: 1440px) {
+            :host {
+              flex-direction: row;
+              justify-content: space-between;
+            }
+
+            main {
+              max-width: 1024px;
+              margin: initial;
+              padding: initial;
+              padding: 30px;
+            }
+          }
         `;
     }
 

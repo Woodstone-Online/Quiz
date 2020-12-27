@@ -12,7 +12,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
           }
 
           :host:after {
-            content: '';
+            //content: '';
             height: 70px;
             display: block;
             width: 100%;
@@ -31,18 +31,6 @@ window.customElements.define('quiz-needs', class extends LitElement {
             outline: unset;
           }
 
-          section:last-of-type {
-            padding-bottom: 100px;
-          }
-
-          section:not(:focus-within) {
-            cursor: pointer;
-          }
-
-          section:not(:focus-within) > *:not(.title) {
-            display: none;
-          }
-
           .title {
             font-weight: 600;
             font-size: 18px;
@@ -50,8 +38,23 @@ window.customElements.define('quiz-needs', class extends LitElement {
             opacity: 0.3;
           }
 
-          section:focus-within > .title {
-            opacity: initial;
+          @media (max-width: 1439px) {
+
+            section:last-of-type {
+              padding-bottom: 100px;
+            }
+
+            section:not(:focus-within) {
+              cursor: pointer;
+            }
+
+            section:not(:focus-within) > *:not(.title) {
+              display: none;
+            }
+
+            section:focus-within > .title {
+              opacity: initial;
+            }
           }
 
           .buttons {
@@ -214,6 +217,48 @@ window.customElements.define('quiz-needs', class extends LitElement {
             font-size: 18px;
             font-weight: 500;
             margin: 0 10px;
+          }
+
+          @media (min-width: 1440px) {
+            :host {
+              border-radius: 6px;
+              background: white;
+              display: block;
+              position: relative;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+              padding: initial;
+              height: auto;
+              min-height: initial;
+            }
+
+            section {
+              position: initial;
+              border-radius: initial;
+              background: initial;
+              padding: 15px 30px;
+              margin: initial;
+              box-shadow: initial;
+              border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            }
+
+            section > *:last-child {
+              flex: 1;
+              max-width: 600px;
+            }
+
+            .big-next-bottom-button {
+              border-radius: 100px;
+              width: 337px;
+              left: initial;
+              right: initial;
+              bottom: 30px;
+              position: fixed;
+              font-size: 20px;
+            }
+
           }
         `;
     }
