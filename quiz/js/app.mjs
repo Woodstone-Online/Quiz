@@ -24,16 +24,30 @@ window.customElements.define('quiz-app', class extends LitElement {
             margin-top: -15px;
           }
 
-          @media (min-width: 1440px) {
+          @media (min-width: 1024px) {
+            main {
+              padding: 0 30px;
+              padding-bottom: 30px;
+              margin: initial;
+            }
+          }
+
+          @media (min-width: 1364px) {
             :host {
               flex-direction: row;
               justify-content: space-between;
+              background: #F5F6F8;
+            }
+
+            quiz-menu {
+              flex-grow: 1;
             }
 
             main {
               max-width: 1024px;
+              min-width: 1024px;
+              width: 1024px;
               margin: initial;
-              padding: initial;
               padding: 30px;
             }
           }
