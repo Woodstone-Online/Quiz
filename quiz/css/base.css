@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    touch-action: manipulation;
+    -webkit-text-size-adjust: none;
 }
 
 :root {
@@ -7,13 +9,22 @@
     height: 100%;
     -webkit-text-size-adjust: none;
     touch-action: none;
+    background: #F2F4F6;
 }
 
 body {
     margin: unset;
     height: 100%;
+    width: 100%;
+    position: fixed;
 }
 
-input {
-    font-size: 16px;
+input, button {
+    font-size: 18px;
+}
+
+@media (min-width: 1364px) {
+    :root {
+        background: #F5F6F8;
+    }
 }

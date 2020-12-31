@@ -41,7 +41,8 @@ export class Quiz {
         this.router = new Router(outlet, {baseUrl: '/quiz/'});
         this.router.setRoutes([
             {path: '', component: 'quiz-needs'},
-            // {path: 'location', component: 'quiz-location'},
+            {path: 'location', component: 'quiz-location'},
+            {path: 'contacts', component: 'quiz-contacts'},
         ]);
     }
 
@@ -56,6 +57,10 @@ export class Quiz {
     }
 
     async renderQuiz() {
+        window.addEventListener("scroll", (e) => {
+            e.preventDefault();
+            window.scrollTo(0, 0);
+        });
         const element = document.createElement('quiz-app');
         // element.innerHTML = `<h1>Конфигуратор</h1><form id="quiz"></form>`;
         document.body.appendChild(element);
@@ -201,22 +206,23 @@ export class Quiz {
 
     loadAnswers(key = 'preferences') {
         try {
-            this[key] = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : {}
+            this[key] = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : null
         } catch (e) {
             console.error(e);
-            this[key] = {}
+            this[key] = null
         }
     }
 
-    async createUser() {
+    async createUser(e) {
+        e.preventDefault();
         const preferences = Object.assign({}, this.preferences);
         for (let item in preferences) if (preferences.hasOwnProperty(item) && typeof preferences[item] !== "object")
             preferences[item] = {value: preferences[item]};
         preferences.communication = {"email": false, "whatsapp": true, "phone": true}
         preferences.interest = {"value": 1}
-        delete preferences.budget.total; // TODO: Backward compatibility
-        const areaIds = Object.keys(this.selectedAreas);
-        const cottageVillageIds = Object.keys(this.selectedVillages);
+        if (preferences.budget && preferences.budget.total) delete preferences.budget.total; // TODO: Backward compatibility
+        const areaIds = this.selectedAreas ? Object.keys(this.selectedAreas) : null;
+        const cottageVillageIds = this.selectedVillages ? Object.keys(this.selectedVillages) : null;
         const data = Object.assign({
             "preferences": preferences,
             "project": {

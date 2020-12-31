@@ -3,6 +3,11 @@ import {LitElement, html, css} from 'https://jspm.dev/lit-element';
 window.customElements.define('quiz-menu', class extends LitElement {
     static get styles() {
         return css`
+          * {
+            touch-action: manipulation;
+            -webkit-text-size-adjust: none;
+          }
+
           :host {
             font-family: 'Montserrat', sans-serif;
           }
@@ -154,9 +159,9 @@ window.customElements.define('quiz-menu', class extends LitElement {
             <aside>
                 <nav>
                     <a href="/quiz/" class="active">Потребности</a>
-                    <a href="">Направления</a>
+                    <a href="/quiz/location">Направления</a>
                     <a href="">Дом</a>
-                    <a href="">Условия</a>
+                    <a href="/quiz/contacts">Условия</a>
                 </nav>
             </aside>
         `;

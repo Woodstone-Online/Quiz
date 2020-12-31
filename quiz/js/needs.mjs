@@ -4,6 +4,11 @@ import {LitElement, html, css} from 'https://jspm.dev/lit-element';
 window.customElements.define('quiz-needs', class extends LitElement {
     static get styles() {
         return css`
+          * {
+            touch-action: manipulation;
+            -webkit-text-size-adjust: none;
+          }
+
           :host {
             font-family: 'Montserrat', sans-serif;
             height: 100%;
@@ -507,8 +512,8 @@ window.customElements.define('quiz-needs', class extends LitElement {
 
     render() {
         return html`${quiz.quizSteps.map(this.renderStep)}
-        <a class="big-next-bottom-button" href=""">
-        Далее<span>Выбор предпочтений по локации</span>
+        <a class="big-next-bottom-button" href="location">
+            Далее<span>Выбор предпочтений по локации</span>
         </a>`
     }
 

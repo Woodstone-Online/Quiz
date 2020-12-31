@@ -2,7 +2,8 @@ import quiz from './quiz.mjs'
 import {LitElement, html, css} from 'https://jspm.dev/lit-element';
 import './menu.mjs';
 import './needs.mjs';
-// import './location.mjs';
+import './location.mjs';
+import './contacts.mjs';
 
 window.customElements.define('quiz-app', class extends LitElement {
 
@@ -13,9 +14,14 @@ window.customElements.define('quiz-app', class extends LitElement {
 
     static get styles() {
         return css`
+          * {
+            touch-action: manipulation;
+            -webkit-text-size-adjust: none;
+          }
+
           :host {
             flex-direction: column;
-            background: #F2F4F6;
+            //background: #F2F4F6;
             max-height: 100vh;
             max-width: 100vw;
             display: flex;
@@ -44,7 +50,7 @@ window.customElements.define('quiz-app', class extends LitElement {
             :host {
               flex-direction: row;
               justify-content: space-between;
-              background: #F5F6F8;
+              //background: #F5F6F8;
             }
 
             quiz-menu {
