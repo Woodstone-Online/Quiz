@@ -5,8 +5,8 @@ window.customElements.define('quiz-location', class extends LitElement {
     static get styles() {
         return css`
           :host {
+            font-family: 'Montserrat', sans-serif;
             display: block;
-
             height: calc(100% - 70px);
             //min-height: 100%;
             margin-bottom: 70px;
@@ -15,7 +15,7 @@ window.customElements.define('quiz-location', class extends LitElement {
           section {
             position: relative;
             background: white;
-            border-radius: 15px;
+            border-radius: 6px;
             box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.06);
             height: 100%;
             overflow: hidden;
@@ -124,7 +124,7 @@ window.customElements.define('quiz-location', class extends LitElement {
           @media (min-width: 1024px) {
             :host {
               height: calc(100% - 130px);
-              border-radius: 15px;
+              border-radius: 6px;
               background: white;
               padding: 15px;
             }
@@ -147,6 +147,7 @@ window.customElements.define('quiz-location', class extends LitElement {
           @media (min-width: 1364px) {
             .big-next-bottom-button {
               left: initial;
+              margin-left: -15px;
             }
 
           }

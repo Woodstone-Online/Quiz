@@ -6,7 +6,6 @@ window.customElements.define('quiz-contacts', class extends LitElement {
         return css`
           :host {
             font-family: 'Montserrat', sans-serif;
-
             display: block;
             height: calc(100% - 70px);
             margin-bottom: 70px;
@@ -127,6 +126,7 @@ window.customElements.define('quiz-contacts', class extends LitElement {
             justify-content: space-between;
             align-items: center;
             border: unset;
+            z-index: 10;
           }
 
           section form {
@@ -136,7 +136,8 @@ window.customElements.define('quiz-contacts', class extends LitElement {
             padding: 30px;
             background: white;
             border-radius: 15px;
-
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
           }
 
           form h2 {
@@ -173,42 +174,62 @@ window.customElements.define('quiz-contacts', class extends LitElement {
             opacity: 0.8;
           }
 
-          @media (max-width: 1023px) {
-            section form {
-              border-bottom-left-radius: 0;
-              border-bottom-right-radius: 0;
-            }
-          }
-
           @media (min-width: 1024px) {
             :host {
               //height: calc(100% - 130px);
               //border-radius: 15px;
               //background: white;
               //padding: 15px;
-              height: 100%;
+              height: calc(100% + 30px);
               margin: unset;
+              margin-bottom: -30px;
+              display: flex;
+              justify-content: space-between;
+              flex-direction: column;
             }
 
             section {
               //box-shadow: initial;
               max-width: 643px;
+              height: auto;
             }
 
-            form {
+            section .header {
+              padding: unset;
+            }
+
+            section .header h1 {
+              font-size: 42px;
+              line-height: 30px;
+            }
+
+            section .header span {
+              font-size: 20px;
+              line-height: 26px;
+              margin-top: unset;
+            }
+
+            .communications {
+              max-width: 100%;
+            }
+
+            section form {
               margin-top: 15px;
+              //bottom: 0;
+              //position: absolute;
+              padding: 50px;
+              padding-bottom: 130px;
             }
 
             .big-next-bottom-button {
-              position: static;
               border-radius: 100px;
               width: 337px;
-              margin-top: 70px;
-              //left: 30px;
+              left: 30px;
               right: initial;
-              //bottom: 30px;
-              //position: fixed;
+              bottom: 30px;
+              position: fixed;
               font-size: 20px;
+              margin-left: 50px;
             }
           }
 
@@ -223,9 +244,9 @@ window.customElements.define('quiz-contacts', class extends LitElement {
 
     render() {
         return html`
+            <h1>Заявка</h1>
             <section>
                 <div class="header">
-                    <h1>Заявка</h1>
                     <span>Предпочтения для связи</span>
                     <div class="communications">
                         <input type="checkbox" id="whathsapp"><label for="whathsapp">Whats App</label>
@@ -241,9 +262,9 @@ window.customElements.define('quiz-contacts', class extends LitElement {
                            onchange="app.updateProfile('name',this.value)">
                     <input type="email" placeholder="E-mail" .value="${quiz.getState('profile', 'email', '')}"
                            onchange="app.updateProfile('email',this.value)">
-                    <button class="big-next-bottom-button" @click="${quiz.createUser.bind(quiz)}">Оставить заявку
-                    </button>
                 </form>
-            </section>`;
+            </section>
+            <button class="big-next-bottom-button" @click="${quiz.createUser.bind(quiz)}">Оставить заявку
+            </button>`;
     }
 });

@@ -5,8 +5,8 @@
     "lit-element": "^2.4.0"
   },
   "scripts": {
-    "dev": "wds --node-resolve --watch --open",
-    "dev-tunnel": "wds --node-resolve --watch --open & vk-tunnel --insecure=1 --ws-protocol=wss --host=localhost --port=8000"
+    "dev": "wds --node-resolve --watch --open --app-index quiz/index.html",
+    "dev-tunnel": "wds --node-resolve --watch & vk-tunnel --insecure=1 --ws-protocol=wss --host=localhost --port=8000"
   },
   "devDependencies": {
     "@web/dev-server": "^0.1.2"
