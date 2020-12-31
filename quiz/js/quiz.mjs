@@ -1,7 +1,9 @@
-export default class Quiz {
-    endpointURL = 'https://woodstone-dev-app.herokuapp.com/api/';
+import {Router} from 'https://unpkg.com/@vaadin/router/dist/vaadin-router.js';
+import './app.mjs';
 
-    constructor() {
+export class Quiz {
+    constructor({apiURL} = {}) {
+        this.endpointURL = apiURL;
         this.loadAnswers();
         this.loadAnswers('selectedAreas');
         this.loadAnswers('selectedVillages');
@@ -12,14 +14,16 @@ export default class Quiz {
     }
 
     async init() {
-        await this.loadConfiguration('quizSteps', 'quizStep', 'fieldname');
-        await this.loadConfiguration('areas', 'area', 'areaId');
-        await this.loadConfiguration('homes', 'home', 'homeId');
+        await Promise.allSettled([
+            this.loadConfiguration('quizSteps', 'quizStep', 'fieldname'),
+            this.loadConfiguration('areas', 'area', 'areaId'),
+            this.loadConfiguration('homes', 'home', 'homeId')
+        ])
         await this.renderQuiz();
     }
 
     initRangesSlider() {
-        let root = document.querySelector('quiz-configurator').shadowRoot.querySelector('#budget');
+        let root = this.shadowRoot.querySelector('#budget');
         var sliderSections = root.getElementsByClassName("range-slider");
         for (var x = 0; x < sliderSections.length; x++) {
             var sliders = sliderSections[x].getElementsByTagName("input");
@@ -27,10 +31,18 @@ export default class Quiz {
                 if (sliders[y].type === "range") {
                     sliders[y].oninput = getVals;
                     // Manually trigger event first time to display values
-                    sliders[y].oninput();
+                    sliders[y].oninput(undefined);
                 }
             }
         }
+    }
+
+    initRouter(outlet) {
+        this.router = new Router(outlet, {baseUrl: '/quiz/'});
+        this.router.setRoutes([
+            {path: '', component: 'quiz-needs'},
+            // {path: 'location', component: 'quiz-location'},
+        ]);
     }
 
     async loadConfiguration(route, store = false, key = false) {
@@ -44,10 +56,10 @@ export default class Quiz {
     }
 
     async renderQuiz() {
-        const element = document.createElement('quiz-configurator');
+        const element = document.createElement('quiz-app');
         // element.innerHTML = `<h1>Конфигуратор</h1><form id="quiz"></form>`;
         document.body.appendChild(element);
-        return await this.quizSteps.forEach(await this.renderStep, this);
+        // return await this.quizSteps.forEach(await this.renderStep, this);
     }
 
     async renderStep(step) {
@@ -258,147 +270,13 @@ export default class Quiz {
 
 }
 
-customElements.define('quiz-configurator', class extends HTMLElement {
-    connectedCallback() {
-        this.attachShadow({mode: 'open'}).append(configurator.content.cloneNode(true));
-        const form = this.shadowRoot.querySelector('form')
-        const slot = this.shadowRoot.querySelector('slot');
-        slot.addEventListener('slotchange', () => {
-            setTimeout(() => {
-                for (let field of slot.assignedNodes()) {
-                    form.insertBefore(field, slot)
-                }
-                app.initRangesSlider();
-            });
-        })
-    }
-});
-customElements.define('quiz-step', class extends HTMLElement {
-    connectedCallback() {
-        if (this.connected) return;
-        this.connected = true;
-        this.attachShadow({mode: 'open'}).append(step.content.cloneNode(true));
-        this.shadowRoot.querySelector('.title').innerText = this.getAttribute('title');
-    }
-});
-customElements.define("quiz-map", class extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: "open"});
-        this.IFrame = null;
-        this.IFrameDocument = null;
-        this.IFrameWindow = null;
-    }
-
-    connectedCallback() {
-        this.render();
-        this.initIframe();
-        this.initMap();
-    }
-
-    initIframe() {
-        this.IFrame = this.shadowRoot.querySelector("iframe");
-        this.IFrameDocument = this.IFrame.contentDocument;
-        this.IFrameWindow = this.IFrame.contentWindow;
-        // создадим скрипт который подтянет в iframe карту
-        const script = document.createElement("script");
-        script.setAttribute(
-            "src",
-            "https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=d1df8012-8243-4242-b139-4a7c6c298e2c"
-        );
-        script.onload = this.initMap.bind(this);
-        this.mapElement = document.createElement("div");
-        this.mapElement.style.height = "100vh";
-        this.mapElement.style.width = "100vw";
-        this.IFrameDocument.body.appendChild(script);
-        this.IFrameDocument.body.appendChild(this.mapElement);
-        this.IFrameDocument.body.style.margin = "0";
-    }
-
-    initMap() {
-        const {ymaps} = this.IFrameWindow;
-        ymaps.ready(() => {
-            this.myMap = new ymaps.Map(this.mapElement, {
-                center: [56.86, 60.56],
-                zoom: 10
-            });
-            if (!app.areas) return console.debug('No polygons');
-            app.areas.forEach(area => {
-                let myPolygon = new ymaps.Polygon([area.polygon], {hintContent: area.title}, {});
-                this.myMap.geoObjects.add(myPolygon);
-            });
-        });
-    }
-
-    render() {
-        this.shadowRoot.innerHTML = `
-        <style>
-            :host {
-                height: 400px;
-                width: 400px;
-                display: block;
-            }
-            iframe {
-                height: 100%;
-                width: 100%;
-            }
-        </style>
-        <iframe scrolling="no" frameborder="0"></iframe>
-    `;
-    }
-});
-customElements.define('quiz-areas', class extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: "open"});
-    }
-
-    connectedCallback() {
-        // this.attachShadow({mode: 'open'}).append(step.content.cloneNode(true));
-        // this.shadowRoot.querySelector('.title').innerText = this.getAttribute('title');
-        this.shadowRoot.innerHTML = '<h2 class="title">Выберите районы</h2>';
-        app.areas.forEach(area => this.shadowRoot.innerHTML += `<div><input type="checkbox" id="area_${area.areaId}" ${app.getState('selectedAreas', area.areaId) ? 'checked' : ''} onchange="app.toggleArea('${area.areaId}',this.checked)">
-<label for="area_${area.areaId}">${area.title}</label></div>`);
-        // this.shadowRoot.innerHTML += `<br><button onclick="app.showVillages()">Показать поселки</button>`;
-    }
-});
-customElements.define('quiz-villages', class extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: "open"});
-    }
-
-    connectedCallback() {
-        this.shadowRoot.innerHTML = `<br><button onclick="app.showVillages()">Показать поселки</button>`;
-    }
-});
-customElements.define('quiz-homes', class extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: "open"});
-    }
-
-    connectedCallback() {
-        this.shadowRoot.innerHTML = `<br><button onclick="app.showHomes()">Показать дома</button>`;
-    }
-});
-customElements.define('quiz-profile', class extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: "open"});
-    }
-
-    connectedCallback() {
-        this.shadowRoot.innerHTML = `<br><button onclick="app.showProfile(this.parentNode)">Заполнить профиль</button>`;
-    }
-});
-
-function getVals() {
+window.getVals = function () {
     // Get slider values
     var parent = this.parentNode;
     var slides = parent.getElementsByTagName("input");
     var slide1 = parseInt(slides[0].value);
     var slide2 = parseInt(slides[1].value);
+    let max = slides[0].max;
     // Neither slider will clip the other, so make sure we determine which is larger
     if (slide1 > slide2) {
         var tmp = slide2;
@@ -406,8 +284,13 @@ function getVals() {
         slide1 = tmp;
     }
 
-    var displayElement = parent.getElementsByClassName("rangeValues")[0];
-    displayElement.innerHTML = slide1 + " - " + slide2;
+    // var displayElement = parent.getElementsByClassName("rangeValues")[0];
+    let price_from = parent.querySelector('#price_from');
+    let price_to = parent.querySelector('#price_to');
+    price_from.innerText = slide1;
+    price_to.innerText = slide2 < max ? slide2 : 'Неважно';
     app.setAnswer(slides[0].dataset.step, 'from', slide1)
     app.setAnswer(slides[0].dataset.step, 'to', slide2)
 }
+
+export default window.app = new Quiz({apiURL: 'https://woodstone-dev-app.herokuapp.com/api/'})

@@ -1,3 +1,4 @@
+import quiz from './quiz.mjs';
 import {LitElement, html, css} from 'https://jspm.dev/lit-element';
 
 window.customElements.define('quiz-needs', class extends LitElement {
@@ -7,12 +8,10 @@ window.customElements.define('quiz-needs', class extends LitElement {
             font-family: 'Montserrat', sans-serif;
             height: 100%;
             min-height: 100%;
-            display: flex;
-            flex-direction: column;
+
           }
 
           :host:after {
-            //content: '';
             height: 70px;
             display: block;
             width: 100%;
@@ -65,6 +64,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
             max-height: 100px;
             padding: 15px;
             margin: 0 -30px;
+            scroll-snap-type: x mandatory;
           }
 
           .mini-buttons {
@@ -91,11 +91,16 @@ window.customElements.define('quiz-needs', class extends LitElement {
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
             border-radius: 8px;
             padding: 25px 20px;
-            display: inline-block;
+            display: inline-flex;
             margin-left: 15px;
             min-width: 100px;
             max-width: 130px;
             cursor: pointer;
+            align-items: center;
+            font-size: 15px;
+            flex-basis: 100%;
+            min-height: 40px;
+            scroll-snap-align: center;
           }
 
           .mini-buttons label {
@@ -107,6 +112,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
             margin-bottom: 10px;
             cursor: pointer;
             font-weight: 600;
+            line-height: 26px;
           }
 
           .buttons input[type="radio"]:checked + label,
@@ -116,7 +122,8 @@ window.customElements.define('quiz-needs', class extends LitElement {
           }
 
           .big-next-bottom-button {
-            all: initial;
+            box-sizing: border-box !important;
+            text-decoration: none;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -140,6 +147,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
             line-height: 17px;
             font-weight: normal;
             max-width: 150px;
+            opacity: 0.8;
           }
 
           .range-slider {
@@ -179,6 +187,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
             position: relative;
             z-index: 1;
             outline: 0;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
           }
 
           .range-slider input::-moz-range-thumb {
@@ -187,6 +196,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
             z-index: 10;
             -moz-appearance: none;
             width: 9px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
           }
 
           .range-slider input::-moz-range-track {
@@ -235,6 +245,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
             border-radius: 28px;
             cursor: pointer;
             -webkit-appearance: none;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
           }
 
           input[type=range]:focus::-webkit-slider-runnable-track {
@@ -257,6 +268,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
             border: 2px solid #6ebc61;
             border-radius: 28px;
             cursor: pointer;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
           }
 
           input[type=range]::-ms-track {
@@ -289,6 +301,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
             border-radius: 28px;
             cursor: pointer;
             margin-top: 0px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
             /*Needed to keep the Edge thumb centred*/
           }
 
@@ -363,20 +376,21 @@ window.customElements.define('quiz-needs', class extends LitElement {
             :host {
               border-radius: 6px;
               background: white;
-              display: block;
               position: relative;
               box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
               padding: initial;
-              height: auto;
+              height: max(calc(100% - 100px), 600px);
               min-height: initial;
               margin-bottom: 100px;
+              display: flex;
+              flex-direction: column;
             }
 
             section {
               position: initial;
               border-radius: initial;
               background: initial;
-              padding: 15px 30px;
+              padding: 10px 30px;
               padding-left: 50px;
               margin: initial;
               box-shadow: initial;
@@ -384,6 +398,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
               display: flex;
               align-items: center;
               justify-content: space-between;
+              flex-basis: 100%;
             }
 
             section > .title {
@@ -397,7 +412,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
 
             section > *:last-child {
               flex: 1;
-              max-width: 550px;
+              max-width: 650px;
             }
 
             .buttons {
@@ -405,19 +420,57 @@ window.customElements.define('quiz-needs', class extends LitElement {
               flex-wrap: initial;
             }
 
+            .buttons label {
+              max-width: initial;
+              flex-basis: 100%;
+              padding: 20px 30px;
+              margin-left: 20px;
+            }
+
             .buttons label:first-of-type {
               margin-left: initial
+            }
+
+            .mini-buttons {
+              padding-left: 5px;
+              box-sizing: border-box;
+            }
+
+            .mini-buttons label {
+              padding: 8px 20px;
+              font-size: 14px;
+              margin-bottom: unset;
+            }
+
+            .buttons input[type="radio"]:checked + label,
+            .mini-buttons input[type="radio"]:checked + label {
+              background: inherit;
+              color: inherit;
+              box-shadow: 0 0 0 1px #6EBC61;
+              border: 1px solid #6EBC61;
             }
 
             .range-slider {
               padding: unset;
               max-width: 530px;
               padding-bottom: 60px;
+              padding-left: 15px;
+              box-sizing: border-box;
+            }
+
+            input[type=range] {
+              width: calc(100% - 30px);
+              margin-left: 15px;
+              margin-right: 15px;
             }
 
             .counters {
               display: flex;
               justify-content: space-between;
+              padding-left: 15px;
+              padding-right: 15px;
+              box-sizing: border-box;
+              margin-top: unset;
             }
 
             .counters label {
@@ -443,10 +496,87 @@ window.customElements.define('quiz-needs', class extends LitElement {
             }
 
           }
+
+          input[disabled] {
+            -webkit-text-fill-color: black;
+            opacity: 1;
+            background: transparent;
+          }
         `;
     }
 
     render() {
+        return html`${quiz.quizSteps.map(this.renderStep)}
+        <a class="big-next-bottom-button" href=""">
+        Далее<span>Выбор предпочтений по локации</span>
+        </a>`
+    }
+
+    firstUpdated() {
+        quiz.initRangesSlider.call(this);
+    }
+
+    renderStep(step) {
+        switch (step.type) {
+            case 'counters':
+                return html`
+                    <section id="${step.fieldname}" tabindex="1"><span class="title">${step.title}</span>
+                        <div class="counters">
+                            ${step.data.map(item => html`
+                                <div><label>${item.title}</label>
+                                    <div>
+                                        <button onclick="this.nextElementSibling.stepDown();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.nextElementSibling.value))">
+                                            –
+                                        </button>
+                                        <input type="number" min="0" step="1" maxlength="2" max="99" disabled
+                                               id="${item.fieldname}" name="${item.fieldname}"
+                                               .value="${quiz.getAnswer(step.fieldname, item.fieldname, 0)}"
+                                               onchange="window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.value))">
+                                        <button onclick=" this.previousElementSibling.stepUp();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.previousElementSibling.value))">
+                                            +
+                                        </button>
+                                    </div>
+                                </div>`)}
+                        </div>
+                    </section>`;
+                break;
+            case 'options-small':
+            case 'options-regular':
+                const checkedValue = quiz.getAnswer(step.fieldname, false, 0);
+                return html`
+                    <section id="${step.fieldname}" tabindex="1"><span class="title">${step.title}</span>
+                        <form class="${step.type === 'options-regular' ? 'buttons' : 'mini-buttons'}">
+                            ${step.data.map(item => html`
+                                <input type="radio" name="${step.fieldname}" id="${step.fieldname + '_' + item.value}"
+                                       ?checked="${item.value === checkedValue}" .value="${item.value}"
+                                       onchange="app.setAnswer('${step.fieldname}',false,parseInt(Object.fromEntries(new FormData(this.form).entries()).${step.fieldname}))">
+                                <label for="${step.fieldname + '_' + item.value}">${item.title}</label>`)}
+                        </form>
+                    </section>`;
+            case 'ranges':
+                return html`
+                    <section id="${step.fieldname}" tabindex="1"><span class="title">${step.title}</span>
+                        ${step.data.map(item => html`
+                            <div class="range-slider">
+                                <div class="money">от
+                                    <span id="price_from">${quiz.getAnswer(step.fieldname, 'from', item.minValue)}</span>
+                                    до
+                                    <span id="price_to">${quiz.getAnswer(step.fieldname, 'to', item.maxValue)}</span>
+                                </div>
+                                <input type="range" step="100000" id="${item.fieldname + '_1'}" name="${item.fieldname}"
+                                       min="${item.minValue}" max="${item.maxValue}" data-step="${step.fieldname}"
+                                       .value="${quiz.getAnswer(step.fieldname, 'from', item.minValue)}">
+                                <input type="range" step="100000" id="${item.fieldname + '_2'}" name="${item.fieldname}"
+                                       min="${item.minValue}" max="${item.maxValue}" data-step="${step.fieldname}"
+                                       .value="${quiz.getAnswer(step.fieldname, 'to', item.maxValue)}">
+                            </div>`)}
+                    </section>`
+            default:
+                return html`${step.fieldname} ${step.title}<br>`
+        }
+    }
+
+    template() {
         return html`
             <section class="active" tabindex="1">
                 <span class="title">Какой дом вы бы хотели построить?</span>

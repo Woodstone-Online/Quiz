@@ -1,8 +1,16 @@
+import quiz from './quiz.mjs'
 import {LitElement, html, css} from 'https://jspm.dev/lit-element';
 import './menu.mjs';
 import './needs.mjs';
+// import './location.mjs';
 
 window.customElements.define('quiz-app', class extends LitElement {
+
+    stages = {
+        needs: html`
+            <quiz-needs></quiz-needs>`
+    }
+
     static get styles() {
         return css`
           :host {
@@ -54,11 +62,19 @@ window.customElements.define('quiz-app', class extends LitElement {
         `;
     }
 
+    get stage() {
+        return this.stages.needs;
+    }
+
+    firstUpdated() {
+        quiz.initRouter(this.shadowRoot.querySelector('main'));
+    }
+
     render() {
         return html`
             <quiz-menu></quiz-menu>
             <main>
-                <slot></slot>
+
             </main>
         `;
     }

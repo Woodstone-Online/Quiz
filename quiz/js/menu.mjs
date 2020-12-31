@@ -88,6 +88,7 @@ window.customElements.define('quiz-menu', class extends LitElement {
             aside {
               height: 100%;
               padding: 30px;
+              overflow-y: scroll;
             }
 
             nav {
@@ -106,11 +107,12 @@ window.customElements.define('quiz-menu', class extends LitElement {
               font-size: 14px;
               font-weight: normal;
               counter-increment: step;
-              margin-bottom: 80px;
+              margin-bottom: 40px;
               padding-left: 23px;
               margin-left: -3px;
               padding-bottom: unset;
               padding-top: 40px;
+              color: rgba(0, 0, 0, .3);
             }
 
             nav > a:last-of-type {
@@ -124,7 +126,7 @@ window.customElements.define('quiz-menu', class extends LitElement {
             nav > a:before {
               content: "Шаг " counter(step);
               font-family: 'Montserrat', sans-serif;
-              color: #6EBC61;
+              color: #6B6B72;
               font-size: 18px;
               font-weight: 600;
               position: absolute;
@@ -133,6 +135,11 @@ window.customElements.define('quiz-menu', class extends LitElement {
 
             nav > a.active {
               border-left: 3px solid #6EBC61;
+              color: inherit;
+            }
+
+            nav > a.active:before {
+              color: #6EBC61;
             }
 
           }
@@ -146,7 +153,7 @@ window.customElements.define('quiz-menu', class extends LitElement {
             </header>
             <aside>
                 <nav>
-                    <a href="" class="active">Потребности</a>
+                    <a href="/quiz/" class="active">Потребности</a>
                     <a href="">Направления</a>
                     <a href="">Дом</a>
                     <a href="">Условия</a>
