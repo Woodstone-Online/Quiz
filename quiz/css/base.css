@@ -10,6 +10,7 @@
 body {
     margin: unset;
     height: 100%;
+    touch-action: none;
 }
 
 input {
