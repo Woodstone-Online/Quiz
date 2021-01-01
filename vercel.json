@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/quiz/index.html"
+    }
+  ],
+  "regions": [
+    "cdg1"
+  ],
+  "github": {
+    "silent": true
+  }
+}
