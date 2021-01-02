@@ -19,7 +19,7 @@
         },
         {
           "key": "Expires",
-          "value": 0
+          "value": "0"
         }
       ]
     }
