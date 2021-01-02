@@ -1,10 +1,11 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "/quiz(.*)",
-      "dest": "/quiz/index.html"
+      "source": "/quiz/:match*",
+      "destination": "/quiz/index.html"
     }
   ],
+  "trailingSlash": true,
   "regions": [
     "cdg1"
   ],

@@ -154,7 +154,7 @@ window.customElements.define('quiz-menu', class extends LitElement {
     render() {
         return html`
             <header>
-                <img src="img/Logo.svg" alt="Logo">
+                <img src="/quiz/img/Logo.svg" alt="Logo">
             </header>
             <aside>
                 <nav>

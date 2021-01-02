@@ -150,6 +150,7 @@ export class Quiz {
     }
 
     setAnswer(step, item, value) {
+        if (!this.preferences) return false;
         if (!item) this.preferences[step] = value;
         else {
             if (!this.preferences[step]) this.preferences[step] = {}
@@ -189,6 +190,7 @@ export class Quiz {
     }
 
     getAnswer(step, item, defaultValue = '') {
+        if (!this.preferences) return defaultValue;
         if (!item) return this.preferences[step] ? this.preferences[step] : defaultValue;
         if (!this.preferences[step]) return defaultValue;
         return this.preferences[step][item] ? this.preferences[step][item] : defaultValue;
@@ -206,10 +208,10 @@ export class Quiz {
 
     loadAnswers(key = 'preferences') {
         try {
-            this[key] = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : null
+            this[key] = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : {}
         } catch (e) {
             console.error(e);
-            this[key] = null
+            this[key] = {}
         }
     }
 

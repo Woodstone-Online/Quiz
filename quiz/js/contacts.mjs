@@ -192,6 +192,12 @@ window.customElements.define('quiz-contacts', class extends LitElement {
               //box-shadow: initial;
               max-width: 643px;
               height: auto;
+              overflow: auto;
+              overflow-y: overlay;
+              -webkit-overflow-scrolling: touch;
+              -webkit-transform: translate3d(0, 0, 0);
+              border-top-left-radius: 15px;
+              border-top-right-radius: 15px;
             }
 
             section .header {
