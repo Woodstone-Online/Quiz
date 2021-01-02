@@ -512,7 +512,7 @@ window.customElements.define('quiz-needs', class extends LitElement {
 
     render() {
         return html`${quiz.quizSteps.map(this.renderStep)}
-        <a class="big-next-bottom-button" href="location">
+        <a class="big-next-bottom-button" href="/quiz/location">
             Далее<span>Выбор предпочтений по локации</span>
         </a>`
     }

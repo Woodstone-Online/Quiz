@@ -205,7 +205,7 @@ window.customElements.define('quiz-location', class extends LitElement {
                         <label for="${'area_' + area.areaId}">${area.title}</label>
                     `)}
                 </div>
-            </section><a class="big-next-bottom-button" href="contacts">
+            </section><a class="big-next-bottom-button" href="/quiz/contacts">
                 Далее<span>Выбор готового решения</span>
             </a>`;
     }

@@ -40,9 +40,9 @@ export class Quiz {
     initRouter(outlet) {
         this.router = new Router(outlet, {baseUrl: '/quiz/'});
         this.router.setRoutes([
-            {path: '', component: 'quiz-needs'},
-            {path: 'location', component: 'quiz-location'},
-            {path: 'contacts', component: 'quiz-contacts'},
+            {path: '/location', component: 'quiz-location'},
+            {path: '/contacts', component: 'quiz-contacts'},
+            {path: '(.*)', component: 'quiz-needs'},
         ]);
     }
 
