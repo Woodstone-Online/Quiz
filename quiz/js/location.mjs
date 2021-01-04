@@ -15,7 +15,7 @@ window.customElements.define('quiz-location', class extends LitElement {
           section {
             position: relative;
             background: white;
-            border-radius: 6px;
+            border-radius: 15px;
             box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.06);
             height: 100%;
             overflow: hidden;
@@ -124,13 +124,14 @@ window.customElements.define('quiz-location', class extends LitElement {
           @media (min-width: 1024px) {
             :host {
               height: calc(100% - 130px);
-              border-radius: 6px;
+              border-radius: 15px;
               background: white;
               padding: 15px;
             }
 
             section {
               box-shadow: initial;
+              border-radius: 15px;
             }
 
             .big-next-bottom-button {
@@ -200,12 +201,12 @@ window.customElements.define('quiz-location', class extends LitElement {
                 <div class="areas">
                     ${quiz.areas.map(area => html`
                         <input type="checkbox" id="${'area_' + area.areaId}"
-                               ?checked="${quiz.getState('selectedAreas', area.areaId)}"
+                               ?checked="${quiz.getState('selectedAreas', area.areaId, true)}"
                                onchange="app.toggleArea('${area.areaId}',this.checked)">
                         <label for="${'area_' + area.areaId}">${area.title}</label>
                     `)}
                 </div>
-            </section><a class="big-next-bottom-button" href="/quiz/contacts">
+            </section><a class="big-next-bottom-button" href="#contacts">
                 Далее<span>Выбор готового решения</span>
             </a>`;
     }

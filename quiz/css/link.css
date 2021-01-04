@@ -1,0 +1,61 @@
+* {
+    touch-action: manipulation;
+    -webkit-text-size-adjust: none;
+}
+
+:host {
+    font-family: 'Montserrat', sans-serif;
+}
+
+:host > a {
+    text-decoration: inherit;
+    color: var(--color, black);
+    padding: 20px 0;
+    padding-left: var(--padding-left, 0);
+    padding-right: var(--padding-right, 0);
+    font-weight: 600;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+:host > a:after {
+    content: var(--separator, '');
+    display: inline-block;
+    width: 24px;
+    height: 0;
+    border-bottom: 1px solid #C4C5C6;
+    vertical-align: middle;
+    margin: 0 7px;
+}
+
+@media (min-width: 1364px) {
+
+    :host > a {
+        position: relative;
+        padding: 20px 0;
+        font-size: 14px;
+        font-weight: normal;
+        margin-bottom: 0;
+        padding-left: 23px;
+        margin-left: -3px;
+        padding-bottom: var(--margin-bottom, unset);
+        padding-top: var(--padding-top, 80px);
+        color: var(--color, inherit);
+        border-left: var(--border-left, 3px solid #6EBC61);
+    }
+
+    :host > a:before {
+        content: "Шаг " var(--counter, '0');
+        font-family: 'Montserrat', sans-serif;
+        color: var(--beforeColor, #6EBC61);
+        font-size: 18px;
+        font-weight: 600;
+        position: absolute;
+        top: var(--beforeTop, 40px);
+    }
+
+    :host > a:after {
+        --separator: none;
+    }
+}

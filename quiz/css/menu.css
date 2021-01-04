@@ -1,0 +1,120 @@
+* {
+    touch-action: manipulation;
+    -webkit-text-size-adjust: none;
+}
+
+:host {
+    display: initial !important;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    display: block;
+    height: 60px;
+    background: white;
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.03);
+}
+
+header > img {
+    padding: 20px;
+    height: 20px;
+}
+
+aside {
+    height: 60px;
+}
+
+nav {
+    display: flex;
+    overflow: auto;
+    height: 100%;
+}
+
+::slotted(quiz-link:first-of-type) {
+    --padding-left: 20px;
+}
+
+::slotted(quiz-link:last-of-type) {
+    --separator: none;
+    --padding-right: 20px;
+}
+
+::slotted(quiz-link:first-of-type) {
+    --color: inherit;
+}
+
+::slotted(quiz-link:target) {
+    --color: inherit;
+}
+
+@media (min-width: 1024px) {
+    header, aside {
+        padding: 0 30px;
+    }
+}
+
+@media (min-width: 1364px) {
+    :host {
+        display: flex;
+        flex-direction: column;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    header {
+        background: initial;
+        box-shadow: initial;
+        padding: 30px;
+    }
+
+    header > img {
+        padding: unset;
+        height: 24px;
+    }
+
+    aside {
+        height: 100%;
+        padding: 30px;
+        overflow-y: scroll;
+    }
+
+    nav {
+        flex-direction: column;
+        counter-reset: step;
+        overflow: initial;
+        border-left: 3px solid #F2F2F2;
+        height: auto;
+    }
+
+    ::slotted(quiz-link:first-of-type) {
+        --padding-top: 40px;
+        --beforeTop: 0px;
+    }
+
+    ::slotted(quiz-link:last-of-type) {
+        --margin-bottom: unset;
+    }
+
+    ::slotted(quiz-link:nth-of-type(1)) {
+        --counter: '1';
+    }
+
+    ::slotted(quiz-link:nth-of-type(2)) {
+        --counter: '2';
+    }
+
+    ::slotted(quiz-link:nth-of-type(3)) {
+        --counter: '3';
+    }
+
+    ::slotted(quiz-link:nth-of-type(4)) {
+        --counter: '4';
+    }
+
+    ::slotted(quiz-link:nth-of-type(5)) {
+        --counter: '5';
+    }
+
+    ::slotted(quiz-link) {
+        --beforeContent: "Шаг " var(--counter);
+    }
+}

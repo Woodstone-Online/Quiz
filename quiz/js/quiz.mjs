@@ -1,4 +1,3 @@
-import {Router} from 'https://unpkg.com/@vaadin/router/dist/vaadin-router.js';
 import './app.mjs';
 
 export class Quiz {
@@ -7,7 +6,7 @@ export class Quiz {
         this.loadAnswers();
         this.loadAnswers('selectedAreas');
         this.loadAnswers('selectedVillages');
-        this.loadAnswers('selectedHome');
+        this.loadAnswers('selectedHome', null);
         this.loadAnswers('profile');
         this.init();
         return this;
@@ -37,14 +36,15 @@ export class Quiz {
         }
     }
 
-    initRouter(outlet) {
+    /*initRouter(outlet) {
         this.router = new Router(outlet, {baseUrl: '/quiz/'});
         this.router.setRoutes([
             {path: '/location', component: 'quiz-location'},
             {path: '/contacts', component: 'quiz-contacts'},
             {path: '(.*)', component: 'quiz-needs'},
         ]);
-    }
+        return this.router;
+    }*/
 
     async loadConfiguration(route, store = false, key = false) {
         const data = await fetch(this.endpointURL + route).then(r => r.json()).catch(e => console.error(e) || {})
@@ -57,14 +57,15 @@ export class Quiz {
     }
 
     async renderQuiz() {
+        window.disableScroll = true;
         window.addEventListener("scroll", (e) => {
+            if (!window.disableScroll) return;
             e.preventDefault();
             window.scrollTo(0, 0);
         });
-        const element = document.createElement('quiz-app');
-        // element.innerHTML = `<h1>Конфигуратор</h1><form id="quiz"></form>`;
-        document.body.appendChild(element);
-        // return await this.quizSteps.forEach(await this.renderStep, this);
+        await document.querySelector('quiz-app').updateStage();
+        // const element = document.createElement('quiz-app');
+        // document.body.appendChild(element);
     }
 
     async renderStep(step) {
@@ -189,11 +190,11 @@ export class Quiz {
         return true;
     }
 
-    getAnswer(step, item, defaultValue = '') {
+    getAnswer(step, item, defaultValue = null) {
         if (!this.preferences) return defaultValue;
-        if (!item) return this.preferences[step] ? this.preferences[step] : defaultValue;
+        if (!item) return typeof this.preferences[step] == "undefined" || (typeof this.preferences[step] == "string" && !this.preferences[step].length) ? defaultValue : this.preferences[step];
         if (!this.preferences[step]) return defaultValue;
-        return this.preferences[step][item] ? this.preferences[step][item] : defaultValue;
+        return typeof this.preferences[step][item] == "undefined" || (typeof this.preferences[step][item] == "string" && !this.preferences[step][item].length) ? defaultValue : this.preferences[step][item];
     }
 
     getState(type, id, defaultValue = false) {
@@ -206,12 +207,12 @@ export class Quiz {
         localStorage.setItem(key, JSON.stringify(this[key]));
     }
 
-    loadAnswers(key = 'preferences') {
+    loadAnswers(key = 'preferences', initial = {}) {
         try {
-            this[key] = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : {}
+            this[key] = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : initial
         } catch (e) {
             console.error(e);
-            this[key] = {}
+            this[key] = initial
         }
     }
 
@@ -302,3 +303,22 @@ window.getVals = function () {
 }
 
 export default window.app = new Quiz({apiURL: 'https://woodstone-dev-app.herokuapp.com/api/'})
+
+export function getDir(scriptPath) {
+    let path = new URL(scriptPath).pathname.split('/');
+    path.pop()
+    return location.origin + path.join('/') + '/'
+}
+
+export function getFileName(scriptPath, extension = true) {
+    let path = new URL(scriptPath).pathname.split('/');
+    return extension ? path.pop() : path.pop().split('.').shift();
+}
+
+export async function load(path, file) {
+    return await fetch(new URL(file || '', path).toString()).then(_ => _.text());
+}
+
+export async function loadStyles(scriptPath, filename = null) {
+    return await load(getDir(scriptPath) + '../css/', filename || getFileName(scriptPath, false) + '.css')
+}

@@ -6,10 +6,22 @@ import './location.mjs';
 import './contacts.mjs';
 
 window.customElements.define('quiz-app', class extends LitElement {
+    constructor() {
+        super();
+        // this.updateStage();
+        window.addEventListener('hashchange', this.updateStage.bind(this));
+    }
 
-    stages = {
-        needs: html`
-            <quiz-needs></quiz-needs>`
+    static get properties() {
+        return {
+            stage: {type: String}
+        }
+    }
+
+    updateStage() {
+        let targetStage = location.hash.substr(1)
+        if (targetStage && document.getElementById(targetStage)) return this.stage = targetStage;
+        return location.hash = 'needs';
     }
 
     static get styles() {
@@ -68,20 +80,16 @@ window.customElements.define('quiz-app', class extends LitElement {
         `;
     }
 
-    get stage() {
-        return this.stages.needs;
-    }
-
-    firstUpdated() {
-        quiz.initRouter(this.shadowRoot.querySelector('main'));
-    }
+    /*firstUpdated() {
+        // quiz.initRouter(this.shadowRoot.querySelector('main'));
+        this.shadowRoot.insertBefore(document.createElement('quiz-menu'), this.shadowRoot.querySelector('main'));
+    }*/
 
     render() {
         return html`
-            <quiz-menu></quiz-menu>
-            <main>
-
-            </main>
+            <!--<quiz-menu></quiz-menu>-->
+            <slot></slot>
+            <main>${this.stage ? document.createElement('quiz-' + this.stage) : null}</main>
         `;
     }
 });

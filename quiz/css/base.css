@@ -23,8 +23,22 @@ input, button {
     font-size: 18px;
 }
 
+.hidden {
+    display: none;
+}
+
+quiz-link:target ~ quiz-link {
+    --color: rgba(0, 0, 0, .2);
+}
+
 @media (min-width: 1364px) {
     :root {
         background: #F5F6F8;
+    }
+
+    quiz-link:target ~ quiz-link {
+        --beforeColor: #6B6B72;
+        --border-left: 3px solid transparent;
+        --color: rgba(0, 0, 0, .3);
     }
 }
