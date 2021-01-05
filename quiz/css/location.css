@@ -162,6 +162,12 @@ iframe {
         position: fixed;
         font-size: 20px;
     }
+
+    .areas {
+        flex-direction: row;
+        max-width: 700px;
+        max-height: initial;
+    }
 }
 
 @media (min-width: 1364px) {
