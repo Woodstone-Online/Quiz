@@ -7,6 +7,9 @@ loadStyles(import.meta.url).then(styles =>
             '#FF9435',
             '#6EBC61',
             '#56CCF2',
+            '#BB6BD9',
+            '#F2C94C',
+            '#FF62C0',
         ]
 
         static get styles() {
@@ -47,13 +50,19 @@ loadStyles(import.meta.url).then(styles =>
             const {ymaps} = this.IFrameWindow;
             ymaps.ready(() => {
                 this.myMap = new ymaps.Map(this.mapElement, {
-                    center: [56.86, 60.56],
-                    zoom: 10
+                    center: [56.8, 60.7],
+                    zoom: 10,
+                    controls: []
+                }, {
+                    suppressMapOpenBlock: true,
+                    suppressObsoleteBrowserNotifier: true,
+                    yandexMapDisablePoiInteractivity: true,
+                    yandexMapAutoSwitch: false
                 });
                 if (!quiz.areas) return console.debug('No polygons');
                 this.polygons = quiz.areas.map((area, i) => {
-                    let myPolygon = new ymaps.Polygon([area.polygon], {hintContent: area.title}, {
-                        fillColor: this.colors[i],
+                    let myPolygon = new ymaps.Circle([area.point, area.radius], {hintContent: area.title}, {
+                        fillColor: this.colors[i] || '#6EBC61',
                         cursor: 'default',
                         fillOpacity: .6,
                         outline: false
