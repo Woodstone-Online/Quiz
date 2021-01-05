@@ -78,6 +78,7 @@ iframe {
 
 .areas input[type="checkbox"]:checked + label:before {
     background: var(--color, #6EBC61);
+    opacity: .6;
 }
 
 .areas label:nth-of-type(1) {
