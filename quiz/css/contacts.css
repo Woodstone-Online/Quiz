@@ -197,7 +197,7 @@ form input {
         /*//box-shadow: initial;*/
         max-width: 643px;
         height: auto;
-        display: flex;
+        /*display: flex;*/
     }
 
     section .header {
@@ -208,6 +208,8 @@ form input {
         font-size: 42px;
         line-height: 30px;
         margin: unset;
+        margin-top: 71px;
+        margin-bottom: 20px;
     }
 
     section .header span {
