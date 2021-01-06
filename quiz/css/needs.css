@@ -3,11 +3,11 @@
 * {
     touch-action: manipulation;
     -webkit-text-size-adjust: none;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Helvetica, sans-serif;
 }
 
 :host {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Helvetica, sans-serif;
     height: 100%;
     min-height: 100%;
 
@@ -33,7 +33,7 @@ section {
 }
 
 .title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Helvetica, sans-serif;
     font-weight: 600;
     font-size: 18px;
     line-height: 26px;
