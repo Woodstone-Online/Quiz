@@ -3,7 +3,7 @@ import {LitElement, html, css} from 'https://jspm.dev/lit-element';
 import './menu.mjs';
 import './needs.mjs';
 import './location.mjs';
-import './home.mjs';
+// import './home.mjs';
 import './contacts.mjs';
 
 loadStyles(import.meta.url).then(styles =>
