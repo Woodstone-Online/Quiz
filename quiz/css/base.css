@@ -2,11 +2,11 @@
     box-sizing: border-box;
     touch-action: manipulation;
     -webkit-text-size-adjust: none;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 :root {
-    font-family: Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     height: 100%;
     -webkit-text-size-adjust: none;
     touch-action: none;
