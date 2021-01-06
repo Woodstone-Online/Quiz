@@ -51,7 +51,7 @@ loadStyles(import.meta.url).then(styles =>
             ymaps.ready(() => {
                 this.myMap = new ymaps.Map(this.mapElement, {
                     center: [56.825, 60.63],
-                    zoom: 9.5,
+                    zoom: 10,
                     controls: []
                 }, {
                     suppressMapOpenBlock: true,
@@ -85,7 +85,7 @@ loadStyles(import.meta.url).then(styles =>
                             <label for="${'area_' + area.areaId}">${area.title}</label>
                         `)}
                     </div>
-                </section><a class="big-next-bottom-button" href="#contacts">
+                </section><a class="big-next-bottom-button" href="#home">
                     Далее<span>Выбор готового решения</span>
                 </a>`;
         }
