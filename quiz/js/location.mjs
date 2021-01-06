@@ -51,7 +51,7 @@ loadStyles(import.meta.url).then(styles =>
             ymaps.ready(() => {
                 this.myMap = new ymaps.Map(this.mapElement, {
                     center: [56.825, 60.63],
-                    zoom: 10,
+                    zoom: 9,
                     controls: []
                 }, {
                     suppressMapOpenBlock: true,
