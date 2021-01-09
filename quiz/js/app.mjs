@@ -3,7 +3,7 @@ import {LitElement, html, css} from 'https://jspm.dev/lit-element';
 import './menu.mjs';
 import './needs.mjs';
 import './location.mjs';
-// import './home.mjs';
+import './home.mjs';
 import './contacts.mjs';
 
 loadStyles(import.meta.url).then(styles =>
@@ -27,7 +27,7 @@ loadStyles(import.meta.url).then(styles =>
         updateStage() {
             let targetStage = location.hash.substr(1)
             if (targetStage && document.getElementById(targetStage)) return this.stage = targetStage;
-            return location.hash = 'needs';
+            return location.hash = 'needs'; // TODO: Popstate replace
         }
 
         /*firstUpdated() {

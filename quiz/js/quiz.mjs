@@ -302,7 +302,7 @@ window.getVals = function () {
     app.setAnswer(slides[0].dataset.step, 'to', slide2)
 }
 
-export default window.app = new Quiz({apiURL: 'https://core.woodstone.online/api/'})
+export default window.app = new Quiz({apiURL: 'https://coredev.woodstone.online/api/'})
 
 export function getDir(scriptPath) {
     let path = new URL(scriptPath).pathname.split('/');
