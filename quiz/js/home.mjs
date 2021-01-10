@@ -7,6 +7,68 @@ loadStyles(import.meta.url).then(styles =>
             return css([styles]);
         }
 
+        constructor() {
+            super();
+            this.home = {};
+            this.images = {};
+        }
+
+        nextSlide(target) {
+            if (!target.activeSlide.nextElementSibling) return;
+            this.setActiveSlide(target, target.activeSlide.nextElementSibling);
+            return target.activeSlide.scrollIntoView({
+                inline: "center",
+                behavior: "smooth",
+                block: 'nearest'
+            });
+        }
+
+        prevSlide(target) {
+            if (!target.activeSlide.previousElementSibling) return;
+            this.setActiveSlide(target, target.activeSlide.previousElementSibling);
+            return target.activeSlide.scrollIntoView({
+                inline: "center",
+                behavior: "smooth",
+                block: 'nearest'
+            })
+        }
+
+        setSlide(target, index) {
+            if (!target.slides[index]) return;
+            this.setActiveSlide(target, target.slides[index]);
+            return target.activeSlide.scrollIntoView({
+                inline: "center",
+                behavior: "smooth",
+                block: 'nearest'
+            });
+        }
+
+        firstUpdated() {
+            this.initSlider(this.home, '.home-slider');
+            this.initSlider(this.images, '.image-slider .slides');
+        }
+
+        initSlider(target, selector) {
+            target.slider = this.shadowRoot.querySelector(selector);
+            target.slides = Array.from(target.slider.children);
+            target.observer = new IntersectionObserver(this.sliderScrollHandler.bind(this, target), {
+                root: target.slider,
+                threshold: 1
+            });
+            return target.slides.forEach(slide => target.observer.observe(slide));
+        }
+
+        sliderScrollHandler(target, entries, observer) {
+            if (!entries[0].isIntersecting) return;
+            return this.setActiveSlide(target, entries[0].target);
+        }
+
+        setActiveSlide(target, slide) {
+            target.slides.forEach(s => s.classList.toggle('active', false));
+            slide.classList.toggle('active', true);
+            return target.activeSlide = slide
+        }
+
         render() {
             return html`
                 <section class="navigation-buttons">
@@ -20,31 +82,36 @@ loadStyles(import.meta.url).then(styles =>
                     <span class="title">Проекты типовых домов</span>
                     <div class="head-line">
                         <div class="homes-navigation">
-                            <button class="active">69 м2</button>
-                            <button>90 м2</button>
-                            <button data-delta="600 000">112 м2</button>
-                            <button>118 м2</button>
+                            <button class="active" @click="${this.setSlide.bind(this, this.home, 0)}">69 м2</button>
+                            <button @click="${this.setSlide.bind(this, this.home, 1)}">90 м2</button>
+                            <button data-delta="600 000" @click="${this.setSlide.bind(this, this.home, 2)}">112 м2
+                            </button>
+                            <button @click="${this.setSlide.bind(this, this.home, 3)}">118 м2</button>
                         </div>
                         <a class="get-pdf" href="">Скачать в PDF</a>
                     </div>
                     <div class="home-slider">
-                        <div class="slider-item toggle-image-viewer"
+                        <div class="slider-item toggle-image-viewer" @click="${this.setSlide.bind(this, this.home, 0)}"
                              style="background-image: url(/quiz/img/1.demo.slider.home.landing.png)">
                             <div class="price">2 450 000</div>
                         </div>
-                        <div class="slider-item toggle-image-viewer"
+                        <div class="slider-item toggle-image-viewer" @click="${this.setSlide.bind(this, this.home, 1)}"
                              style="background-image: url(/quiz/img/1.demo.slider.home.landing.png)">
                             <div class="price">2 450 000</div>
                         </div>
-                        <div class="slider-item toggle-image-viewer"
+                        <div class="slider-item toggle-image-viewer" @click="${this.setSlide.bind(this, this.home, 2)}"
+                             style="background-image: url(/quiz/img/1.demo.slider.home.landing.png)">
+                            <div class="price">2 450 000</div>
+                        </div>
+                        <div class="slider-item toggle-image-viewer" @click="${this.setSlide.bind(this, this.home, 3)}"
                              style="background-image: url(/quiz/img/1.demo.slider.home.landing.png)">
                             <div class="price">2 450 000</div>
                         </div>
                     </div>
                     <div class="bottom-line">
                         <div class="slider-navigation">
-                            <button><</button>
-                            <button>></button>
+                            <button @click="${this.prevSlide.bind(this, this.home)}"><</button>
+                            <button @click="${this.nextSlide.bind(this, this.home)}">></button>
                         </div>
                         <div class="buttons-section">
                             <button class="primary">Подробнее</button>
@@ -91,8 +158,8 @@ loadStyles(import.meta.url).then(styles =>
                             <img src="/quiz/img/1.demo.slider.home.landing.png">
                         </div>
                         <div class="slider-navigation">
-                            <button><</button>
-                            <button>></button>
+                            <button @click="${this.prevSlide.bind(this, this.images)}"><</button>
+                            <button @click="${this.nextSlide.bind(this, this.images)}">></button>
                         </div>
                     </div>
                     <div class="card image-full-width">
