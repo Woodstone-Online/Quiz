@@ -838,6 +838,11 @@
         content: unset;
     }
 
+    #summary .head-line .homes-navigation {
+        overflow-x: scroll;
+        margin-right: 30px;
+    }
+
     #summary .head-line .get-pdf {
         margin: unset;
     }

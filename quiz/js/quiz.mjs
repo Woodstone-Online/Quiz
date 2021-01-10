@@ -16,7 +16,11 @@ export class Quiz {
         await Promise.allSettled([
             this.loadConfiguration('quizSteps', 'quizStep', 'fieldname'),
             this.loadConfiguration('areas', 'area', 'areaId'),
-            this.loadConfiguration('homes', 'home', 'homeId')
+            this.loadConfiguration('homes', 'home', 'homeId').then(() => this.homes.sort(function (a, b) {
+                if (a.space > b.space) return 1;
+                if (a.space < b.space) return -1;
+                return 0;
+            }))
         ])
         await this.renderQuiz();
     }

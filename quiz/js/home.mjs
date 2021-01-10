@@ -11,22 +11,23 @@ loadStyles(import.meta.url).then(styles =>
             super();
             this.home = {};
             this.images = {};
+            this.numberFormat = new Intl.NumberFormat('ru-RU');
         }
 
         nextSlide(target) {
             if (!target.activeSlide.nextElementSibling) return;
             this.setActiveSlide(target, target.activeSlide.nextElementSibling);
-            return target.activeSlide.scrollIntoView({
+            return this.skipScrollHandling(target) && target.activeSlide.scrollIntoView({
                 inline: "center",
                 behavior: "smooth",
                 block: 'nearest'
-            });
+            })
         }
 
         prevSlide(target) {
             if (!target.activeSlide.previousElementSibling) return;
             this.setActiveSlide(target, target.activeSlide.previousElementSibling);
-            return target.activeSlide.scrollIntoView({
+            return this.skipScrollHandling(target) && target.activeSlide.scrollIntoView({
                 inline: "center",
                 behavior: "smooth",
                 block: 'nearest'
@@ -36,20 +37,21 @@ loadStyles(import.meta.url).then(styles =>
         setSlide(target, index) {
             if (!target.slides[index]) return;
             this.setActiveSlide(target, target.slides[index]);
-            return target.activeSlide.scrollIntoView({
+            return this.skipScrollHandling(target) && target.activeSlide.scrollIntoView({
                 inline: "center",
                 behavior: "smooth",
                 block: 'nearest'
-            });
+            })
         }
 
         firstUpdated() {
-            this.initSlider(this.home, '.home-slider');
+            this.initSlider(this.home, '.home-slider', '.homes-navigation');
             this.initSlider(this.images, '.image-slider .slides');
         }
 
-        initSlider(target, selector) {
-            target.slider = this.shadowRoot.querySelector(selector);
+        initSlider(target, sliderSelector, indicatorSelector) {
+            if (indicatorSelector) target.indicators = Array.from(this.shadowRoot.querySelector(indicatorSelector).children);
+            target.slider = this.shadowRoot.querySelector(sliderSelector);
             target.slides = Array.from(target.slider.children);
             target.observer = new IntersectionObserver(this.sliderScrollHandler.bind(this, target), {
                 root: target.slider,
@@ -59,14 +61,35 @@ loadStyles(import.meta.url).then(styles =>
         }
 
         sliderScrollHandler(target, entries, observer) {
-            if (!entries[0].isIntersecting) return;
+            if (!entries[0].isIntersecting || target.skipHandling) return;
             return this.setActiveSlide(target, entries[0].target);
         }
 
         setActiveSlide(target, slide) {
             target.slides.forEach(s => s.classList.toggle('active', false));
             slide.classList.toggle('active', true);
+            target.activeSlideIndex = target.slides.findIndex(item => item === slide);
+            if (target.indicators) {
+                target.indicators.forEach(i => i.classList.toggle('active', false));
+                target.indicators[target.activeSlideIndex].classList.toggle('active', true);
+                // clearTimeout(target.indicatorScrollTimeout);
+                /*target.indicatorScrollTimeout = setTimeout(() => */
+                target.indicators[target.activeSlideIndex].scrollIntoView({
+                    inline: "center",
+                    // behavior: "smooth",
+                    block: 'nearest'
+                })/*, 1000)*/
+            }
             return target.activeSlide = slide
+        }
+
+        skipScrollHandling(target, time = 1000) {
+            clearTimeout(target.skipHandling);
+            return target.skipHandling = setTimeout(() => target.skipHandling = false, time)
+        }
+
+        renderHomeSlider() {
+
         }
 
         render() {
@@ -82,31 +105,20 @@ loadStyles(import.meta.url).then(styles =>
                     <span class="title">Проекты типовых домов</span>
                     <div class="head-line">
                         <div class="homes-navigation">
-                            <button class="active" @click="${this.setSlide.bind(this, this.home, 0)}">69 м2</button>
-                            <button @click="${this.setSlide.bind(this, this.home, 1)}">90 м2</button>
-                            <button data-delta="600 000" @click="${this.setSlide.bind(this, this.home, 2)}">112 м2
-                            </button>
-                            <button @click="${this.setSlide.bind(this, this.home, 3)}">118 м2</button>
+                            ${quiz.homes.map((home, i) => html`
+                                <button @click="${this.setSlide.bind(this, this.home, i)}">
+                                    ${home.title}
+                                </button>`)}
                         </div>
                         <a class="get-pdf" href="">Скачать в PDF</a>
                     </div>
                     <div class="home-slider">
-                        <div class="slider-item toggle-image-viewer" @click="${this.setSlide.bind(this, this.home, 0)}"
-                             style="background-image: url(/quiz/img/1.demo.slider.home.landing.png)">
-                            <div class="price">2 450 000</div>
-                        </div>
-                        <div class="slider-item toggle-image-viewer" @click="${this.setSlide.bind(this, this.home, 1)}"
-                             style="background-image: url(/quiz/img/1.demo.slider.home.landing.png)">
-                            <div class="price">2 450 000</div>
-                        </div>
-                        <div class="slider-item toggle-image-viewer" @click="${this.setSlide.bind(this, this.home, 2)}"
-                             style="background-image: url(/quiz/img/1.demo.slider.home.landing.png)">
-                            <div class="price">2 450 000</div>
-                        </div>
-                        <div class="slider-item toggle-image-viewer" @click="${this.setSlide.bind(this, this.home, 3)}"
-                             style="background-image: url(/quiz/img/1.demo.slider.home.landing.png)">
-                            <div class="price">2 450 000</div>
-                        </div>
+                        ${quiz.homes.map((home, i) => html`
+                            <div class="slider-item toggle-image-viewer"
+                                 @click="${this.setSlide.bind(this, this.home, i)}"
+                                 style="background-image: url(${home.image ? home.image.url : ''})">
+                                <div class="price">${this.numberFormat.format(home.price)}</div>
+                            </div>`)}
                     </div>
                     <div class="bottom-line">
                         <div class="slider-navigation">
