@@ -125,7 +125,7 @@ section .header span {
     line-height: 26px;
     padding: 0 30px;
     cursor: pointer;
-    display: flex;
+    /*display: flex;*/
     justify-content: space-between;
     align-items: center;
     border: unset;
@@ -232,13 +232,14 @@ form input {
 
     .big-next-bottom-button {
         border-radius: 100px;
-        width: 337px;
+        width: 261px;
         left: 30px;
         right: initial;
         bottom: 30px;
         position: fixed;
         font-size: 20px;
         margin-left: 50px;
+        text-align: center;
     }
 }
 

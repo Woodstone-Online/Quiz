@@ -41,7 +41,6 @@ loadStyles(import.meta.url).then(styles =>
                                onblur="window.disableScroll=true">
                     </form>
                 </section>
-                <button class="big-next-bottom-button" @click="${quiz.createUser.bind(quiz)}">Оставить заявку
-                </button>`;
+                <button class="big-next-bottom-button" @click="${quiz.createUser.bind(quiz)}">Оставить заявку</button>`;
         }
     }))
