@@ -10,8 +10,11 @@ loadStyles(import.meta.url).then(styles =>
         render() {
             return html`
                 <section class="navigation-buttons">
-                    <a href="#contacts" class="button primary">Далее<span>Выбор готового решения</span></a>
-                    <a href="#contacts" class="button">Пропустить шаг</a>
+                    <div>
+                        <a href="#contacts" class="button primary">Далее<span>Выбор готового решения</span></a>
+                        <a href="#contacts" class="button">Пропустить шаг</a>
+                    </div>
+                    <a href="#contacts" class="button alternate">Записаться на просмотр</a>
                 </section>
                 <section id="summary">
                     <span class="title">Проекты типовых домов</span>
@@ -75,13 +78,13 @@ loadStyles(import.meta.url).then(styles =>
                         Продуманный до мелочей — альтернатива квартире. Каждый проект может быть адаптирован под ваш
                         участок и ваши условия. Выберите дом и адаптируйте планировку под себя.
                     </div>
-                    <div class="card view">
+                    <div id="view" class="card">
                         <span class="title">Запишитесь на просмотр своего будущего дома</span>
                         <span class="description">так вы сможете оценить качество материалов и отделки а также осмотреть район и пообщаться с соседями</span>
                         <a href="#contacts" class="button">Записаться</a>
                     </div>
-                    <h2 class="title">Галлерея</h2>
                     <div class="image-slider">
+                        <h2 class="title">Галлерея</h2>
                         <div class="slides">
                             <img src="/quiz/img/1.demo.slider.home.landing.png">
                             <img src="/quiz/img/1.demo.slider.home.landing.png">
@@ -92,7 +95,7 @@ loadStyles(import.meta.url).then(styles =>
                             <button>></button>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card image-full-width">
                         <h2 class="title">Чертеж</h2>
                         <img src="/quiz/img/1.demo.card.home.landing.png" style="margin-bottom: 0">
                     </div>

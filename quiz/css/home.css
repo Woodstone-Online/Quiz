@@ -11,6 +11,11 @@
     z-index: 10;
 }
 
+.navigation-buttons > div {
+    display: flex;
+    width: 100%;
+}
+
 .navigation-buttons .button {
     text-decoration: none;
     height: 70px;
@@ -36,6 +41,12 @@
 .navigation-buttons .button.primary span {
     font-size: 12px;
     font-weight: normal;
+}
+
+.navigation-buttons .button.alternate {
+    display: none;
+    background: #302F3A;
+    color: white;
 }
 
 @media (min-width: 400px) {
@@ -242,8 +253,28 @@
     justify-content: space-between;
 }
 
-#summary .slider-navigation {
+.slider-navigation {
+    display: flex;
+}
+
+.slider-navigation button {
+    width: 46px;
+    height: 46px;
+    background: #FFFFFF;
+    color: #6EBC61;
+    font-size: 20px;
+    border: 0;
+    border-radius: 100px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+#summary .bottom-line .slider-navigation {
     display: none;
+}
+
+#summary .bottom-line .slider-navigation button {
+    background: #F5F6F8;
 }
 
 #summary .buttons-section {
@@ -259,7 +290,6 @@
     display: inline-block;
     min-width: calc(15px - 7px);
 }
-
 
 #summary .buttons-section button {
     font-family: Montserrat, sans-serif;
@@ -288,7 +318,7 @@
     font-family: Montserrat, sans-serif;
     font-weight: bold;
     font-size: 34px;
-    line-height: 36px;
+    /*line-height: 36px;*/
     color: #302F3A;
     margin-bottom: 15px;
 }
@@ -392,6 +422,7 @@
     font-weight: 600;
     font-size: 16px;
     color: #302F3A;
+    margin-bottom: 5px;
 }
 
 #details .card > p:not(:first-of-type) {
@@ -424,6 +455,8 @@
     color: #302F3A;
     position: relative;
     padding-right: 26px;
+    cursor: pointer;
+    outline: none;
     /*display: flex;*/
     /*justify-content: center;*/
     /*align-items: center;*/
@@ -513,11 +546,11 @@
     border-bottom-right-radius: 16px;
 }
 
-#details .card.view {
+#details .card#view {
     padding: 26px 24px;
 }
 
-#details .card.view .title {
+#details .card#view .title {
     font-weight: 600;
     font-size: 22px;
     margin-bottom: 19px;
@@ -547,7 +580,6 @@
     font-weight: bold;
     font-size: 32px;
     color: #302F3A;
-
 }
 
 #details .image-slider .slides {
@@ -582,22 +614,6 @@
 
 #details .image-slider .slides img:not(:last-of-type) {
     margin-right: 15px;
-}
-
-.slider-navigation {
-    display: flex;
-}
-
-.slider-navigation button {
-    width: 46px;
-    height: 46px;
-    background: #FFFFFF;
-    color: #6EBC61;
-    font-size: 20px;
-    border: 0;
-    border-radius: 100px;
-    margin-right: 12px;
-    cursor: pointer;
 }
 
 #details .plans {
@@ -696,6 +712,11 @@
     font-weight: bold;
     font-size: 27px;
     margin-top: 30px;
+    color: #3F3E48;
+}
+
+#details .plans .item.active .summary span {
+    color: inherit;
 }
 
 #details .plans .item .summary button {
@@ -712,9 +733,361 @@
     width: 100%;
     margin-top: 15px;
     cursor: pointer;
+    padding: 0 26px;
 }
 
 #details .plans .item.active .summary button {
     background: white;
     color: #6EBC61;
+}
+
+@media (min-width: 1024px) {
+
+    .navigation-buttons {
+        left: 30px;
+        width: 100%;
+        max-width: 1024px;
+        margin-right: 30px;
+        bottom: 30px;
+        justify-content: space-between;
+    }
+
+    .navigation-buttons > div {
+        width: auto;
+    }
+
+    .navigation-buttons .button {
+        border-radius: 100px;
+        width: auto;
+        white-space: nowrap;
+        padding: 0 40px;
+        font-size: 20px;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 15px;
+        color: #ACACB0;
+        border: 2px solid #D8D8D8;
+    }
+
+    .navigation-buttons .button:last-of-type {
+        margin-right: unset;
+    }
+
+    .navigation-buttons .button.primary,
+    .navigation-buttons .button.alternate {
+        border: unset;
+    }
+
+    .navigation-buttons .button.primary span {
+        font-size: 13px;
+        line-height: 17px;
+        font-weight: normal;
+        margin-left: 42px;
+        white-space: initial;
+        max-width: 150px;
+    }
+
+    .navigation-buttons .button.alternate {
+        display: inherit;
+    }
+
+    #summary {
+        padding: 30px;
+    }
+
+    #summary .title {
+        display: none;
+    }
+
+    #summary .head-line {
+        overflow: initial;
+        margin: unset;
+        padding: unset;
+    }
+
+    #summary .head-line:after {
+        content: unset;
+    }
+
+    #summary .head-line .get-pdf {
+        margin: unset;
+    }
+
+    #summary .home-slider {
+        margin: 0 -30px;
+        padding: 30px;
+    }
+
+    #summary .home-slider:after {
+        min-width: 30px;
+    }
+
+    #summary .home-slider .slider-item {
+        width: 723px;
+        min-width: 723px;
+        max-width: 723px;
+        height: 422px;
+        min-height: 422px;
+        max-height: 422px;
+        padding: 22px 28px;
+    }
+
+    #summary .home-slider .slider-item .price {
+        font-size: 40px;
+    }
+
+    #summary .home-slider .slider-item .price:after {
+        width: 40px;
+        height: 40px;
+        font-size: 28px;
+        margin-left: 12px;
+    }
+
+    #summary .bottom-line .slider-navigation {
+        display: flex;
+    }
+
+    #summary .buttons-section {
+        margin: initial;
+        padding: initial;
+
+    }
+
+    #summary .buttons-section:after {
+        content: unset;
+    }
+
+    #summary .buttons-section button:last-of-type {
+        margin-right: unset;
+    }
+
+    #details {
+        padding: unset;
+        /*margin-top: 200px;*/
+    }
+
+    #details > .title {
+        font-size: 44px;
+        margin-top: 75px;
+    }
+
+    #details .grid {
+        justify-content: flex-start;
+    }
+
+    #details .grid .grid-item {
+        width: 214px;
+        height: 200px;
+        min-height: unset;
+        margin-right: 12px;
+        margin-bottom: 12px;
+        align-items: flex-start;
+        padding: 27px 24px;
+    }
+
+    #details .grid .grid-item img {
+        width: 56px;
+        height: 56px;
+    }
+
+    #details .grid .grid-item.wide-item {
+        width: 440px;
+        order: 10;
+    }
+
+    #details .grid .grid-item.wide-item img {
+
+    }
+
+    #details > .description {
+        max-width: 700px;
+        font-size: 22px;
+        margin: 75px 0;
+    }
+
+    #details .card#view {
+        display: none;
+    }
+
+    #details .image-slider {
+        border-radius: 16px;
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+
+    #details .image-slider:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #302F3A;
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 1;
+        border-radius: 16px;
+    }
+
+    #details .image-slider .title {
+        position: absolute;
+        z-index: 1;
+        font-size: 46px;
+        color: #F5F5F5;
+        top: 52px;
+        left: 79px;
+        margin: unset;
+    }
+
+    #details .image-slider .slides {
+        width: 100%;
+        height: auto;
+        margin: unset;
+        padding: unset;
+    }
+
+    #details .image-slider .slides:after {
+        content: unset;
+    }
+
+    #details .image-slider .slides img {
+        width: 1024px;
+        min-width: 1024px;
+        max-width: 1024px;
+        height: 100%;
+        min-height: unset;
+        max-height: unset;
+        border-radius: unset;
+        margin: unset;
+    }
+
+    #details .image-slider .slides img:not(:last-of-type) {
+        /*margin: unset;*/
+    }
+
+    #details .image-slider .slider-navigation {
+        position: absolute;
+        z-index: 2;
+        bottom: 53px;
+        left: 71px;
+    }
+
+    #details .card {
+        padding: 52px 71px;
+        position: relative;
+        /*min-height: 569px;*/
+        padding-right: 50%;
+    }
+
+    #details .card * {
+        z-index: 1;
+    }
+
+    #details .card .title {
+        font-size: 46px;
+        margin-bottom: 15px;
+        width: calc(1024px - 71px - 71px);
+    }
+
+    #details .card .title + .description {
+        font-size: 16px;
+    }
+
+    #details .card > p {
+        /*margin-bottom: 5px;*/
+    }
+
+    #details .card details {
+        border-top: unset;
+    }
+
+    #details .card details p {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    #details .card .logos-section {
+        max-width: 350px;
+        margin-bottom: -40px;
+    }
+
+    #details .card .feature {
+        position: absolute;
+        max-width: 250px;
+        left: 50%;
+        top: 52px;
+        margin: unset;
+        height: 57px;
+    }
+
+    #details .card > img {
+        width: calc(50% - 30px);
+        max-height: 100%;
+        object-fit: contain;
+        object-position: right bottom;
+        margin: unset;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        border-radius: unset;
+        border-bottom-right-radius: 16px;
+    }
+
+    #details .card.image-full-width {
+        padding: 52px 71px;
+    }
+
+    #details .card.image-full-width > *:not(img) {
+        position: absolute;
+    }
+
+    #details .card.image-full-width > img {
+        width: 100%;
+        position: initial;
+    }
+
+    #details .plans {
+        margin: unset;
+        padding: unset;
+        margin-top: 40px;
+        margin-bottom: 100px;
+    }
+
+    #details .plans:after {
+        content: unset;
+    }
+
+    #details .plans .item {
+        width: 422px;
+        min-width: unset;
+        max-width: unset;
+    }
+
+    #details .plans .item .summary {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #details .plans .item .summary span {
+        margin: unset;
+    }
+
+    #details .plans .item .summary button {
+        margin: unset;
+        width: 161px;
+        text-overflow: clip;
+        -webkit-line-clamp: 1;
+        line-height: 62px;
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 1364px) {
+    .navigation-buttons {
+        left: initial;
+    }
 }
