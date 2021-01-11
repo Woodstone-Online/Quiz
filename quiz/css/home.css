@@ -287,12 +287,14 @@
     min-width: calc(15px - 7px);
 }
 
-#summary .buttons-section button {
+#summary .buttons-section .button {
     font-family: Montserrat, sans-serif;
+    text-decoration: none;
     background: #F5F6F8;
     font-weight: 600;
     font-size: 14px;
     height: 45px;
+    line-height: 45px;
     border: unset;
     color: #302F3A;
     padding: 0 22px;
@@ -302,7 +304,7 @@
     cursor: pointer;
 }
 
-#summary .buttons-section button.primary {
+#summary .buttons-section .button.primary {
     background: #6EBC61;
     color: #FFFFFF;
 }
@@ -415,6 +417,10 @@
 
 #summary.selected .head-line:after {
     min-width: calc(20px - 8px);
+}
+
+#summary.selected .head-line .homes-navigation button.active {
+    border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 #summary.selected .home-cover {
@@ -1021,7 +1027,7 @@
         content: unset;
     }
 
-    #summary .buttons-section button:last-of-type {
+    #summary .buttons-section .button:last-child {
         margin-right: unset;
     }
 

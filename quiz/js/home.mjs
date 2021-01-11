@@ -152,7 +152,7 @@ loadStyles(import.meta.url).then(styles =>
                                     ${home.title}
                                 </button>`)}
                         </div>
-                        <a class="get-pdf" href="">Скачать в PDF</a>
+                        <a class="get-pdf" href="#contacts">Скачать в PDF</a>
                     </div>
                     <div class="home-slider">
                         ${quiz.homes.map((home, i) => html`
@@ -168,8 +168,8 @@ loadStyles(import.meta.url).then(styles =>
                             <button @click="${this.nextSlide.bind(this, this.home)}">></button>
                         </div>
                         <div class="buttons-section">
-                            <button class="primary" @click="${() => this.selectHome()}">Подробнее</button>
-                            <button>Посмотреть готовый дом</button>
+                            <button class="button primary" @click="${() => this.selectHome()}">Подробнее</button>
+                            <a class="button" href="#contacts">Посмотреть готовый дом</a>
                         </div>
                     </div>
                     <div class="home-cover">
