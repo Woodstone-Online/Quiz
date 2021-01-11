@@ -316,6 +316,7 @@
     white-space: nowrap;
     border-radius: 100px;
     margin-right: 7px;
+    cursor: pointer;
 }
 
 #summary .buttons-section button.primary {
@@ -325,6 +326,7 @@
 
 #details {
     padding: 15px;
+    padding-bottom: 70px;
 }
 
 #details > .title {
@@ -639,7 +641,7 @@
     margin: 0 -15px;
     padding: 15px;
     scroll-snap-type: x mandatory;
-    margin-bottom: 70px;
+    /*margin-bottom: 70px;*/
 }
 
 #details .plans:after {
@@ -730,6 +732,10 @@
     font-size: 27px;
     margin-top: 30px;
     color: #3F3E48;
+}
+
+#details .plans .item .summary span:after {
+    content: ' ₽';
 }
 
 #details .plans .item.active .summary span {
@@ -898,6 +904,7 @@
     #details {
         padding: unset;
         /*margin-top: 200px;*/
+        padding-bottom: 100px;
     }
 
     #details > .title {
@@ -906,6 +913,7 @@
     }
 
     #details .grid {
+        margin-top: 40px;
         justify-content: flex-start;
     }
 
@@ -1087,7 +1095,7 @@
         margin: unset;
         padding: unset;
         margin-top: 40px;
-        margin-bottom: 100px;
+        /*margin-bottom: 100px;*/
     }
 
     #details .plans:after {

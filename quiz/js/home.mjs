@@ -12,6 +12,20 @@ loadStyles(import.meta.url).then(styles =>
             this.home = {};
             this.images = {};
             this.numberFormat = new Intl.NumberFormat('ru-RU');
+            this.selectedHome = quiz.getState('selectedHome');
+        }
+
+        static get properties() {
+            return {
+                selectedHome: {attribute: false}
+            }
+        }
+
+        selectHome(homeIndex = this.home.activeSlideIndex || null) {
+            if (!homeIndex || !quiz.homes[homeIndex]) return;
+            const home = quiz.homes[homeIndex];
+            quiz.selectHome(home.homeId);
+            this.selectedHome = home.homeId;
         }
 
         nextSlide(target) {
@@ -44,20 +58,45 @@ loadStyles(import.meta.url).then(styles =>
             })
         }
 
+        async performUpdate() {
+            if (this.selectedHome && (!quiz.home[this.selectedHome] || !quiz.home[this.selectedHome].dataLoaded))
+                await quiz.loadHomeData(quiz.home[this.selectedHome]);
+            super.performUpdate();
+        }
+
         firstUpdated() {
             this.initSlider(this.home, '.home-slider', '.homes-navigation');
-            this.initSlider(this.images, '.image-slider .slides');
+            if (this.selectedHome) this.setSlide(this.home, quiz.homes.findIndex(home => home.homeId === this.selectedHome))
+        }
+
+        updated() {
+            this.destroySlider(this.images);
+            if (this.selectedHome && quiz.home[this.selectedHome] && quiz.home[this.selectedHome].images)
+                this.initSlider(this.images, '.image-slider .slides');
         }
 
         initSlider(target, sliderSelector, indicatorSelector) {
             if (indicatorSelector) target.indicators = Array.from(this.shadowRoot.querySelector(indicatorSelector).children);
             target.slider = this.shadowRoot.querySelector(sliderSelector);
+            if (!target.slider) return;
             target.slides = Array.from(target.slider.children);
             target.observer = new IntersectionObserver(this.sliderScrollHandler.bind(this, target), {
                 root: target.slider,
                 threshold: 1
             });
             return target.slides.forEach(slide => target.observer.observe(slide));
+        }
+
+        destroySlider(target) {
+            if (!target || !target.observer) return target;
+            target.observer.disconnect();
+            delete target.slider;
+            delete target.slides;
+            delete target.observer;
+            delete target.indicators;
+            delete target.activeSlide;
+            delete target.activeSlideIndex;
+            return target;
         }
 
         sliderScrollHandler(target, entries, observer) {
@@ -86,10 +125,6 @@ loadStyles(import.meta.url).then(styles =>
         skipScrollHandling(target, time = 1000) {
             clearTimeout(target.skipHandling);
             return target.skipHandling = setTimeout(() => target.skipHandling = false, time)
-        }
-
-        renderHomeSlider() {
-
         }
 
         render() {
@@ -126,7 +161,7 @@ loadStyles(import.meta.url).then(styles =>
                             <button @click="${this.nextSlide.bind(this, this.home)}">></button>
                         </div>
                         <div class="buttons-section">
-                            <button class="primary">Подробнее</button>
+                            <button class="primary" @click="${() => this.selectHome()}">Подробнее</button>
                             <button>Посмотреть готовый дом</button>
                         </div>
                     </div>
@@ -153,136 +188,141 @@ loadStyles(import.meta.url).then(styles =>
                             <img src="/quiz/img/7.grid.home.landing.svg"><span>Окна и двери</span>
                         </div>
                     </div>
-                    <div class="description">
-                        Продуманный до мелочей — альтернатива квартире. Каждый проект может быть адаптирован под ваш
-                        участок и ваши условия. Выберите дом и адаптируйте планировку под себя.
-                    </div>
-                    <div id="view" class="card">
-                        <span class="title">Запишитесь на просмотр своего будущего дома</span>
-                        <span class="description">так вы сможете оценить качество материалов и отделки а также осмотреть район и пообщаться с соседями</span>
-                        <a href="#contacts" class="button">Записаться</a>
-                    </div>
-                    <div class="image-slider">
-                        <h2 class="title">Галлерея</h2>
-                        <div class="slides">
-                            <img src="/quiz/img/1.demo.slider.home.landing.png">
-                            <img src="/quiz/img/1.demo.slider.home.landing.png">
-                            <img src="/quiz/img/1.demo.slider.home.landing.png">
+                    ${this.selectedHome ? html`
+                        <div class="description">
+                            Продуманный до мелочей — альтернатива квартире. Каждый проект может быть адаптирован под ваш
+                            участок и ваши условия. Выберите дом и адаптируйте планировку под себя.
                         </div>
-                        <div class="slider-navigation">
-                            <button @click="${this.prevSlide.bind(this, this.images)}"><</button>
-                            <button @click="${this.nextSlide.bind(this, this.images)}">></button>
+                        <div id="view" class="card">
+                            <span class="title">Запишитесь на просмотр своего будущего дома</span>
+                            <span class="description">так вы сможете оценить качество материалов и отделки а также осмотреть район и пообщаться с соседями</span>
+                            <a href="#contacts" class="button">Записаться</a>
                         </div>
-                    </div>
-                    <div class="card image-full-width">
-                        <h2 class="title">Чертеж</h2>
-                        <img src="/quiz/img/1.demo.card.home.landing.png" style="margin-bottom: 0">
-                    </div>
-                    <div class="card">
-                        <h2 class="title">Фундамент</h2>
-                        <p>Используем 2 варианта в зависимости от результатов геологии на участке:</p>
-                        <details open>
-                            <summary>1 - Свайно-ростверковый фундамент</summary>
-                            <p>
-                                способствует повышению устойчивости конструкции, обеспечивая опору на глубоко залегающие
-                                почвенные слои. Основным элементом основания служат сваи, заглубляемые в грунт и
-                                подвергаемые армированию, способствующему улучшению морозостойкости и увеличению
-                                прочности на изгиб.
-                            </p>
-                        </details>
-                        <details>
-                            <summary>2 - Плитный фундамент с ребрами жесткости</summary>
-                            <p>
-                                способствует повышению устойчивости конструкции, обеспечивая опору на глубоко залегающие
-                                почвенные слои. Основным элементом основания служат сваи, заглубляемые в грунт и
-                                подвергаемые армированию, способствующему улучшению морозостойкости и увеличению
-                                прочности на изгиб.
-                            </p>
-                        </details>
-                        <img src="/quiz/img/2.card.home.landing.png">
-                    </div>
-                    <div class="card">
-                        <h2 class="title">Крыша</h2>
-                        <p>Кровельный материал</p>
-                        <span class="description">металлочерепица из нержавеющей стали толщиной 0,5 мм с 50-летней гарантией качества.</span>
-                        <p>Утепление</p>
-                        <span class="description">природный и долговечный базальтовый утеплитель 200 мм.</span>
-                        <p>Пароизоляционная мембрана</p>
-                        <span class="description">увеличиваетсрок службы утеплителя и дерявянных конструкций.</span>
-                        <p>Водосточная система</p>
-                        <span class="description">немецкая водосточная система DOCKE не допускает контакта стен с осадками.</span>
-                        <div class="feature"><img src="/quiz/img/1.feature.home.landing.svg">
-                            <span>Утеплитель 200 мм — тишина в доме.</span>
+                        ${quiz.home[this.selectedHome].images ? html`
+                            <div class="image-slider">
+                                <h2 class="title">Галлерея</h2>
+                                <div class="slides">
+                                    ${quiz.home[this.selectedHome].images.map(image => html`<img src="${image.url}">`)}
+                                </div>
+                                <div class="slider-navigation">
+                                    <button @click="${this.prevSlide.bind(this, this.images)}"><</button>
+                                    <button @click="${this.nextSlide.bind(this, this.images)}">></button>
+                                </div>
+                            </div>` : null}
+                        ${quiz.home[this.selectedHome].plan ? html`
+                            <div class="card image-full-width">
+                                <h2 class="title">Чертеж</h2>
+                                <img src="${quiz.home[this.selectedHome].plan.url}" style="margin-bottom: 0">
+                            </div>` : null}
+                        <div class="card">
+                            <h2 class="title">Фундамент</h2>
+                            <p>Используем 2 варианта в зависимости от результатов геологии на участке:</p>
+                            <details open>
+                                <summary>1 - Свайно-ростверковый фундамент</summary>
+                                <p>
+                                    способствует повышению устойчивости конструкции, обеспечивая опору на глубоко
+                                    залегающие
+                                    почвенные слои. Основным элементом основания служат сваи, заглубляемые в грунт и
+                                    подвергаемые армированию, способствующему улучшению морозостойкости и увеличению
+                                    прочности на изгиб.
+                                </p>
+                            </details>
+                            <details>
+                                <summary>2 - Плитный фундамент с ребрами жесткости</summary>
+                                <p>
+                                    способствует повышению устойчивости конструкции, обеспечивая опору на глубоко
+                                    залегающие
+                                    почвенные слои. Основным элементом основания служат сваи, заглубляемые в грунт и
+                                    подвергаемые армированию, способствующему улучшению морозостойкости и увеличению
+                                    прочности на изгиб.
+                                </p>
+                            </details>
+                            <img src="/quiz/img/2.card.home.landing.png">
                         </div>
-                        <img src="/quiz/img/3.card.home.landing.png">
-                    </div>
-                    <div class="card">
-                        <h2 class="title">Стены и эко-фасады</h2>
-                        <span class="description">Утепляем экологичными и безопасными материалами – никакого пенополистирола.</span>
-                        <ol>
-                            <li>Фасадная штукатурка</li>
-                            <li>Грунтовка под штукатурку</li>
-                            <li>Стекловолокная сетка</li>
-                            <li>Грунтовка</li>
-                            <li>Фасадный дюбель</li>
-                            <li>Базальтовый эко-утеплитель</li>
-                            <li>Грунтовка</li>
-                            <li>Газоблок автоклавный</li>
-                        </ol>
-                        <div class="logos-section">
-                            <img src="/quiz/img/1.logo.home.landing.png">
-                            <img src="/quiz/img/2.logo.home.landing.png">
-                            <img src="/quiz/img/3.logo.home.landing.png">
-                        </div>
-                        <img src="/quiz/img/4.card.home.landing.png">
-                    </div>
-                    <h2 class="title">Цены</h2>
-                    <div class="plans">
-                        <div class="item active">
-                            <h3 class="title">Чистовая отделка</h3>
-                            <ul>
-                                <li>Фундамент</li>
-                                <li>Стеновой комплект</li>
-                                <li>Кровля</li>
-                                <li>Окна и двери</li>
-                                <li>Канализация</li>
-                                <li>Отопление</li>
-                                <li>Электричество</li>
-                                <li>Водоснабжение</li>
-                                <li>Водосточная система</li>
-                                <li>Отделка фасадов</li>
-                                <li class="excluded">Ремонт</li>
-                                <li class="excluded">Чистовая отделка</li>
-                                <li class="excluded">Мебельная планировка с артикулами товаров и названием магазина</li>
-                            </ul>
-                            <div class="summary">
-                                <span>2 450 000 ₽</span>
-                                <button>Выбрать пакет</button>
+                        <div class="card">
+                            <h2 class="title">Крыша</h2>
+                            <p>Кровельный материал</p>
+                            <span class="description">металлочерепица из нержавеющей стали толщиной 0,5 мм с 50-летней гарантией качества.</span>
+                            <p>Утепление</p>
+                            <span class="description">природный и долговечный базальтовый утеплитель 200 мм.</span>
+                            <p>Пароизоляционная мембрана</p>
+                            <span class="description">увеличиваетсрок службы утеплителя и дерявянных конструкций.</span>
+                            <p>Водосточная система</p>
+                            <span class="description">немецкая водосточная система DOCKE не допускает контакта стен с осадками.</span>
+                            <div class="feature"><img src="/quiz/img/1.feature.home.landing.svg">
+                                <span>Утеплитель 200 мм — тишина в доме.</span>
                             </div>
+                            <img src="/quiz/img/3.card.home.landing.png">
                         </div>
-                        <div class="item">
-                            <h3 class="title">Под ключ</h3>
-                            <ul>
-                                <li>Фундамент</li>
-                                <li>Стеновой комплект</li>
-                                <li>Кровля</li>
-                                <li>Окна и двери</li>
-                                <li>Канализация</li>
-                                <li>Отопление</li>
-                                <li>Электричество</li>
-                                <li>Водоснабжение</li>
-                                <li>Водосточная система</li>
-                                <li>Отделка фасадов</li>
-                                <li>Ремонт</li>
-                                <li>Чистовая отделка</li>
-                                <li>Мебельная планировка с артикулами товаров и названием магазина</li>
-                            </ul>
-                            <div class="summary">
-                                <span>3 450 000 ₽</span>
-                                <button>Выбрать пакет</button>
+                        <div class="card">
+                            <h2 class="title">Стены и эко-фасады</h2>
+                            <span class="description">Утепляем экологичными и безопасными материалами – никакого пенополистирола.</span>
+                            <ol>
+                                <li>Фасадная штукатурка</li>
+                                <li>Грунтовка под штукатурку</li>
+                                <li>Стекловолокная сетка</li>
+                                <li>Грунтовка</li>
+                                <li>Фасадный дюбель</li>
+                                <li>Базальтовый эко-утеплитель</li>
+                                <li>Грунтовка</li>
+                                <li>Газоблок автоклавный</li>
+                            </ol>
+                            <div class="logos-section">
+                                <img src="/quiz/img/1.logo.home.landing.png">
+                                <img src="/quiz/img/2.logo.home.landing.png">
+                                <img src="/quiz/img/3.logo.home.landing.png">
                             </div>
+                            <img src="/quiz/img/4.card.home.landing.png">
                         </div>
-                    </div>
+                        <h2 class="title">Цены</h2>
+                        <div class="plans">
+                            <div class="item active">
+                                <h3 class="title">Чистовая отделка</h3>
+                                <ul>
+                                    <li>Фундамент</li>
+                                    <li>Стеновой комплект</li>
+                                    <li>Кровля</li>
+                                    <li>Окна и двери</li>
+                                    <li>Канализация</li>
+                                    <li>Отопление</li>
+                                    <li>Электричество</li>
+                                    <li>Водоснабжение</li>
+                                    <li>Водосточная система</li>
+                                    <li>Отделка фасадов</li>
+                                    <li class="excluded">Ремонт</li>
+                                    <li class="excluded">Чистовая отделка</li>
+                                    <li class="excluded">Мебельная планировка с артикулами товаров и названием
+                                        магазина
+                                    </li>
+                                </ul>
+                                <div class="summary">
+                                    <span>${this.numberFormat.format(quiz.home[this.selectedHome].basePrice)}</span>
+                                    <button>Выбрать пакет</button>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <h3 class="title">Под ключ</h3>
+                                <ul>
+                                    <li>Фундамент</li>
+                                    <li>Стеновой комплект</li>
+                                    <li>Кровля</li>
+                                    <li>Окна и двери</li>
+                                    <li>Канализация</li>
+                                    <li>Отопление</li>
+                                    <li>Электричество</li>
+                                    <li>Водоснабжение</li>
+                                    <li>Водосточная система</li>
+                                    <li>Отделка фасадов</li>
+                                    <li>Ремонт</li>
+                                    <li>Чистовая отделка</li>
+                                    <li>Мебельная планировка с артикулами товаров и названием магазина</li>
+                                </ul>
+                                <div class="summary">
+                                    <span>${this.numberFormat.format(quiz.home[this.selectedHome].price)}</span>
+                                    <button>Выбрать пакет</button>
+                                </div>
+                            </div>
+                        </div>` : ''}
                 </section>`;
         }
     }))

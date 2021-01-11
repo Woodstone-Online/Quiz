@@ -1,5 +1,6 @@
 import './app.mjs';
 
+
 export class Quiz {
     constructor({apiURL} = {}) {
         this.endpointURL = apiURL;
@@ -23,6 +24,7 @@ export class Quiz {
             }))
         ])
         await this.renderQuiz();
+        this.homes.forEach(this.loadHomeData.bind(this))
     }
 
     initRangesSlider() {
@@ -58,6 +60,16 @@ export class Quiz {
             if (items.length) items.forEach(item => this[store][item[key]] = item);
         }
         return Object.assign(this, data);
+    }
+
+    async loadHomeData(home) {
+        // TODO: Check if request in the queue
+        if (!home.dataLoaded) {
+            const data = await fetch(this.endpointURL + 'homes/' + home.homeId).then(r => r.json()).catch(e => console.error(e) || {})
+            Object.assign(home, data.home, {dataLoaded: true})
+            if (home.images && home.images.length) home.plan = home.images.pop()
+        }
+        return home;
     }
 
     async renderQuiz() {
