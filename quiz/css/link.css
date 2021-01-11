@@ -1,6 +1,7 @@
 * {
     touch-action: manipulation;
     -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
 }
 
 :host {

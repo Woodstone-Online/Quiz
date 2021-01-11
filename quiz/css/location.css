@@ -1,3 +1,7 @@
+* {
+    -webkit-font-smoothing: antialiased;
+}
+
 :host {
     font-family: 'Montserrat', sans-serif;
     display: block;

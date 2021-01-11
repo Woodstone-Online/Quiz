@@ -1,4 +1,6 @@
 import {LitElement, html, css} from 'https://jspm.dev/lit-element';
+import {classMap} from "https://jspm.dev/lit-html/directives/class-map";
+import {styleMap} from "https://jspm.dev/lit-html/directives/style-map";
 import quiz, {loadStyles} from "./quiz.mjs";
 
 loadStyles(import.meta.url).then(styles =>
@@ -22,7 +24,7 @@ loadStyles(import.meta.url).then(styles =>
         }
 
         selectHome(homeIndex = this.home.activeSlideIndex || null) {
-            if (!homeIndex || !quiz.homes[homeIndex]) return;
+            if (typeof homeIndex != "number" || !quiz.homes[homeIndex]) return;
             const home = quiz.homes[homeIndex];
             quiz.selectHome(home.homeId);
             this.selectedHome = home.homeId;
@@ -52,11 +54,12 @@ loadStyles(import.meta.url).then(styles =>
             if (!target.slides || !target.slides[index]) return;
             this.setActiveSlide(target, target.slides[index]);
             this.skipScrollHandling(target);
-            return resetScroll ? target.slider.scrollTo(0, 0) : target.activeSlide.scrollIntoView({
+            if (resetScroll) target.slider.scrollTo(0, 0); else target.activeSlide.scrollIntoView({
                 inline: "center",
                 behavior: "smooth",
                 block: 'nearest'
-            })
+            });
+            return index;
         }
 
         async performUpdate() {
@@ -139,12 +142,13 @@ loadStyles(import.meta.url).then(styles =>
                     </div>
                     <a href="#contacts" class="button alternate">Записаться на просмотр</a>
                 </section>
-                <section id="summary">
+                <section id="summary" class=${classMap({selected: this.selectedHome})}
+                         style=${styleMap(this.selectedHome ? {'background-image': quiz.home[this.selectedHome].image ? `url("${quiz.home[this.selectedHome].image.url}")` : 'none'} : {})}>
                     <span class="title">Проекты типовых домов</span>
                     <div class="head-line">
                         <div class="homes-navigation">
                             ${quiz.homes.map((home, i) => html`
-                                <button @click="${() => this.setSlide(this.home, i)}">
+                                <button @click="${() => this.selectedHome ? this.selectHome(this.setSlide(this.home, i)) : this.setSlide(this.home, i)}">
                                     ${home.title}
                                 </button>`)}
                         </div>
@@ -168,9 +172,16 @@ loadStyles(import.meta.url).then(styles =>
                             <button>Посмотреть готовый дом</button>
                         </div>
                     </div>
+                    <div class="home-cover">
+                        <h1 class="title">Типовой дом со всеми удобствами</h1>
+                        <div class="home-price">
+                            ${this.selectedHome ? this.numberFormat.format(quiz.home[this.selectedHome].price) : ''}
+                        </div>
+                        <div class="inviteToScroll">Прокрутите вниз и узнайте больше об этом доме</div>
+                    </div>
                 </section>
                 <section id="details">
-                    <h1 class="title">Что входит в дом</h1>
+                    <h2 class="title">Что входит в дом</h2>
                     <div class="grid">
                         <div class="grid-item">
                             <img src="/quiz/img/1.grid.home.landing.svg"><span>Устройство фундамента</span></div>

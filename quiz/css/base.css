@@ -3,6 +3,7 @@
     touch-action: manipulation;
     -webkit-text-size-adjust: none;
     font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 :root {

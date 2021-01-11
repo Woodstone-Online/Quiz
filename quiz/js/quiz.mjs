@@ -259,7 +259,7 @@ export class Quiz {
             body: JSON.stringify(data)
         }).then(r => r.json());
         if (response.details) alert(response.details.pop().message);
-        if (response.user) alert('Пользователь успешно создан, ID: ' + response.user.userId)
+        if (response.user) alert('Пользователь успешно создан, ID: ' + response.user.userId) // TODO: Reset storage
         return console.debug(response);
     }
 
