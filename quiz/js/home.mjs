@@ -23,7 +23,7 @@ loadStyles(import.meta.url).then(styles =>
             }
         }
 
-        selectHome(homeIndex = this.home.activeSlideIndex || null) {
+        selectHome(homeIndex = typeof this.home.activeSlideIndex == "number" ? this.home.activeSlideIndex : null) {
             if (typeof homeIndex != "number" || !quiz.homes[homeIndex]) return;
             const home = quiz.homes[homeIndex];
             quiz.selectHome(home.homeId);
@@ -75,6 +75,7 @@ loadStyles(import.meta.url).then(styles =>
 
         updated() {
             if (this.images.slider) this.destroySlider(this.images);
+            if (!this.selectedHome) this.setSlide(this.home, undefined, true);
             if (this.selectedHome && quiz.home[this.selectedHome] && quiz.home[this.selectedHome].images) {
                 this.initSlider(this.images, '.image-slider .slides');
                 this.setSlide(this.images, undefined, true);
