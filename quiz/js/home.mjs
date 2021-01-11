@@ -29,7 +29,7 @@ loadStyles(import.meta.url).then(styles =>
         }
 
         nextSlide(target) {
-            if (!target.activeSlide.nextElementSibling) return;
+            if (!target.activeSlide || !target.activeSlide.nextElementSibling) return;
             this.setActiveSlide(target, target.activeSlide.nextElementSibling);
             return this.skipScrollHandling(target) && target.activeSlide.scrollIntoView({
                 inline: "center",
@@ -39,7 +39,7 @@ loadStyles(import.meta.url).then(styles =>
         }
 
         prevSlide(target) {
-            if (!target.activeSlide.previousElementSibling) return;
+            if (!target.activeSlide || !target.activeSlide.previousElementSibling) return;
             this.setActiveSlide(target, target.activeSlide.previousElementSibling);
             return this.skipScrollHandling(target) && target.activeSlide.scrollIntoView({
                 inline: "center",
@@ -48,10 +48,11 @@ loadStyles(import.meta.url).then(styles =>
             })
         }
 
-        setSlide(target, index) {
-            if (!target.slides[index]) return;
+        setSlide(target, index = 0, resetScroll) {
+            if (!target.slides || !target.slides[index]) return;
             this.setActiveSlide(target, target.slides[index]);
-            return this.skipScrollHandling(target) && target.activeSlide.scrollIntoView({
+            this.skipScrollHandling(target);
+            return resetScroll ? target.slider.scrollTo(0, 0) : target.activeSlide.scrollIntoView({
                 inline: "center",
                 behavior: "smooth",
                 block: 'nearest'
@@ -59,7 +60,7 @@ loadStyles(import.meta.url).then(styles =>
         }
 
         async performUpdate() {
-            if (this.selectedHome && (!quiz.home[this.selectedHome] || !quiz.home[this.selectedHome].dataLoaded))
+            if (this.selectedHome && quiz.home[this.selectedHome] && !quiz.home[this.selectedHome].dataLoaded)
                 await quiz.loadHomeData(quiz.home[this.selectedHome]);
             super.performUpdate();
         }
@@ -70,9 +71,11 @@ loadStyles(import.meta.url).then(styles =>
         }
 
         updated() {
-            this.destroySlider(this.images);
-            if (this.selectedHome && quiz.home[this.selectedHome] && quiz.home[this.selectedHome].images)
+            if (this.images.slider) this.destroySlider(this.images);
+            if (this.selectedHome && quiz.home[this.selectedHome] && quiz.home[this.selectedHome].images) {
                 this.initSlider(this.images, '.image-slider .slides');
+                this.setSlide(this.images, undefined, true);
+            }
         }
 
         initSlider(target, sliderSelector, indicatorSelector) {
@@ -141,7 +144,7 @@ loadStyles(import.meta.url).then(styles =>
                     <div class="head-line">
                         <div class="homes-navigation">
                             ${quiz.homes.map((home, i) => html`
-                                <button @click="${this.setSlide.bind(this, this.home, i)}">
+                                <button @click="${() => this.setSlide(this.home, i)}">
                                     ${home.title}
                                 </button>`)}
                         </div>
@@ -150,7 +153,7 @@ loadStyles(import.meta.url).then(styles =>
                     <div class="home-slider">
                         ${quiz.homes.map((home, i) => html`
                             <div class="slider-item toggle-image-viewer"
-                                 @click="${this.setSlide.bind(this, this.home, i)}"
+                                 @click="${() => this.setSlide(this.home, i)}"
                                  style="background-image: url(${home.image ? home.image.url : ''})">
                                 <div class="price">${this.numberFormat.format(home.price)}</div>
                             </div>`)}
