@@ -159,7 +159,7 @@ loadStyles(import.meta.url).then(styles =>
                         ${quiz.homes.map((home, i) => html`
                             <div class="slider-item toggle-image-viewer"
                                  @click="${() => this.setSlide(this.home, i)}"
-                                 style="background-image: url(${home.image ? home.image.url : ''})">
+                                 style=${styleMap({'background-image': home.image ? `url("${home.image.url}")` : 'none'})}>
                                 <div class="price">${this.numberFormat.format(home.price)}</div>
                             </div>`)}
                     </div>
