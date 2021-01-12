@@ -15,6 +15,7 @@ loadStyles(import.meta.url).then(styles =>
             this.images = {};
             this.numberFormat = new Intl.NumberFormat('ru-RU');
             this.selectedHome = quiz.getState('selectedHome');
+            this.maxPrice = quiz.getAnswer('budget', 'to');
         }
 
         static get properties() {
@@ -148,7 +149,11 @@ loadStyles(import.meta.url).then(styles =>
                     <span class="title">Проекты типовых домов</span>
                     <div class="head-line">
                         <div class="homes-navigation">
-                            ${quiz.homes.map((home, i) => html`
+                            ${quiz.homes.map((home, i) => this.maxPrice && this.maxPrice < home.price ? html`
+                                <button @click="${() => this.selectedHome ? this.selectHome(this.setSlide(this.home, i)) : this.setSlide(this.home, i)}"
+                                        data-delta="${this.numberFormat.format(home.price - this.maxPrice)}">
+                                    ${home.title}
+                                </button>` : html`
                                 <button @click="${() => this.selectedHome ? this.selectHome(this.setSlide(this.home, i)) : this.setSlide(this.home, i)}">
                                     ${home.title}
                                 </button>`)}
@@ -311,7 +316,7 @@ loadStyles(import.meta.url).then(styles =>
                                     </li>
                                 </ul>
                                 <div class="summary">
-                                    <span>${this.numberFormat.format(quiz.home[this.selectedHome].basePrice)}</span>
+                                    <span>${this.numberFormat.format(quiz.home[this.selectedHome].price)}</span>
                                     <button>Выбрать пакет</button>
                                 </div>
                             </div>
@@ -333,11 +338,13 @@ loadStyles(import.meta.url).then(styles =>
                                     <li>Мебельная планировка с артикулами товаров и названием магазина</li>
                                 </ul>
                                 <div class="summary">
-                                    <span>${this.numberFormat.format(quiz.home[this.selectedHome].price)}</span>
+                                    <span>${this.numberFormat.format(quiz.home[this.selectedHome].totalPrice)}</span>
                                     <button>Выбрать пакет</button>
                                 </div>
                             </div>
                         </div>` : ''}
                 </section>`;
         }
+
+
     }))
