@@ -222,7 +222,10 @@ loadStyles(import.meta.url).then(styles =>
                             <div class="image-slider">
                                 <h2 class="title">Галлерея</h2>
                                 <div class="slides">
-                                    ${quiz.home[this.selectedHome].images.map(image => html`<img src="${image.url}">`)}
+                                    ${quiz.home[this.selectedHome].images.map((image, i) => html`
+                                        <div @click="${() => this.setSlide(this.images, i)}" tabindex="0">
+                                            <img src="${image.url}">
+                                        </div>`)}
                                 </div>
                                 <div class="slider-navigation">
                                     <button @click="${this.prevSlide.bind(this, this.images)}"><</button>

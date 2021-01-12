@@ -711,12 +711,21 @@
     margin: 0 -15px;
     padding: 15px;
     scroll-snap-type: x mandatory;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 #details .image-slider .slides:after {
     content: '';
     display: inline-block;
     min-width: 15px;
+}
+
+#details .image-slider .slides > div {
+    height: 100%;
+    width: 80vw;
+    margin-right: 15px;
+    scroll-snap-align: center;
 }
 
 #details .image-slider .slides img {
@@ -726,21 +735,105 @@
     width: 80vw;
     min-width: 80vw;
     max-width: 80vw;
-    height: calc(80vw * 0.7595628415);
-    min-height: calc(80vw * 0.7595628415);
-    max-height: calc(80vw * 0.7595628415);
+    /*height: 100%;*/
+    /*height: calc(80vw * 0.7595628415);*/
+    /*min-height: calc(80vw * 0.7595628415);*/
+    /*max-height: calc(80vw * 0.7595628415);*/
     /*background-color: lightgray;*/
     /*justify-content: flex-end;*/
     /*padding: 4px 22px;*/
-    scroll-snap-align: center;
+    /*scroll-snap-align: center;*/
 }
 
 #details .image-slider .slides img:not(.active) {
     /*cursor: pointer;*/
 }
 
-#details .image-slider .slides img:not(:last-of-type) {
+#details .image-slider .slides > div:not(:last-child) {
     margin-right: 15px;
+}
+
+#details .image-slider:focus-within .slides {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .7);
+    z-index: 10;
+    align-items: center;
+    margin: unset;
+    padding: unset;
+}
+
+#details .image-slider:focus-within .slides:after {
+    content: unset;
+}
+
+#details .image-slider:focus-within .slides > div {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: unset;
+}
+
+#details .image-slider:focus-within .slides > div.active {
+    /*z-index: 99;*/
+    /*margin: unset;*/
+    /*width: 100vw;*/
+    opacity: initial;
+    pointer-events: none;
+}
+
+#details .image-slider:focus-within .slides > div/*:not(.active)*/:before,
+#details .image-slider:focus-within .slides > div/*:not(.active)*/:after {
+    content: '';
+    display: block;
+    background-color: black;
+    background-image: url("/quiz/img/right.arrow.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 5vw;
+    /*opacity: 0;*/
+    opacity: .5;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -10vw;
+    width: 10vw;
+    z-index: 200;
+}
+
+#details .image-slider:focus-within .slides > div/*:not(.active)*/:after {
+    background-image: url("/quiz/img/left.arrow.svg");
+    left: unset;
+    right: -10vw;
+}
+
+#details .image-slider:focus-within .slides > div:first-child:before,
+#details .image-slider:focus-within .slides > div:last-child:after {
+    content: unset;
+}
+
+#details .image-slider:focus-within .slides > div:not(.active) {
+    cursor: pointer;
+}
+
+#details .image-slider:focus-within .slides img {
+    width: 100vw;
+    min-width: unset;
+    max-width: unset;
+    height: auto;
+    min-height: unset;
+    max-height: unset;
+    border-radius: unset;
+    /*margin: 0 -25vw;*/
+    /*z-index: 100;*/
+    /*opacity: 0;*/
 }
 
 #details .plans {
@@ -1174,6 +1267,18 @@
         z-index: 2;
         bottom: 53px;
         left: 71px;
+    }
+
+    #details .image-slider:focus-within .slides > div:before,
+    #details .image-slider:focus-within .slides > div:after {
+        left: -100px;
+        width: 100px;
+        background-size: 20px;
+    }
+
+    #details .image-slider:focus-within .slides > div:after {
+        left: initial;
+        right: -100px;
     }
 
     #details .card {

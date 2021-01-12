@@ -22,7 +22,7 @@ loadStyles(import.meta.url).then(styles =>
             switch (step.type) {
                 case 'counters':
                     return html`
-                        <section id="${step.fieldname}" tabindex="1"><span class="title">${step.title}</span>
+                        <section id="${step.fieldname}" tabindex="0"><span class="title">${step.title}</span>
                             <div class="counters">
                                 ${step.data.map(item => html`
                                     <div><label>${item.title}</label>
@@ -46,7 +46,7 @@ loadStyles(import.meta.url).then(styles =>
                 case 'options-regular':
                     const checkedValue = quiz.getAnswer(step.fieldname, false, 0);
                     return html`
-                        <section id="${step.fieldname}" tabindex="1"><span class="title">${step.title}</span>
+                        <section id="${step.fieldname}" tabindex="0"><span class="title">${step.title}</span>
                             <form class="${step.type === 'options-regular' ? 'buttons' : 'mini-buttons'}">
                                 ${step.data.map(item => html`
                                     <input type="radio" name="${step.fieldname}"
@@ -58,7 +58,7 @@ loadStyles(import.meta.url).then(styles =>
                         </section>`;
                 case 'ranges':
                     return html`
-                        <section id="${step.fieldname}" tabindex="1"><span class="title">${step.title}</span>
+                        <section id="${step.fieldname}" tabindex="0"><span class="title">${step.title}</span>
                             ${step.data.map(item => html`
                                 <div class="range-slider">
                                     <div class="money">от
@@ -83,7 +83,7 @@ loadStyles(import.meta.url).then(styles =>
 
         template() {
             return html`
-                <section class="active" tabindex="1">
+                <section class="active" tabindex="0">
                     <span class="title">Какой дом вы бы хотели построить?</span>
                     <div class="buttons">
                         <input type="radio" id="test1" name="home"><label for="test1">Типовой проект</label>
@@ -92,8 +92,8 @@ loadStyles(import.meta.url).then(styles =>
                         <input type="radio" id="test3" name="home"><label for="test3">У меня уже есть проект</label>
                     </div>
                 </section>
-                <section class="" tabindex="1"><span class="title">Место</span></section>
-                <section class="" tabindex="1"><span class="title">Когда вы хотели бы переехать?</span>
+                <section class="" tabindex="0"><span class="title">Место</span></section>
+                <section class="" tabindex="0"><span class="title">Когда вы хотели бы переехать?</span>
                     <div class="mini-buttons">
                         <input type="radio" id="test4" name="period"><label for="test4">3-6</label>
                         <input type="radio" id="test5" name="period"><label for="test5">6-12</label>
@@ -101,7 +101,7 @@ loadStyles(import.meta.url).then(styles =>
                         <input type="radio" id="test8" name="period"><label for="test8">Не имеет значения</label>
                     </div>
                 </section>
-                <section class="" tabindex="1"><span class="title">Бюджет</span>
+                <section class="" tabindex="0"><span class="title">Бюджет</span>
                     <div class="range-slider">
                         <div class="money">от <span>1 800 000</span> до <span>100 000 000</span></div>
                         <input step="100000" value="100000" type="range" id="test7_1" name="price_1" min="1800000"
@@ -110,7 +110,7 @@ loadStyles(import.meta.url).then(styles =>
                                max="100000000">
                     </div>
                 </section>
-                <section class="" tabindex="1"><span class="title">Для кого этот дом?</span>
+                <section class="" tabindex="0"><span class="title">Для кого этот дом?</span>
                     <div class="counters">
                         <div><label>Взрослых</label>
                             <div>
