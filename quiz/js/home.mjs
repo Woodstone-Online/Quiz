@@ -299,7 +299,8 @@ loadStyles(import.meta.url).then(styles =>
                         </div>
                         <h2 class="title">Цены</h2>
                         <div class="plans">
-                            <div class="item active">
+                            <input type="radio" name="plan" id="basePlan" checked>
+                            <label for="basePlan" class="item active">
                                 <h3 class="title">Чистовая отделка</h3>
                                 <ul>
                                     <li>Фундамент</li>
@@ -320,10 +321,11 @@ loadStyles(import.meta.url).then(styles =>
                                 </ul>
                                 <div class="summary">
                                     <span>${this.numberFormat.format(quiz.home[this.selectedHome].price)}</span>
-                                    <button>Выбрать пакет</button>
+                                    <!--<button>Выбрать пакет</button>-->
                                 </div>
-                            </div>
-                            <div class="item">
+                            </label>
+                            <input type="radio" name="plan" id="overhaulPlan">
+                            <label for="overhaulPlan" class="item">
                                 <h3 class="title">Под ключ</h3>
                                 <ul>
                                     <li>Фундамент</li>
@@ -342,9 +344,9 @@ loadStyles(import.meta.url).then(styles =>
                                 </ul>
                                 <div class="summary">
                                     <span>${this.numberFormat.format(quiz.home[this.selectedHome].totalPrice)}</span>
-                                    <button>Выбрать пакет</button>
+                                    <!--<button>Выбрать пакет</button>-->
                                 </div>
-                            </div>
+                            </label>
                         </div>` : ''}
                 </section>`;
         }
