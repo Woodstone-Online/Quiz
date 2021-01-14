@@ -1,0 +1,202 @@
+* {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+}
+
+:host {
+    display: block;
+    padding: 0 16px;
+    margin-top: -16px;
+    font-family: "Open Sans", sans-serif;
+    padding-bottom: 70px;
+}
+
+.conditions {
+    display: flex;
+    flex-wrap: wrap;
+    color: #6B6B72;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    justify-content: space-between;
+}
+
+.conditions > div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.conditions .title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 39px;
+    line-height: 62px;
+    color: #3F3E48;
+}
+
+p {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 29px;
+    color: #3F3E48;
+}
+
+.plans {
+    display: flex;
+    flex-direction: column;
+}
+
+.plans > a {
+    display: block;
+    text-decoration: none;
+    background: #FFFFFF;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    padding: 30px;
+    background-repeat: no-repeat;
+    background-position: center right -350px;
+    background-size: 500px;
+}
+
+.plans .title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 42px;
+    color: #6EBC61;
+}
+
+.plans .title:after {
+    content: '';
+    width: 29px;
+    height: 29px;
+    margin-left: 10px;
+    vertical-align: middle;
+    border-radius: 100px;
+    display: inline-block;
+    background-size: 8px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(110, 188, 97, 0.1);
+    background-image: url("/quiz/img/right.arrow.svg");
+}
+
+.plans .title:first-child {
+    margin-top: unset;
+}
+
+.plans p {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    color: rgba(63, 62, 72, .7);
+    max-width: 70%;
+    text-shadow: 0 0 5px white;
+}
+
+.get-pdf {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    position: fixed;
+    background: #302F3A;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.get-pdf:before {
+    content: '';
+    background: url("/quiz/img/download.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 26px;
+    width: 26px;
+    min-width: 26px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+@media (min-width: 1024px) {
+    :host {
+        margin-top: initial;
+        padding: unset;
+        padding-bottom: 60px;
+    }
+
+    .conditions {
+        border-bottom: 1px solid rgba(81, 81, 89, .1);
+        padding-bottom: 13px;
+        font-weight: 500;
+        margin-bottom: 20px;
+        justify-content: flex-start;
+    }
+
+    .conditions > div {
+        margin-right: 100px;
+    }
+
+    p {
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .plans {
+        margin-top: 36px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .plans > a {
+        width: 304px;
+        background-position: center bottom -60px;
+        background-size: contain;
+        padding-bottom: 80px;
+    }
+
+    .plans .title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .plans .title:after {
+        content: unset;
+    }
+
+    .plans p {
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: normal;
+        max-width: initial;
+    }
+
+    .get-pdf {
+        height: 48px;
+        border-radius: 100px;
+        font-weight: bold;
+        line-height: 22px;
+        left: 30px;
+        bottom: 30px;
+        right: unset;
+        padding: 14px 33px;
+    }
+}
+
+@media (min-width: 1364px) {
+    .get-pdf {
+        left: initial;
+
+    }
+}
