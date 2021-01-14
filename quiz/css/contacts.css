@@ -83,7 +83,7 @@ section .header span {
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 100px;
     padding: 8px 15px;
-    padding-left: 40px;
+    padding-left: 43px;
     margin-left: 10px;
     margin-bottom: 10px;
     cursor: pointer;
@@ -91,6 +91,8 @@ section .header span {
     font-size: 14px;
     line-height: 20px;
     font-weight: normal;
+    display: flex;
+    align-items: center;
 }
 
 .communications label:first-of-type {
@@ -100,17 +102,19 @@ section .header span {
 .communications label:before {
     box-sizing: border-box;
     content: '';
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     position: absolute;
-    left: 10px;
+    left: 8px;
     background: white;
-    border-radius: 20px;
-    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    border-radius: 11px;
+    border: 2px solid rgba(0, 0, 0, 0.12);
 }
 
 .communications input[type="checkbox"]:checked + label:before {
     background: #6EBC61;
+    border: 3px solid #6EBC61;
+    box-shadow: inset 0 0 0 3px white;
 }
 
 .big-next-bottom-button {
