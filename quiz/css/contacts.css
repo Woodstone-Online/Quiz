@@ -48,6 +48,7 @@ section .header span {
     font-size: 14px;
     line-height: 26px;
     margin-top: unset;
+    color: #3F3E48;
 }
 
 .communications {
@@ -80,7 +81,7 @@ section .header span {
 .communications label {
     font-family: 'Open Sans', sans-serif;
     position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    /*border: 1px solid rgba(0, 0, 0, 0.12);*/
     border-radius: 100px;
     padding: 8px 15px;
     padding-left: 43px;
@@ -93,6 +94,7 @@ section .header span {
     font-weight: normal;
     display: flex;
     align-items: center;
+    color: #97969C;
 }
 
 .communications label:first-of-type {
@@ -109,6 +111,10 @@ section .header span {
     background: white;
     border-radius: 11px;
     border: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.communications input[type="checkbox"]:checked + label {
+    color: black;
 }
 
 .communications input[type="checkbox"]:checked + label:before {
@@ -178,6 +184,10 @@ form input {
     padding: 15px;
 }
 
+aside {
+    display: none;
+}
+
 .big-next-bottom-button span {
     display: inline-block;
     font-size: 13px;
@@ -228,6 +238,7 @@ form input {
 
     .communications {
         max-width: 100%;
+        margin-top: 28px;
     }
 
     section form {
@@ -236,6 +247,51 @@ form input {
         /*//position: absolute;*/
         padding: 50px;
         padding-bottom: 130px;
+    }
+
+    form input:first-of-type {
+        margin-top: unset;
+    }
+
+    form h2 {
+        display: none;
+    }
+
+    aside {
+        display: flex;
+        position: absolute;
+        right: 30px;
+        bottom: 163px;
+        width: calc(1024px - 643px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    aside:before {
+        content: '';
+        display: block;
+        width: 79px;
+        height: 79px;
+        background-image: url(/quiz/img/time.contacts.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-bottom: 58px;
+        margin-right: 50px;
+    }
+
+    aside h2 {
+        max-width: 242px;
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 38px;
+        color: #3F3E48;
+        margin: unset;
+    }
+
+    aside h2 span {
+        color: #6EBC61;
     }
 
     .big-next-bottom-button {
