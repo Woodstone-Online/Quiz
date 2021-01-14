@@ -41,6 +41,7 @@ h1 {
     font-size: 32px;
     line-height: 26px;
     margin: 10px 15px;
+    color: #3F3E48;
 }
 
 section .header span {
@@ -90,11 +91,12 @@ section .header span {
     cursor: pointer;
     background: #FFFFFF;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 30px;
     font-weight: normal;
     display: flex;
     align-items: center;
     color: #97969C;
+    height: 45px;
 }
 
 .communications label:first-of-type {
@@ -107,7 +109,7 @@ section .header span {
     width: 22px;
     height: 22px;
     position: absolute;
-    left: 8px;
+    left: 12px;
     background: white;
     border-radius: 11px;
     border: 2px solid rgba(0, 0, 0, 0.12);
@@ -237,8 +239,25 @@ aside {
     }
 
     .communications {
+        /*display: initial;*/
         max-width: 100%;
         margin-top: 28px;
+        flex-direction: row;
+    }
+
+    .communications:after {
+        content: unset;
+    }
+
+    .communications label {
+        box-sizing: border-box;
+        padding-left: 40px;
+        min-width: 167px;
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .communications label:before {
     }
 
     section form {

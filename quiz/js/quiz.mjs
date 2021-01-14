@@ -4,13 +4,17 @@ import './app.mjs';
 export class Quiz {
     constructor({apiURL} = {}) {
         this.endpointURL = apiURL;
+        this.loadAllAnswers();
+        this.init();
+        return this;
+    }
+
+    loadAllAnswers() {
         this.loadAnswers();
         this.loadAnswers('selectedAreas');
         this.loadAnswers('selectedVillages');
         this.loadAnswers('selectedHome', null);
         this.loadAnswers('profile');
-        this.init();
-        return this;
     }
 
     async init() {
@@ -259,7 +263,12 @@ export class Quiz {
             body: JSON.stringify(data)
         }).then(r => r.json());
         if (response.details) alert(response.details.pop().message);
-        if (response.user) location.reload(localStorage.clear(alert('Пользователь успешно создан, ID: ' + response.user.userId)))
+        if (response.user) {
+            // alert('Пользователь успешно создан, ID: ' + response.user.userId)
+            localStorage.clear();
+            this.loadAllAnswers();
+            location.hash = 'final';
+        }
         return console.debug(response);
     }
 
