@@ -45,8 +45,8 @@ loadStyles(import.meta.url).then(styles =>
 
         render() {
             return html`
+                <h1>${this.subject && this.subject.title ? this.subject.title : 'Заявка'}</h1>
                 <section>
-                    <h1>${this.subject && this.subject.title ? this.subject.title : 'Заявка'}</h1>
                     <div class="header">
                         ${this.subject && this.subject.caption ? html`<span
                                 style="margin: 10px 0">${this.subject.caption}</span>` : ''}
