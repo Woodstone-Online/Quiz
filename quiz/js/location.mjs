@@ -88,6 +88,13 @@ loadStyles(import.meta.url).then(styles =>
                 </section>
                 <div class="navigation-buttons">
                     <quiz-next-stage stage="location"></quiz-next-stage>
+                </div>
+                <input type="checkbox" id="instruction">
+                <div class="instruction">
+                    <h1 class="title">Исключите направления и районы, которые вам не подходят</h1>
+                    <p>Когда мы поймем предпочтения по географии, мы сможем подобрать коттеджные поселки и земельные
+                        участки, которые лучше всего соответствуют вашим требованиям</p>
+                    <label for="instruction">Понятно</label>
                 </div>`;
         }
     }))

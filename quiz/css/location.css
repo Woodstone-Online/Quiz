@@ -8,6 +8,7 @@
     height: calc(100% - 70px);
     /*//min-height: 100%;*/
     margin-bottom: 70px;
+    position: relative;
 }
 
 .navigation-buttons {
@@ -152,6 +153,65 @@ iframe {
     opacity: 0.8;
 }
 
+input#instruction {
+    display: none;
+}
+
+.instruction {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    background: rgba(12, 13, 13, 0.9);
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 67px 35px;
+    padding-bottom: 100px;
+    color: white;
+    z-index: 100;
+}
+
+.instruction .title {
+    margin-top: unset;
+    margin-bottom: 31px;
+}
+
+label[for="instruction"] {
+    box-sizing: border-box;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 70px;
+    background: #6EBC61;
+    padding: 0 32px;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    cursor: pointer;
+}
+
+input#instruction:checked ~ .instruction {
+    display: none;
+}
+
+@media (max-width: 350px) {
+    .instruction {
+        padding-top: 30px;
+    }
+}
+
+.instruction .title,
+.instruction p {
+    max-width: 700px;
+}
+
 @media (max-width: 1023px) {
     section {
         border-bottom-left-radius: 0;
@@ -196,6 +256,27 @@ iframe {
         max-width: 700px;
         max-height: initial;
     }
+
+    .instruction {
+        top: 0;
+        /*left: initial;*/
+        /*right: initial;*/
+        /*width: auto;*/
+        /*width: 100%;*/
+        /*position: relative;*/
+        padding: 30px;
+        padding-top: 120px;
+    }
+
+    label[for="instruction"] {
+        left: initial;
+        right: initial;
+        width: 337px;
+        max-width: calc(100% - 60px);
+        bottom: 30px;
+        border-radius: 100px;
+        padding-left: 47px;
+    }
 }
 
 @media (min-width: 1364px) {
@@ -208,6 +289,11 @@ iframe {
     .big-next-bottom-button {
         left: initial;
         margin-left: -15px;
+    }
+
+    .instruction {
+        padding-top: 30px;
+        padding-left: calc(100vw - 1024px - 30px);
     }
 
 }
