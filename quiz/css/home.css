@@ -798,7 +798,7 @@
     content: '';
     display: block;
     background-color: black;
-    background-image: url("/quiz/img/right.arrow.svg");
+    background-image: url("/quiz/img/right.navigation.arrow.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 5vw;
@@ -814,7 +814,7 @@
 }
 
 #details .image-slider:focus-within .slides > div/*:not(.active)*/:after {
-    background-image: url("/quiz/img/left.arrow.svg");
+    background-image: url("/quiz/img/left.navigation.arrow.svg");
     left: unset;
     right: -10vw;
 }
