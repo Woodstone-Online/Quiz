@@ -21,19 +21,19 @@ export class Quiz {
                 adults: 0,
                 children: 0
             }
-        }
+        },
+        selectedAreas: {}
     }
 
     constructor({apiURL} = {}) {
         this.endpointURL = apiURL;
-        this.loadAllAnswers();
+        Object.assign(this, this.defaultAnswers);
         this.initStages();
         this.init();
         return this;
     }
 
     loadAllAnswers(initial) {
-        if (!initial) Object.assign(this, this.defaultAnswers);
         this.loadAnswers();
         this.loadAnswers('selectedAreas');
         this.loadAnswers('selectedVillages');
@@ -44,13 +44,14 @@ export class Quiz {
     async init() {
         await Promise.allSettled([
             this.loadConfiguration('quizSteps', 'quizStep', 'fieldname'),
-            this.loadConfiguration('areas', 'area', 'areaId'),
+            this.loadConfiguration('areas', 'area', 'areaId').then(async () => this.areas.forEach(area => this.toggleArea(area.areaId, true, true))),
             this.loadConfiguration('homes', 'home', 'homeId').then(() => this.homes.sort(function (a, b) {
                 if (a.space > b.space) return 1;
                 if (a.space < b.space) return -1;
                 return 0;
             }))
-        ])
+        ]);
+        this.loadAllAnswers();
         await this.renderQuiz();
         this.homes.forEach(this.loadHomeData.bind(this))
     }
@@ -206,11 +207,11 @@ export class Quiz {
         window.dispatchEvent(new CustomEvent('setAnswer', {detail: {step, item, value}}))
     }
 
-    toggleArea(id, state = !this.getState('selectedAreas', id)) {
+    toggleArea(id, state = !this.getState('selectedAreas', id), disableSync) {
         if (!id) return false;
         if (state) this.selectedAreas[id] = true;
-        else delete this.selectedAreas[id];
-        this.saveAnswers('selectedAreas');
+        else this.selectedAreas[id] = false;
+        if (!disableSync) this.saveAnswers('selectedAreas');
         return state;
     }
 
@@ -245,7 +246,7 @@ export class Quiz {
 
     getState(type, id, defaultValue = false) {
         if (!type || !this[type]) return defaultValue;
-        if (id) return this[type][id] || defaultValue;
+        if (id) return typeof this[type][id] === "boolean" ? this[type][id] : this[type][id] || defaultValue;
         else return this[type] || defaultValue;
     }
 
@@ -282,7 +283,7 @@ export class Quiz {
         preferences.communication = {"email": false, "whatsapp": true, "phone": true}
         preferences.interest = {"value": 1}
         if (preferences.budget && preferences.budget.total) delete preferences.budget.total; // TODO: Backward compatibility
-        const areaIds = this.selectedAreas ? Object.keys(this.selectedAreas) : null;
+        const areaIds = this.selectedAreas ? Object.keys(Object.fromEntries(Object.entries(this.selectedAreas).filter(([_, v]) => v))) : null;
         const cottageVillageIds = this.selectedVillages ? Object.keys(this.selectedVillages) : null;
         const data = Object.assign({
             "preferences": preferences,
