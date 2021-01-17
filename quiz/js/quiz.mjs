@@ -391,8 +391,9 @@ window.getVals = function () {
     // var displayElement = parent.getElementsByClassName("rangeValues")[0];
     let price_from = parent.querySelector('#price_from');
     let price_to = parent.querySelector('#price_to');
-    price_from.innerText = slide1;
-    price_to.innerText = slide2 < max ? slide2 : 'Неважно';
+    let numberFormat = new Intl.NumberFormat('ru-RU');
+    price_from.innerText = numberFormat.format(slide1);
+    price_to.innerText = slide2 < max ? numberFormat.format(slide2) : 'Неважно';
     // app.setAnswer(slides[0].dataset.step, 'from', slide1)
     // app.setAnswer(slides[0].dataset.step, 'to', slide2)
 }
