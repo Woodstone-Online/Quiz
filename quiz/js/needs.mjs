@@ -9,6 +9,7 @@ loadStyles(import.meta.url).then(styles =>
 
         firstUpdated() {
             quiz.initRangesSlider.call(this);
+            this.shadowRoot.querySelector('section').focus()
         }
 
         render() {
