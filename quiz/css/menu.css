@@ -48,6 +48,15 @@ nav {
     --color: inherit;
 }
 
+:host(.only-header) aside {
+    display: none;
+}
+
+:host(.only-header) header {
+    margin-bottom: unset;
+    padding-bottom: unset;
+}
+
 @media (min-width: 1024px) {
     header, aside {
         padding: 0 30px;

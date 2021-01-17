@@ -109,7 +109,7 @@ export class Quiz {
             e.preventDefault();
             window.scrollTo(0, 0);
         });
-        await document.querySelector('quiz-app').updateStage();
+        if (document.querySelector('quiz-app')) await document.querySelector('quiz-app').updateStage();
         // const element = document.createElement('quiz-app');
         // document.body.appendChild(element);
     }
@@ -204,7 +204,8 @@ export class Quiz {
             this.preferences[step][item] = value;
         }
         this.saveAnswers();
-        window.dispatchEvent(new CustomEvent('setAnswer', {detail: {step, item, value}}))
+        window.dispatchEvent(new CustomEvent('setAnswer', {detail: {step, item, value}}));
+        return value;
     }
 
     toggleArea(id, state = !this.getState('selectedAreas', id), disableSync) {
@@ -306,7 +307,7 @@ export class Quiz {
             // alert('Пользователь успешно создан, ID: ' + response.user.userId)
             localStorage.clear();
             this.loadAllAnswers();
-            location.hash = 'final';
+            location.href = '/quiz/final.html';
         }
         return console.debug(response);
     }

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no" name="viewport"/>
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Woodstone Quiz</title>
+    <link href="https://rawcdn.githack.com/JulietaUla/Montserrat/master/fonts/webfonts/Montserrat.css" rel="stylesheet">
+    <link as="script" href="https://jspm.dev/lit-element" rel="prefetch">
+    <link href="https://coredev.woodstone.online" rel="preconnect">
+    <link href="https://api-maps.yandex.ru" rel="preconnect">
+    <link as="script" href="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=d1df8012-8243-4242-b139-4a7c6c298e2c"
+          rel="prefetch">
+    <link href="/quiz/css/base.css" rel="stylesheet">
+    <script async defer src="/quiz/js/quiz.mjs" type="module"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            overflow-y: scroll;
+            height: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            main {
+                padding: 30px 40px;
+                padding-bottom: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+<quiz-menu class="only-header"></quiz-menu>
+<main>
+    <quiz-final></quiz-final>
+</main>
+</body>
+</html>

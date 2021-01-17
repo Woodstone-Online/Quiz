@@ -142,7 +142,10 @@ loadStyles(import.meta.url).then(styles =>
                         <quiz-next-stage stage="home" class="vertical"></quiz-next-stage>
                         <a href="#contacts" class="button">Пропустить шаг</a>
                     </div>
-                    <a href="#contacts" class="button alternate">Записаться на просмотр</a>
+                    <a href="#contacts" class="button alternate"
+                       @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing')}">
+                        Записаться на просмотр
+                    </a>
                 </section>
                 <section id="summary" class=${classMap({selected: this.selectedHome})}
                          style=${styleMap(this.selectedHome ? {'background-image': quiz.home[this.selectedHome].image ? `url("${quiz.home[this.selectedHome].image.url}")` : 'none'} : {})}>
@@ -158,7 +161,10 @@ loadStyles(import.meta.url).then(styles =>
                                     ${home.title}
                                 </button>`)}
                         </div>
-                        <a class="get-pdf" href="#contacts">Скачать в PDF</a>
+                        <a class="get-pdf" href="#contacts"
+                           @click="${() => quiz.setAnswer('interest', null, 5) && (quiz.contactSubject = 'WhatsApp')}">
+                            Скачать в PDF
+                        </a>
                     </div>
                     <div class="home-slider">
                         ${quiz.homes.map((home, i) => html`
@@ -175,7 +181,9 @@ loadStyles(import.meta.url).then(styles =>
                         </div>
                         <div class="buttons-section">
                             <button class="button primary" @click="${() => this.selectHome()}">Подробнее</button>
-                            <a class="button" href="#contacts">Посмотреть готовый дом</a>
+                            <a class="button" href="#contacts"
+                               @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing')}">Посмотреть
+                                готовый дом</a>
                         </div>
                     </div>
                     <div class="home-cover">
@@ -216,7 +224,8 @@ loadStyles(import.meta.url).then(styles =>
                         <div id="view" class="card">
                             <span class="title">Запишитесь на просмотр своего будущего дома</span>
                             <span class="description">так вы сможете оценить качество материалов и отделки а также осмотреть район и пообщаться с соседями</span>
-                            <a href="#contacts" class="button">Записаться</a>
+                            <a href="#contacts" class="button"
+                               @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing')}">Записаться</a>
                         </div>
                         ${quiz.home[this.selectedHome].images ? html`
                             <div class="image-slider">
