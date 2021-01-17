@@ -7,15 +7,15 @@ loadStyles(import.meta.url).then(styles =>
             return css([styles]);
         }
 
-        render() {
-            return html`${quiz.quizSteps.map(this.renderStep)}
-            <a class="big-next-bottom-button" href="#location">
-                Далее<span>Выбор предпочтений по локации</span>
-            </a>`
-        }
-
         firstUpdated() {
             quiz.initRangesSlider.call(this);
+        }
+
+        render() {
+            return html`${quiz.quizSteps.map(this.renderStep)}
+            <div class="navigation-buttons">
+                <quiz-next-stage stage="needs"></quiz-next-stage>
+            </div>`
         }
 
         renderStep(step) {
@@ -44,7 +44,7 @@ loadStyles(import.meta.url).then(styles =>
                     break;
                 case 'options-small':
                 case 'options-regular':
-                    const checkedValue = quiz.getAnswer(step.fieldname, false, 0);
+                    const checkedValue = quiz.getAnswer(step.fieldname, false, null);
                     return html`
                         <section id="${step.fieldname}" tabindex="1"><span class="title">${step.title}</span>
                             <form class="${step.type === 'options-regular' ? 'buttons' : 'mini-buttons'}">
@@ -79,56 +79,5 @@ loadStyles(import.meta.url).then(styles =>
                 default:
                     return html`${step.fieldname} ${step.title}<br>`
             }
-        }
-
-        template() {
-            return html`
-                <section class="active" tabindex="1">
-                    <span class="title">Какой дом вы бы хотели построить?</span>
-                    <div class="buttons">
-                        <input type="radio" id="test1" name="home"><label for="test1">Типовой проект</label>
-                        <input type="radio" id="test2" name="home"><label for="test2">Спроектируйте мне дом с
-                        нуля</label>
-                        <input type="radio" id="test3" name="home"><label for="test3">У меня уже есть проект</label>
-                    </div>
-                </section>
-                <section class="" tabindex="1"><span class="title">Место</span></section>
-                <section class="" tabindex="1"><span class="title">Когда вы хотели бы переехать?</span>
-                    <div class="mini-buttons">
-                        <input type="radio" id="test4" name="period"><label for="test4">3-6</label>
-                        <input type="radio" id="test5" name="period"><label for="test5">6-12</label>
-                        <input type="radio" id="test6" name="period"><label for="test6">12-18</label>
-                        <input type="radio" id="test8" name="period"><label for="test8">Не имеет значения</label>
-                    </div>
-                </section>
-                <section class="" tabindex="1"><span class="title">Бюджет</span>
-                    <div class="range-slider">
-                        <div class="money">от <span>1 800 000</span> до <span>100 000 000</span></div>
-                        <input step="100000" value="100000" type="range" id="test7_1" name="price_1" min="1800000"
-                               max="100000000">
-                        <input step="100000" value="50000000" type="range" id="test7_2" name="price_2" min="1800000"
-                               max="100000000">
-                    </div>
-                </section>
-                <section class="" tabindex="1"><span class="title">Для кого этот дом?</span>
-                    <div class="counters">
-                        <div><label>Взрослых</label>
-                            <div>
-                                <button onclick="this.nextElementSibling.stepDown()">–</button>
-                                <input type="number" value="0" min="0" step="1" maxlength="2" max="99">
-                                <button onclick="this.previousElementSibling.stepUp()">+</button>
-                            </div>
-                        </div>
-                        <div><label>Детей</label>
-                            <div>
-                                <button onclick="this.nextElementSibling.stepDown()">–</button>
-                                <input type="number" value="0" min="0" step="1" maxlength="2" max="99">
-                                <button onclick="this.previousElementSibling.stepUp()">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <button class="big-next-bottom-button">Далее<span>Выбор предпочтений по локации</span></button>
-            `;
         }
     }))

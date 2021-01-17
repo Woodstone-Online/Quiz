@@ -7,6 +7,7 @@ import './home.mjs';
 import './conditions.mjs';
 import './contacts.mjs';
 import './final.mjs';
+import './next-stage.mjs';
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-app', class extends LitElement {

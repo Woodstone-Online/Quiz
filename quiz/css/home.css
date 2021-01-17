@@ -11,6 +11,11 @@
     right: 0;
     display: flex;
     z-index: 10;
+    pointer-events: none;
+}
+
+.navigation-buttons > * {
+    pointer-events: initial;
 }
 
 .navigation-buttons > div {
@@ -913,6 +918,10 @@
         width: auto;
     }
 
+    .navigation-buttons > div > * {
+        margin-right: 15px;
+    }
+
     .navigation-buttons .button {
         border-radius: 100px;
         width: auto;
@@ -927,6 +936,7 @@
         border: 2px solid #D8D8D8;
     }
 
+    .navigation-buttons > div > *:last-child,
     .navigation-buttons .button:last-of-type {
         margin-right: unset;
     }

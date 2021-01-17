@@ -85,8 +85,9 @@ loadStyles(import.meta.url).then(styles =>
                             <label for="${'area_' + area.areaId}">${area.title}</label>
                         `)}
                     </div>
-                </section><a class="big-next-bottom-button" href="#home">
-                    Далее<span>Выбор готового решения</span>
-                </a>`;
+                </section>
+                <div class="navigation-buttons">
+                    <quiz-next-stage stage="location"></quiz-next-stage>
+                </div>`;
         }
     }))

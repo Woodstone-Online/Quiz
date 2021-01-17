@@ -10,6 +10,20 @@
     margin-bottom: 70px;
 }
 
+.navigation-buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.navigation-buttons > * {
+    pointer-events: initial;
+}
+
 section {
     position: relative;
     background: white;
@@ -153,6 +167,15 @@ iframe {
         padding: 15px;
     }
 
+    .navigation-buttons {
+        left: 30px;
+        width: 100%;
+        max-width: calc(100% - 60px);
+        margin-right: 30px;
+        bottom: 30px;
+        justify-content: space-between;
+    }
+
     section {
         box-shadow: initial;
         border-radius: 15px;
@@ -176,6 +199,12 @@ iframe {
 }
 
 @media (min-width: 1364px) {
+
+    .navigation-buttons {
+        left: initial;
+        max-width: 1024px;
+    }
+
     .big-next-bottom-button {
         left: initial;
         margin-left: -15px;

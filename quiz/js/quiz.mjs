@@ -1,19 +1,43 @@
 import './app.mjs';
 
-
 export class Quiz {
+    stage = {
+        needs: {next: 'location'},
+        location: {
+            next: 'home', title: 'Выбрать районы и направления'
+        },
+        home: {
+            next: 'conditions', title: 'Выбрать дом — готовое решение'
+        },
+        conditions: {
+            next: 'contacts', title: 'Доступные варианты  покупки'
+        },
+        contacts: {}
+    }
+
+    defaultAnswers = {
+        preferences: {
+            residents: {
+                adults: 0,
+                children: 0
+            }
+        }
+    }
+
     constructor({apiURL} = {}) {
         this.endpointURL = apiURL;
         this.loadAllAnswers();
+        this.initStages();
         this.init();
         return this;
     }
 
-    loadAllAnswers() {
+    loadAllAnswers(initial) {
+        if (!initial) Object.assign(this, this.defaultAnswers);
         this.loadAnswers();
         this.loadAnswers('selectedAreas');
         this.loadAnswers('selectedVillages');
-        this.loadAnswers('selectedHome', null);
+        this.loadAnswers('selectedHome', null, String);
         this.loadAnswers('profile');
     }
 
@@ -39,6 +63,7 @@ export class Quiz {
             for (var y = 0; y < sliders.length; y++) {
                 if (sliders[y].type === "range") {
                     sliders[y].oninput = getVals;
+                    sliders[y].onchange = setVals;
                     // Manually trigger event first time to display values
                     sliders[y].oninput(undefined);
                 }
@@ -178,6 +203,7 @@ export class Quiz {
             this.preferences[step][item] = value;
         }
         this.saveAnswers();
+        window.dispatchEvent(new CustomEvent('setAnswer', {detail: {step, item, value}}))
     }
 
     toggleArea(id, state = !this.getState('selectedAreas', id)) {
@@ -227,12 +253,24 @@ export class Quiz {
         localStorage.setItem(key, JSON.stringify(this[key]));
     }
 
-    loadAnswers(key = 'preferences', initial = {}) {
-        try {
-            this[key] = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : initial
-        } catch (e) {
-            console.error(e);
-            this[key] = initial
+    loadAnswers(key = 'preferences', initial = {}, type = Object) {
+        switch (type) {
+            case Object:
+                try {
+                    this[key] = deepMerge(this[key] || initial, localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : initial)
+                } catch (e) {
+                    console.error(e);
+                    this[key] = deepMerge(this[key] || initial, initial)
+                }
+                break;
+            default:
+                try {
+                    this[key] = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : initial
+                } catch (e) {
+                    console.error(e);
+                    this[key] = initial
+                }
+                break;
         }
     }
 
@@ -302,7 +340,37 @@ export class Quiz {
 <input required type="email" placeholder="E-mail" onchange="app.updateProfile('email',this.value)" value="${app.getState('profile', 'email', '')}">`;
     }
 
+    initStages() {
+        Object.entries(this.stage).forEach(([stage, data] = item) => {
+            data.id = stage;
+            if (data.next) {
+                data.next = this.stage[data.next];
+                Object.defineProperty(data, 'nextStage', {
+                    get: () => data.next ? (data.next.skip ? data.next.nextStage : data.next) : null
+                })
+            }
+            switch (stage) {
+                case 'location':
+                    Object.defineProperty(data, 'skip', {
+                        get: () => this.getAnswer('land', false, null) === 2
+                    })
+                    break;
+                case 'home':
+                    Object.defineProperty(data, 'skip', {
+                        get: () => this.getAnswer('home', false, null) !== 1
+                    })
+                    break;
+            }
+        })
+    }
+
+    getNextStage(stage) {
+        if (stage && this.stage[stage]) return this.stage[stage].nextStage;
+    }
+
 }
+
+export default window.app = new Quiz({apiURL: 'https://coredev.woodstone.online/api/'})
 
 window.getVals = function () {
     // Get slider values
@@ -323,11 +391,43 @@ window.getVals = function () {
     let price_to = parent.querySelector('#price_to');
     price_from.innerText = slide1;
     price_to.innerText = slide2 < max ? slide2 : 'Неважно';
+    // app.setAnswer(slides[0].dataset.step, 'from', slide1)
+    // app.setAnswer(slides[0].dataset.step, 'to', slide2)
+}
+
+window.setVals = function () {
+    // Get slider values
+    var parent = this.parentNode;
+    var slides = parent.getElementsByTagName("input");
+    var slide1 = parseInt(slides[0].value);
+    var slide2 = parseInt(slides[1].value);
+    let max = slides[0].max;
+    // Neither slider will clip the other, so make sure we determine which is larger
+    if (slide1 > slide2) {
+        var tmp = slide2;
+        slide2 = slide1;
+        slide1 = tmp;
+    }
+
+    // var displayElement = parent.getElementsByClassName("rangeValues")[0];
+    // let price_from = parent.querySelector('#price_from');
+    // let price_to = parent.querySelector('#price_to');
+    // price_from.innerText = slide1;
+    // price_to.innerText = slide2 < max ? slide2 : 'Неважно';
     app.setAnswer(slides[0].dataset.step, 'from', slide1)
     app.setAnswer(slides[0].dataset.step, 'to', slide2)
 }
 
-export default window.app = new Quiz({apiURL: 'https://coredev.woodstone.online/api/'})
+function deepMerge(target, source) {
+    Object.entries(source).forEach(([key, value]) => {
+        if (value && typeof value === 'object') {
+            deepMerge(target[key] = target[key] || {}, value);
+            return;
+        }
+        target[key] = value;
+    });
+    return target;
+}
 
 export function getDir(scriptPath) {
     let path = new URL(scriptPath).pathname.split('/');

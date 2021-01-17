@@ -139,7 +139,7 @@ loadStyles(import.meta.url).then(styles =>
             return html`
                 <section class="navigation-buttons">
                     <div>
-                        <a href="#contacts" class="button primary">Далее<span>Выбор готового решения</span></a>
+                        <quiz-next-stage stage="home" class="vertical"></quiz-next-stage>
                         <a href="#contacts" class="button">Пропустить шаг</a>
                     </div>
                     <a href="#contacts" class="button alternate">Записаться на просмотр</a>
@@ -162,7 +162,7 @@ loadStyles(import.meta.url).then(styles =>
                     </div>
                     <div class="home-slider">
                         ${quiz.homes.map((home, i) => html`
-                            <div class="slider-item toggle-image-viewer"
+                            <div class="slider-item"
                                  @click="${() => this.setSlide(this.home, i)}"
                                  style=${styleMap({'background-image': home.image ? `url("${home.image.url}")` : 'none'})}>
                                 <div class="price">${this.numberFormat.format(home.price)}</div>

@@ -7,8 +7,31 @@ loadStyles(import.meta.url).then(styles =>
             return css([styles]);
         }
 
+        subjects = {
+            Consultation: {
+                title: 'Консультация',
+                caption: 'Сохраните текущий прогресс и закажите звонок от менеджера — мы ответим на все интересующие вопросы'
+            },
+            WhatsApp: {
+                title: 'Получить проект дома в WhatsApp',
+                caption: 'Сохраните текущий прогресс и получите проект понравившегося дома в PDF',
+                button: 'Получить PDF'
+            },
+            Viewing: {
+                title: 'Записаться на просмотр',
+                caption: 'Посмотрите место, где в ближайшем будущем сможете жить вы сами. В удобное время.',
+                button: 'Записаться'
+            },
+            Offer: {
+                title: 'Отлично, мы поняли что вы хотите!',
+                caption: 'Сохраните проект и отправьте его на обработку менеджеру — в скором времени мы ознакомим вас с лучшими предложениями.',
+                button: 'Сохранить проект'
+            }
+        }
+
         constructor() {
             super();
+            this.subject = quiz.contactSubject && this.subjects[quiz.contactSubject] ? this.subjects[quiz.contactSubject] : null;
             this.whatsapp = quiz.getAnswer('communication', 'whatsapp', true);
             this.phone = quiz.getAnswer('communication', 'phone', true);
             this.email = quiz.getAnswer('communication', 'email', false);
@@ -22,7 +45,7 @@ loadStyles(import.meta.url).then(styles =>
 
         render() {
             return html`
-                <h1>Заявка</h1>
+                <h1>${this.subject && this.subject.title ? this.subject.title : 'Заявка'}</h1>
                 <section>
                     <div class="header">
                         <span>Предпочтения для связи</span>
