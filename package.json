@@ -6,7 +6,7 @@
   },
   "scripts": {
     "dev": "wds --node-resolve --watch --open --app-index quiz/index.html",
-    "dev-tunnel": "wds --node-resolve --watch & vk-tunnel --insecure=1 --ws-protocol=wss --host=localhost --port=8000"
+    "dev-tunnel": "wds --node-resolve --watch & vk-tunnel --insecure=1 --ws-protocol=wss --host=localhost --port=8000 --timeout=60000"
   },
   "devDependencies": {
     "@web/dev-server": "^0.1.2"

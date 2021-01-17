@@ -12,9 +12,15 @@ loadStyles(import.meta.url).then(styles =>
                 <h1>Заявка принята, мы свяжемся с вами в течении <span>14 минут</span></h1>
                 <p>Пока вы можете ознакомиться с материалами о нашей компании</p>
                 <nav>
-                    <a href=""><img src="/quiz/img/instagram.svg">Наш инстаграм с отзывами клиентов и новостями</a>
-                    <a href=""><img src="/quiz/img/yt.svg">YouTube канал с процессами строительства</a>
-                    <a href=""><img src="/quiz/img/like.svg">Видеоотзывы наших клиентов</a>
+                    <a href="https://www.instagram.com/woodstone_ekb/" target="_blank">
+                        <img src="/quiz/img/instagram.svg">Наш инстаграм с отзывами и новостями
+                    </a>
+                    <a href="https://www.facebook.com/woodstoneekb/" target="_blank">
+                        <img src="/quiz/img/yt.svg">Facebook с примерами нетиповых проектов
+                    </a>
+                    <a href="https://youtu.be/-PvLnOFiFLU" target="_blank">
+                        <img src="/quiz/img/like.svg">Видеоотзывы наших клиентов
+                    </a>
                 </nav>
             `;
         }

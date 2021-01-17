@@ -14,20 +14,42 @@
     <link href="/quiz/css/base.css" rel="stylesheet">
     <script async defer src="/quiz/js/quiz.mjs" type="module"></script>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
+        }
+
+        body, html {
             display: flex;
             flex-direction: column;
+            align-items: center;
+        }
+
+        quiz-menu {
+            width: 100%;
         }
 
         main {
             overflow-y: scroll;
             height: 100%;
+            width: 100%;
         }
 
         @media (min-width: 1024px) {
+
+            body {
+                max-width: 1024px;
+            }
+
             main {
-                padding: 30px 40px;
+                padding: 0 50px;
                 padding-bottom: 60px;
+                margin-top: 60px;
+            }
+        }
+
+        @media (min-width: 1364px) {
+            main {
+                /*padding: 30px 40px;*/
             }
         }
     </style>

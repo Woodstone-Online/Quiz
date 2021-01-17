@@ -55,7 +55,10 @@ nav {
 :host(.only-header) header {
     margin-bottom: unset;
     padding-bottom: unset;
+    background: initial;
+    box-shadow: initial;
 }
+
 
 @media (min-width: 1024px) {
     header, aside {

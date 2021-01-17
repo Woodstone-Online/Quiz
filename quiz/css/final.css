@@ -6,6 +6,7 @@
 :host {
     display: block;
     padding: 16px;
+    padding-top: 48px;
     font-family: "Open Sans", sans-serif;
 }
 
@@ -15,7 +16,7 @@ h1 {
     font-size: 32px;
     line-height: 38px;
     color: #3F3E48;
-    margin-bottom: 67px;
+    margin-bottom: 30px;
     margin-top: unset;
 }
 
@@ -43,6 +44,7 @@ nav > a {
     padding-left: 32px;
     margin: unset;
     margin-bottom: 20px;
+    padding-right: 32px;
 }
 
 nav > a img {
@@ -97,8 +99,4 @@ nav > a img {
         width: 66px;
         height: 66px;
     }
-}
-
-@media (min-width: 1364px) {
-
 }
