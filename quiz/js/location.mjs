@@ -91,7 +91,9 @@ loadStyles(import.meta.url).then(styles =>
                 </div>
                 <input type="checkbox" id="instruction">
                 <div class="instruction">
-                    <h1 class="title">Исключите направления и районы, которые вам не подходят</h1>
+                    <h1 class="title">
+                        Исключите <span>направления</span> и <span>районы</span>, которые вам не подходят
+                    </h1>
                     <p>Когда мы поймем предпочтения по географии, мы сможем подобрать коттеджные поселки и земельные
                         участки, которые лучше всего соответствуют вашим требованиям</p>
                     <label for="instruction">Понятно</label>

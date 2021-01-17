@@ -51,7 +51,7 @@ loadStyles(import.meta.url).then(styles =>
                 </div>
                 <a href="#contacts" class="get-pdf"
                    @click="${() => quiz.setAnswer('interest', null, 5) && (quiz.contactSubject = 'WhatsApp')}">
-                    Скачать собранный проект в PDF
+                    Скачать проект дома в PDF
                 </a>
             `;
         }

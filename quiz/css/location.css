@@ -180,6 +180,15 @@ input#instruction {
     margin-bottom: 31px;
 }
 
+.instruction .title span {
+    color: #6EBC61;
+}
+
+.instruction p {
+    font-size: 17px;
+    line-height: 30px;
+}
+
 label[for="instruction"] {
     box-sizing: border-box;
     position: fixed;

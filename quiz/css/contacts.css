@@ -39,8 +39,9 @@ section .header {
 
 h1 {
     font-size: 32px;
-    line-height: 26px;
+    /*line-height: 26px;*/
     margin: 10px 15px;
+    margin-top: 0;
     color: #3F3E48;
 }
 
@@ -67,6 +68,8 @@ section .header span {
     margin: 15px -15px;
     margin-bottom: 0;
     scroll-snap-type: x mandatory;
+    min-height: 56px;
+    margin-top: 0;
 }
 
 .communications:after {

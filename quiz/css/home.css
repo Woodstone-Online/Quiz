@@ -1368,6 +1368,7 @@
 
     #details .card.image-full-width > img {
         width: 100%;
+        margin-top: 70px;
         position: initial;
     }
 

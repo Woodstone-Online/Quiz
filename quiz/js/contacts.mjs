@@ -45,10 +45,12 @@ loadStyles(import.meta.url).then(styles =>
 
         render() {
             return html`
-                <h1>${this.subject && this.subject.title ? this.subject.title : 'Заявка'}</h1>
                 <section>
+                    <h1>${this.subject && this.subject.title ? this.subject.title : 'Заявка'}</h1>
                     <div class="header">
-                        <span>Предпочтения для связи</span>
+                        ${this.subject && this.subject.caption ? html`<span
+                                style="margin: 10px 0">${this.subject.caption}</span>` : ''}
+                        <!--                        <span>Предпочтения для связи</span>-->
                         <div class="communications">
                             <input type="checkbox" id="whathsapp"
                                    onchange="this.getRootNode().host.setAnswer('communication','whatsapp',this.checked)"
@@ -82,6 +84,8 @@ loadStyles(import.meta.url).then(styles =>
                 <aside>
                     <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
                 </aside>
-                <button class="big-next-bottom-button" @click="${quiz.createUser.bind(quiz)}">Оставить заявку</button>`;
+                <button class="big-next-bottom-button" @click="${quiz.createUser.bind(quiz)}">
+                    ${this.subject && this.subject.button ? this.subject.button : 'Оставить заявку'}
+                </button>`;
         }
     }))

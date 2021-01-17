@@ -448,7 +448,7 @@ input[type=number] {
     .buttons label {
         max-width: initial;
         flex-basis: 100%;
-        padding: 20px 30px;
+        padding: 20px 22px;
         margin-left: 20px;
     }
 

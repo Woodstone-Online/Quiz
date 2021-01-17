@@ -161,10 +161,6 @@ loadStyles(import.meta.url).then(styles =>
                                     ${home.title}
                                 </button>`)}
                         </div>
-                        <a class="get-pdf" href="#contacts"
-                           @click="${() => quiz.setAnswer('interest', null, 5) && (quiz.contactSubject = 'WhatsApp')}">
-                            Скачать в PDF
-                        </a>
                     </div>
                     <div class="home-slider">
                         ${quiz.homes.map((home, i) => html`
@@ -182,8 +178,9 @@ loadStyles(import.meta.url).then(styles =>
                         <div class="buttons-section">
                             <button class="button primary" @click="${() => this.selectHome()}">Подробнее</button>
                             <a class="button" href="#contacts"
-                               @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing')}">Посмотреть
-                                готовый дом</a>
+                               @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing')}">
+                                Посмотреть выставочный дом
+                            </a>
                         </div>
                     </div>
                     <div class="home-cover">
@@ -222,7 +219,7 @@ loadStyles(import.meta.url).then(styles =>
                             участок и ваши условия. Выберите дом и адаптируйте планировку под себя.
                         </div>
                         <div id="view" class="card">
-                            <span class="title">Запишитесь на просмотр своего будущего дома</span>
+                            <span class="title">Запишитесь на просмотр выставочного дома</span>
                             <span class="description">так вы сможете оценить качество материалов и отделки а также осмотреть район и пообщаться с соседями</span>
                             <a href="#contacts" class="button"
                                @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing')}">Записаться</a>
