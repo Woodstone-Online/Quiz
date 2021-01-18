@@ -69,5 +69,6 @@
         color: inherit;
         font-size: 14px;
         content: attr(data-full-text);
+        font-family: 'Montserrat', sans-serif;
     }
 }

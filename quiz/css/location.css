@@ -275,16 +275,32 @@ input#instruction:checked ~ .instruction {
         /*position: relative;*/
         padding: 30px;
         padding-top: 120px;
+        justify-content: center;
+    }
+
+    .instruction .title {
+        margin-bottom: 34px;
+    }
+
+    .instruction p {
+        margin: unset;
     }
 
     label[for="instruction"] {
+        position: initial;
         left: initial;
         right: initial;
-        width: 337px;
-        max-width: calc(100% - 60px);
-        bottom: 30px;
+        width: 217px;
+        /*max-width: calc(100% - 60px);*/
+        bottom: initial;
         border-radius: 100px;
-        padding-left: 47px;
+        padding: 22px;
+        font-size: 20px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 72px;
     }
 }
 
@@ -301,7 +317,7 @@ input#instruction:checked ~ .instruction {
     }
 
     .instruction {
-        padding-top: 30px;
+        padding-top: 0;
         padding-left: calc(100vw - 1024px - 30px);
     }
 
