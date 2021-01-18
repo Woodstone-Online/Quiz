@@ -1,5 +1,5 @@
 import {LitElement, html, css} from 'https://jspm.dev/lit-element';
-import {loadStyles} from "./quiz.mjs";
+import quiz, {loadStyles} from "./quiz.mjs";
 import './link.js';
 
 loadStyles(import.meta.url).then(styles =>
@@ -8,10 +8,16 @@ loadStyles(import.meta.url).then(styles =>
             return css([styles]);
         }
 
+        updated() {
+            this.classList.toggle('hidden', false);
+        }
+
         render() {
             return html`
                 <header>
                     <img src="/quiz/img/Logo.svg" alt="Logo">
+                    <a href="#contacts" class="call-button"
+                       @click="${() => quiz.setAnswer('interest', null, 6) && (quiz.contactSubject = 'Consultation')}">Звонок</a>
                 </header>
                 <aside>
                     <nav>
