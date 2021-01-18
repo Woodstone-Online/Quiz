@@ -161,6 +161,9 @@ loadStyles(import.meta.url).then(styles =>
                                     ${home.title}
                                 </button>`)}
                         </div>
+                        <button class="reset-home" @click="${() => quiz.resetHome(this.selectedHome = null)}">
+                            К списку домов
+                        </button>
                     </div>
                     <div class="home-slider">
                         ${quiz.homes.map((home, i) => html`

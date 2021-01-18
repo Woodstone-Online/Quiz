@@ -105,7 +105,8 @@
 }
 
 #summary .head-line .homes-navigation button,
-#summary .head-line .get-pdf {
+#summary .head-line .get-pdf,
+#summary .head-line .reset-home {
     background: #3F3E48;
     height: 46px;
     line-height: 100%;
@@ -122,6 +123,11 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+
+#summary .head-line .reset-home {
+    display: none;
+    padding-left: 17px;
 }
 
 #summary .head-line .homes-navigation button[data-delta]:after {
@@ -145,9 +151,10 @@
     color: black;
 }
 
-#summary .head-line .get-pdf:before {
+#summary .head-line .get-pdf:before,
+#summary .head-line .reset-home:before {
     content: '';
-    background: url("/quiz/img/download.svg");
+    background-image: url("/quiz/img/download.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -156,6 +163,14 @@
     display: inline-block;
     margin-right: 20px;
     margin-left: calc(17px - 25px);
+}
+
+#summary .head-line .reset-home:before {
+    background-image: url("/quiz/img/left.white.arrow.svg");
+    background-size: 10px;
+    margin-right: 16px;
+    width: 10px;
+    margin-left: unset;
 }
 
 #summary .home-slider {
@@ -426,6 +441,14 @@
 
 #summary.selected .head-line .homes-navigation button.active {
     border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+#summary.selected .homes-navigation {
+    display: none;
+}
+
+#summary.selected .reset-home {
+    display: flex;
 }
 
 #summary.selected .home-cover {
@@ -1087,7 +1110,8 @@
         margin-right: 30px;
     }
 
-    #summary .head-line .get-pdf {
+    #summary .head-line .get-pdf,
+    #summary .head-line .reset-home {
         margin: unset;
     }
 

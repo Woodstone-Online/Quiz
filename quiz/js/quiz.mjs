@@ -231,6 +231,13 @@ export class Quiz {
         return true;
     }
 
+    resetHome() {
+        // if (!id) return false;
+        this.selectedHome = null;
+        this.saveAnswers('selectedHome');
+        return true;
+    }
+
     updateProfile(key, value) {
         if (!key) return false;
         this.profile[key] = value;
