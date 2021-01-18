@@ -13,6 +13,15 @@ loadStyles(import.meta.url).then(styles =>
             super();
             this.home = {};
             this.images = {};
+            this.plans = {
+                setActiveSlide: (target, slide) => {
+                    const inputs = target.slides.map(s => s.previousElementSibling);
+                    inputs.forEach(s => s.checked = false);
+                    target.activeSlideIndex = target.slides.findIndex(item => item === slide);
+                    inputs[target.activeSlideIndex].checked = true;
+                    return target.activeSlide = slide
+                }
+            };
             this.numberFormat = new Intl.NumberFormat('ru-RU');
             this.selectedHome = quiz.getState('selectedHome');
             this.maxPrice = quiz.getAnswer('budget', 'to');
@@ -81,13 +90,16 @@ loadStyles(import.meta.url).then(styles =>
                 this.initSlider(this.images, '.image-slider .slides');
                 this.setSlide(this.images, undefined, true);
             }
+            if (this.plans.slider) this.destroySlider(this.images);
+            if (this.selectedHome) this.initSlider(this.plans, '.plans', null, '.item');
         }
 
-        initSlider(target, sliderSelector, indicatorSelector) {
+        initSlider(target, sliderSelector, indicatorSelector, slideSelector) {
             if (indicatorSelector) target.indicators = Array.from(this.shadowRoot.querySelector(indicatorSelector).children);
             target.slider = this.shadowRoot.querySelector(sliderSelector);
             if (!target.slider) return;
             target.slides = Array.from(target.slider.children);
+            if (slideSelector) target.slides = target.slides.filter(slide => slide.matches(slideSelector));
             target.observer = new IntersectionObserver(this.sliderScrollHandler.bind(this, target), {
                 root: target.slider,
                 threshold: 1
@@ -107,9 +119,9 @@ loadStyles(import.meta.url).then(styles =>
             return target;
         }
 
-        sliderScrollHandler(target, entries, observer) {
+        sliderScrollHandler(target, entries) {
             if (!entries[0].isIntersecting || target.skipHandling) return;
-            return this.setActiveSlide(target, entries[0].target);
+            return target.setActiveSlide ? target.setActiveSlide(target, entries[0].target) : this.setActiveSlide(target, entries[0].target);
         }
 
         setActiveSlide(target, slide) {
@@ -309,7 +321,7 @@ loadStyles(import.meta.url).then(styles =>
                         <h2 class="title">Цены</h2>
                         <div class="plans">
                             <input type="radio" name="plan" id="basePlan" checked>
-                            <label for="basePlan" class="item active">
+                            <label for="basePlan" class="item">
                                 <h3 class="title">Чистовая отделка</h3>
                                 <ul>
                                     <li>Фундамент</li>
