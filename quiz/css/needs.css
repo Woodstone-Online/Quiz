@@ -367,16 +367,20 @@ input[type=number] {
 }
 
 .counters > div > div > button {
+    box-sizing: border-box;
     all: initial;
-    border: 1.5px solid rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 50%;
     color: #C4C4C4;
-    width: 35px;
-    height: 35px;
+    width: 31px;
+    height: 31px;
     text-align: center;
     font-size: 30px;
     line-height: 35px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .counters > div > div > input[type="number"] {
@@ -386,6 +390,25 @@ input[type=number] {
     font-size: 18px;
     font-weight: 500;
     margin: 0 10px;
+}
+
+button.decrease:before,
+button.increase:before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 2px;
+    background: #C4C4C4;
+    position: absolute;
+}
+
+button.increase:after {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 14px;
+    background: #C4C4C4;
+    position: absolute;
 }
 
 @media (min-width: 1024px) {

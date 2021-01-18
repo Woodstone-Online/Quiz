@@ -28,16 +28,14 @@ loadStyles(import.meta.url).then(styles =>
                                 ${step.data.map(item => html`
                                     <div><label>${item.title}</label>
                                         <div>
-                                            <button onclick="this.nextElementSibling.stepDown();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.nextElementSibling.value))">
-                                                –
-                                            </button>
+                                            <button onclick="this.nextElementSibling.stepDown();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.nextElementSibling.value))"
+                                                    class="decrease"></button>
                                             <input type="number" min="0" step="1" maxlength="2" max="99" disabled
                                                    id="${item.fieldname}" name="${item.fieldname}"
                                                    .value="${quiz.getAnswer(step.fieldname, item.fieldname, 0)}"
                                                    onchange="window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.value))">
-                                            <button onclick=" this.previousElementSibling.stepUp();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.previousElementSibling.value))">
-                                                +
-                                            </button>
+                                            <button onclick=" this.previousElementSibling.stepUp();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.previousElementSibling.value))"
+                                                    class="increase"></button>
                                         </div>
                                     </div>`)}
                             </div>
