@@ -59,4 +59,15 @@
     :host > a:after {
         --separator: none;
     }
+
+    :host > a[data-full-text-set] {
+        font-size: 0;
+    }
+
+    :host > a[data-full-text-set]:after {
+        all: initial;
+        color: inherit;
+        font-size: 14px;
+        content: attr(data-full-text);
+    }
 }
