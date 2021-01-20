@@ -43,6 +43,14 @@ loadStyles(import.meta.url).then(styles =>
             return this.requestUpdate();
         }
 
+        toggleCommunication(item, value) {
+            return this.setAnswer('communication', item, value)
+        }
+
+        checkCommunications(event) {
+            return Array.from(this.shadowRoot.querySelectorAll('input[type="checkbox"]')).filter(input => input.checked).length < 1 ? event.preventDefault() : null;
+        }
+
         render() {
             return html`
                 <h1>${this.subject && this.subject.title ? this.subject.title : 'Заявка'}</h1>
@@ -52,17 +60,17 @@ loadStyles(import.meta.url).then(styles =>
                                 style="margin: 10px 0">${this.subject.caption}</span>` : ''}
                         <!--                        <span>Предпочтения для связи</span>-->
                         <div class="communications">
-                            <input type="checkbox" id="whathsapp"
-                                   onchange="this.getRootNode().host.setAnswer('communication','whatsapp',this.checked)"
-                                   ?checked="${this.whatsapp}">
+                            <input type="checkbox" id="whathsapp" ?checked="${this.whatsapp}"
+                                   onclick="this.getRootNode().host.checkCommunications(event)"
+                                   onchange="this.getRootNode().host.toggleCommunication('whatsapp',this.checked)">
                             <label for="whathsapp">Whats App</label>
-                            <input type="checkbox" id="phone"
-                                   onchange="this.getRootNode().host.setAnswer('communication','phone',this.checked)"
-                                   ?checked="${this.phone}">
+                            <input type="checkbox" id="phone" ?checked="${this.phone}"
+                                   onclick="this.getRootNode().host.checkCommunications(event)"
+                                   onchange="this.getRootNode().host.toggleCommunication('phone',this.checked)">
                             <label for="phone">Телефон</label>
-                            <input type="checkbox" id="email"
-                                   onchange="this.getRootNode().host.setAnswer('communication', 'email', this.checked)"
-                                   ?checked="${this.email}">
+                            <input type="checkbox" id="email" ?checked="${this.email}"
+                                   onclick="this.getRootNode().host.checkCommunications(event)"
+                                   onchange="this.getRootNode().host.toggleCommunication('email', this.checked, event)">
                             <label for="email">Email</label>
                         </div>
                     </div>
