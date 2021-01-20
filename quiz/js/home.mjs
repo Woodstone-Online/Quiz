@@ -22,6 +22,7 @@ loadStyles(import.meta.url).then(styles =>
                     return target.activeSlide = slide
                 }
             };
+            this.sliders = [this.home, this.images];
             this.numberFormat = new Intl.NumberFormat('ru-RU');
             this.selectedHome = quiz.getState('selectedHome');
             this.maxPrice = quiz.getAnswer('budget', 'to');
@@ -81,16 +82,18 @@ loadStyles(import.meta.url).then(styles =>
         firstUpdated() {
             this.initSlider(this.home, '.home-slider', '.homes-navigation');
             if (this.selectedHome) this.setSlide(this.home, quiz.homes.findIndex(home => home.homeId === this.selectedHome))
+            document.addEventListener('keydown', this.sliderKeyNavigationHandler.bind(this));
         }
 
         updated() {
             if (this.images.slider) this.destroySlider(this.images);
             if (!this.selectedHome) this.setSlide(this.home, undefined, true);
+            console.debug('updated', this.selectedHome, quiz.home[this.selectedHome], quiz.home[this.selectedHome].images)
             if (this.selectedHome && quiz.home[this.selectedHome] && quiz.home[this.selectedHome].images) {
                 this.initSlider(this.images, '.image-slider .slides');
                 this.setSlide(this.images, undefined, true);
             }
-            if (this.plans.slider) this.destroySlider(this.images);
+            if (this.plans.slider) this.destroySlider(this.plans);
             if (this.selectedHome) this.initSlider(this.plans, '.plans', null, '.item');
         }
 
@@ -105,6 +108,22 @@ loadStyles(import.meta.url).then(styles =>
                 threshold: 1
             });
             return target.slides.forEach(slide => target.observer.observe(slide));
+        }
+
+        sliderKeyNavigationHandler(e) {
+            switch (e.which) {
+                case 37:
+                    e.preventDefault();
+                    return this.sliders.forEach(target => target.slider ? this.prevSlide(target) : null);
+                case 39:
+                    e.preventDefault();
+                    return this.sliders.forEach(target => target.slider ? this.nextSlide(target) : null);
+            }
+        }
+
+        disconnectedCallback() {
+            super.disconnectedCallback();
+            document.removeEventListener('keydown', this.sliderKeyNavigationHandler);
         }
 
         destroySlider(target) {
