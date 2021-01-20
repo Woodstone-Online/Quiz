@@ -198,6 +198,31 @@ section {
     margin-right: 25px;
 }
 
+.range-slider .slider-line {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    width: calc(100% - 30px);
+    outline: none;
+    height: 10px;
+    margin: 0 15px;
+    padding: 0;
+    top: 52.5px;
+    border-radius: 10px;
+    background-image: linear-gradient(90deg, #f2f2f2 48.08%, #ffffff 48.08%, #ffffff 50%, #f2f2f2 50%, #f2f2f2 98.08%, #ffffff 98.08%, #ffffff 100%);
+    background-size: 52.00px 52.00px;
+    overflow: hidden;
+}
+
+.range-slider .slider-line > div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(90deg, #6ebc61 48.08%, #ffffff 48.08%, #ffffff 50%, #6ebc61 50%, #6ebc61 98.08%, #ffffff 98.08%, #ffffff 100%);
+    background-size: 52.00px 52.00px;
+}
+
 .range-slider input {
     pointer-events: none;
     position: absolute;
@@ -256,7 +281,7 @@ input[type=range]:focus {
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-    background: rgba(242, 242, 242, 0.78);
+    background: transparent;
     border: 0;
     border-radius: 10px;
     width: 100%;
@@ -281,7 +306,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 input[type=range]::-moz-range-track {
-    background: rgba(242, 242, 242, 0.78);
+    background: transparent;
     border: 0;
     border-radius: 10px;
     width: 100%;
@@ -310,13 +335,13 @@ input[type=range]::-ms-track {
 }
 
 input[type=range]::-ms-fill-lower {
-    background: #e5e5e5;
+    background: transparent;
     border: 0;
     border-radius: 20px;
 }
 
 input[type=range]::-ms-fill-upper {
-    background: rgba(242, 242, 242, 0.78);
+    background: transparent;
     border: 0;
     border-radius: 20px;
 }
@@ -334,7 +359,7 @@ input[type=range]::-ms-thumb {
 }
 
 input[type=range]:focus::-ms-fill-lower {
-    background: rgba(242, 242, 242, 0.78);
+    background: transparent;
 }
 
 input[type=range]:focus::-ms-fill-upper {
@@ -520,6 +545,11 @@ button.increase:after {
         padding-bottom: 60px;
         padding-left: 15px;
         box-sizing: border-box;
+    }
+
+    .range-slider .slider-line {
+        width: calc(100% - 60px);
+        margin: 0 30px;
     }
 
     input[type=range] {

@@ -63,10 +63,9 @@ export class Quiz {
             var sliders = sliderSections[x].getElementsByTagName("input");
             for (var y = 0; y < sliders.length; y++) {
                 if (sliders[y].type === "range") {
-                    sliders[y].oninput = getVals;
-                    sliders[y].onchange = setVals;
-                    // Manually trigger event first time to display values
-                    sliders[y].oninput(undefined);
+                    sliders[y].addEventListener('input', getVals, {passive: true})
+                    sliders[y].addEventListener('change', setVals, {passive: true})
+                    getVals.call(sliders[y])
                 }
             }
         }
@@ -388,6 +387,7 @@ window.getVals = function () {
     var slide1 = parseInt(slides[0].value);
     var slide2 = parseInt(slides[1].value);
     let max = slides[0].max;
+    let min = slides[0].min;
     // Neither slider will clip the other, so make sure we determine which is larger
     if (slide1 > slide2) {
         var tmp = slide2;
@@ -398,11 +398,12 @@ window.getVals = function () {
     // var displayElement = parent.getElementsByClassName("rangeValues")[0];
     let price_from = parent.querySelector('#price_from');
     let price_to = parent.querySelector('#price_to');
+    let line = parent.querySelector('.slider-line>div');
     let numberFormat = new Intl.NumberFormat('ru-RU');
     price_from.innerText = numberFormat.format(slide1);
     price_to.innerText = slide2 < max ? numberFormat.format(slide2) : 'Неважно';
-    // app.setAnswer(slides[0].dataset.step, 'from', slide1)
-    // app.setAnswer(slides[0].dataset.step, 'to', slide2)
+
+    line.style.clipPath = `inset(0 ${((max - slide2) * 100) / (max - min)}% 0 ${((slide1 - min) * 100) / (max - min)}%)`;
 }
 
 window.setVals = function () {

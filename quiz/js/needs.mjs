@@ -111,6 +111,9 @@ loadStyles(import.meta.url).then(styles =>
                                            name="${item.fieldname}"
                                            min="${item.minValue}" max="${item.maxValue}" data-step="${step.fieldname}"
                                            .value="${quiz.getAnswer(step.fieldname, 'to', item.maxValue)}">
+                                    <div class="slider-line">
+                                        <div></div>
+                                    </div>
                                 </div>`)}
                         </section>`
                 default:
