@@ -366,7 +366,7 @@ export class Quiz {
                     break;
                 case 'home':
                     Object.defineProperty(data, 'skip', {
-                        get: () => this.getAnswer('home', false, null) !== 1
+                        get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) !== 1 : false
                     })
                     break;
             }
