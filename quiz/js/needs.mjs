@@ -7,14 +7,51 @@ loadStyles(import.meta.url).then(styles =>
             return css([styles]);
         }
 
+        constructor() {
+            super();
+            this.lastFocusedStep = null;
+            this.lastStep = null;
+        }
+
         firstUpdated() {
             quiz.initRangesSlider.call(this);
-            this.shadowRoot.querySelector('section').focus()
+            this.focusFirstStep();
+            this.lastStep = this.shadowRoot.querySelector('section:last-of-type')
+            this.shadowRoot.querySelector('#nextStep').addEventListener('mousedown', this.nextStep.bind(this))
+            this.addEventListener('blur', () => window.matchMedia("(max-width: 1023px)").matches ? this.focusStep(this.lastFocusedStep) : null);
+            this.shadowRoot.querySelectorAll('section').forEach(step => step.addEventListener('mousedown', e => this.setFocusedStep(e)))
+        }
+
+        focusFirstStep() {
+            const targetStep = this.shadowRoot.querySelector('section');
+            this.lastFocusedStep = targetStep;
+            targetStep.focus();
+        }
+
+        focusStep(targetStep) {
+            if (!targetStep) return false;
+            this.lastFocusedStep = targetStep;
+            targetStep.focus();
+        }
+
+        nextStep(event) {
+            event.preventDefault();
+            if (this.shadowRoot.activeElement) {
+                const targetStep = this.shadowRoot.activeElement.nextElementSibling;
+                this.lastFocusedStep = targetStep;
+                targetStep.focus();
+            }
+        }
+
+        setFocusedStep(event) {
+            if (!event.target) return false;
+            this.lastFocusedStep = event.target.matches('section') ? event.target : event.target.closest('section');
         }
 
         render() {
             return html`${quiz.quizSteps.map(this.renderStep)}
             <div class="navigation-buttons">
+                <button id="nextStep" class="big-next-bottom-button">Далее</button>
                 <quiz-next-stage stage="needs"></quiz-next-stage>
             </div>`
         }
@@ -23,7 +60,8 @@ loadStyles(import.meta.url).then(styles =>
             switch (step.type) {
                 case 'counters':
                     return html`
-                        <section id="${step.fieldname}" tabindex="1"><span class="title">${step.title}</span>
+                        <section id="${step.fieldname}" tabindex="1">
+                            <span class="title">${step.title}</span>
                             <div class="counters">
                                 ${step.data.map(item => html`
                                     <div><label>${item.title}</label>

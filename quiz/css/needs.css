@@ -32,6 +32,10 @@
     pointer-events: initial;
 }
 
+#nextStep {
+    z-index: 1;
+}
+
 section {
     background: white;
     border-radius: 15px;
@@ -69,6 +73,11 @@ section {
 
     section:focus-within > .title {
         opacity: initial;
+    }
+
+    section:focus-within + .navigation-buttons #nextStep,
+    :host(:not(:focus-within)) #nextStep {
+        display: none;
     }
 }
 
@@ -138,6 +147,9 @@ section {
 }
 
 .big-next-bottom-button {
+    -webkit-appearance: none;
+    border: none;
+    margin: unset;
     box-sizing: border-box !important;
     text-decoration: none;
     position: fixed;
@@ -432,6 +444,10 @@ button.increase:after {
         margin-right: 30px;
         bottom: 30px;
         justify-content: space-between;
+    }
+
+    #nextStep {
+        display: none;
     }
 
     section {
