@@ -19,8 +19,8 @@ loadStyles(import.meta.url).then(styles =>
                         <span>Учет квартиры до 100%</span>
                     </div>
                     <div>
-                        <span class="title">10%</span>
-                        <span>Предоплата 10%, остальные 90% потом</span>
+                        <span class="title">20%</span>
+                        <span>Предоплата 20%, остальные 80% потом</span>
                     </div>
                 </div>
                 <p>Миссия Woodstone — осуществлять мечту людей о загородном доме.
@@ -36,8 +36,8 @@ loadStyles(import.meta.url).then(styles =>
                     </a>
                     <a href="#contacts" style="background-image: url(/img/2.plans.conditions.png)"
                        @click="${() => quiz.setAnswer('interest', null, 1) && (quiz.contactSubject = 'Offer')}">
-                        <h2 class="title">Готовый дом за 10%</h2>
-                        <p>Для начала строительства достаточно внести всего 10%.</p>
+                        <h2 class="title">Готовый дом за 20%</h2>
+                        <p>Для начала строительства достаточно внести всего 20%.</p>
                         <p>За 4 месяца мы построим готовый к жизни загородный дом и поможем с оформлением ипотеки от
                             2.7% годовых.</p>
                     </a>

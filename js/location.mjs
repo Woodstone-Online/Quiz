@@ -65,7 +65,8 @@ loadStyles(import.meta.url).then(styles =>
                         fillColor: this.colors[i] || '#6EBC61',
                         cursor: 'default',
                         fillOpacity: .6,
-                        outline: false
+                        outline: false,
+                        visible: quiz.getState('selectedAreas', area.areaId, true)
                     });
                     this.myMap.geoObjects.add(myPolygon);
                     return myPolygon;

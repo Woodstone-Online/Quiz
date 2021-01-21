@@ -15,7 +15,7 @@ loadStyles(import.meta.url).then(styles =>
         render() {
             return html`
                 <header>
-                    <img src="/img/Logo.svg" alt="Logo">
+                    <a href="https://woodstone.online"><img src="/img/Logo.svg" alt="Logo"></a>
                     <a href="#contacts" class="call-button"
                        @click="${() => quiz.setAnswer('interest', null, 6) && (quiz.contactSubject = 'Consultation')}">Звонок</a>
                 </header>
