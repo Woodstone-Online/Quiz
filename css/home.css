@@ -154,7 +154,7 @@
 #summary .head-line .get-pdf:before,
 #summary .head-line .reset-home:before {
     content: '';
-    background-image: url("/quiz/img/download.svg");
+    background-image: url("/img/download.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -166,7 +166,7 @@
 }
 
 #summary .head-line .reset-home:before {
-    background-image: url("/quiz/img/left.white.arrow.svg");
+    background-image: url("/img/left.white.arrow.svg");
     background-size: 10px;
     margin-right: 16px;
     width: 10px;
@@ -382,7 +382,7 @@
     display: block;
     border-radius: 100px;
     background-color: rgba(255, 255, 255, .12);
-    background-image: url("/quiz/img/white.down.arrow.svg");
+    background-image: url("/img/white.down.arrow.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 10px;
@@ -627,14 +627,14 @@
     height: 24px;
     background: rgba(110, 188, 97, 0.1);
     border-radius: 100px;
-    background-image: url("/quiz/img/down.arrow.svg");
+    background-image: url("/img/down.arrow.svg");
     background-size: 10px;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 #details .card details[open] summary::after {
-    background-image: url("/quiz/img/up.arrow.svg");
+    background-image: url("/img/up.arrow.svg");
 }
 
 #details .card ol {
@@ -822,7 +822,7 @@
     content: '';
     display: block;
     background-color: black;
-    background-image: url("/quiz/img/right.navigation.arrow.svg");
+    background-image: url("/img/right.navigation.arrow.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 5vw;
@@ -838,7 +838,7 @@
 }
 
 #details .image-slider:focus-within .slides > div/*:not(.active)*/:after {
-    background-image: url("/quiz/img/left.navigation.arrow.svg");
+    background-image: url("/img/left.navigation.arrow.svg");
     left: unset;
     right: -10vw;
 }
@@ -936,7 +936,7 @@
     height: 24px;
     min-width: 15px;
     display: inline-block;
-    background-image: url("/quiz/img/green.check.svg");
+    background-image: url("/img/green.check.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -944,7 +944,7 @@
 }
 
 #details .plans input[type="radio"]:checked + .item ul li:before {
-    background-image: url("/quiz/img/check.svg");
+    background-image: url("/img/check.svg");
 }
 
 #details .plans input[type="radio"]:checked + .item ul li.excluded {
@@ -952,7 +952,7 @@
 }
 
 #details .plans input[type="radio"]:checked + .item ul li.excluded:before {
-    background-image: url("/quiz/img/exclude.svg");
+    background-image: url("/img/exclude.svg");
 }
 
 #details .plans .item .summary {
@@ -1013,7 +1013,7 @@
     background: #302F3A;
     border: none;
     border-radius: 100px;
-    background-image: url("/quiz/img/zoom.svg");
+    background-image: url("/img/zoom.svg");
     background-size: 24px;
     background-repeat: no-repeat;
     background-position: center;

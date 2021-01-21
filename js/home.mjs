@@ -229,22 +229,22 @@ loadStyles(import.meta.url).then(styles =>
                     <h2 class="title">Что входит в дом</h2>
                     <div class="grid">
                         <div class="grid-item">
-                            <img src="/quiz/img/1.grid.home.landing.svg"><span>Устройство фундамента</span></div>
+                            <img src="/img/1.grid.home.landing.svg"><span>Устройство фундамента</span></div>
                         <div class="grid-item">
-                            <img src="/quiz/img/2.grid.home.landing.svg"><span>Стеновой комплект</span></div>
+                            <img src="/img/2.grid.home.landing.svg"><span>Стеновой комплект</span></div>
                         <div class="grid-item">
-                            <img src="/quiz/img/3.grid.home.landing.svg"><span>Отделка фасадов</span>
+                            <img src="/img/3.grid.home.landing.svg"><span>Отделка фасадов</span>
                         </div>
                         <div class="grid-item">
-                            <img src="/quiz/img/4.grid.home.landing.svg"><span>Кровельные работы</span></div>
-                        <div class="grid-item wide-item"><img src="/quiz/img/5.grid.home.landing.svg">
+                            <img src="/img/4.grid.home.landing.svg"><span>Кровельные работы</span></div>
+                        <div class="grid-item wide-item"><img src="/img/5.grid.home.landing.svg">
                             <span class="title">Сопровождение строительства</span>
                             <span>Специалисты будут контролировать каждый этап строительства</span>
                         </div>
                         <div class="grid-item">
-                            <img src="/quiz/img/6.grid.home.landing.svg"><span>Водосточная система</span></div>
+                            <img src="/img/6.grid.home.landing.svg"><span>Водосточная система</span></div>
                         <div class="grid-item">
-                            <img src="/quiz/img/7.grid.home.landing.svg"><span>Окна и двери</span>
+                            <img src="/img/7.grid.home.landing.svg"><span>Окна и двери</span>
                         </div>
                     </div>
                     ${this.selectedHome ? html`
@@ -300,7 +300,7 @@ loadStyles(import.meta.url).then(styles =>
                                     прочности на изгиб.
                                 </p>
                             </details>
-                            <img src="/quiz/img/2.card.home.landing.png">
+                            <img src="/img/2.card.home.landing.png">
                         </div>
                         <div class="card">
                             <h2 class="title">Крыша</h2>
@@ -312,10 +312,10 @@ loadStyles(import.meta.url).then(styles =>
                             <span class="description">увеличиваетсрок службы утеплителя и дерявянных конструкций.</span>
                             <p>Водосточная система</p>
                             <span class="description">немецкая водосточная система DOCKE не допускает контакта стен с осадками.</span>
-                            <div class="feature"><img src="/quiz/img/1.feature.home.landing.svg">
+                            <div class="feature"><img src="/img/1.feature.home.landing.svg">
                                 <span>Утеплитель 200 мм — тишина в доме.</span>
                             </div>
-                            <img src="/quiz/img/3.card.home.landing.png">
+                            <img src="/img/3.card.home.landing.png">
                         </div>
                         <div class="card">
                             <h2 class="title">Стены и эко-фасады</h2>
@@ -331,11 +331,11 @@ loadStyles(import.meta.url).then(styles =>
                                 <li>Газоблок автоклавный</li>
                             </ol>
                             <div class="logos-section">
-                                <img src="/quiz/img/1.logo.home.landing.png">
-                                <img src="/quiz/img/2.logo.home.landing.png">
-                                <img src="/quiz/img/3.logo.home.landing.png">
+                                <img src="/img/1.logo.home.landing.png">
+                                <img src="/img/2.logo.home.landing.png">
+                                <img src="/img/3.logo.home.landing.png">
                             </div>
-                            <img src="/quiz/img/4.card.home.landing.png">
+                            <img src="/img/4.card.home.landing.png">
                         </div>
                         <h2 class="title">Цены</h2>
                         <div class="plans">

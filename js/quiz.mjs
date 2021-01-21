@@ -72,7 +72,7 @@ export class Quiz {
     }
 
     /*initRouter(outlet) {
-        this.router = new Router(outlet, {baseUrl: '/quiz/'});
+        this.router = new Router(outlet, {baseUrl: '/'});
         this.router.setRoutes([
             {path: '/location', component: 'quiz-location'},
             {path: '/contacts', component: 'quiz-contacts'},
@@ -313,7 +313,7 @@ export class Quiz {
             // alert('Пользователь успешно создан, ID: ' + response.user.userId)
             localStorage.clear();
             this.loadAllAnswers();
-            location.href = '/quiz/final.html';
+            location.href = '/final.html';
         }
         return console.debug(response);
     }

@@ -13,13 +13,13 @@ loadStyles(import.meta.url).then(styles =>
                 <p>Пока вы можете ознакомиться с материалами о нашей компании</p>
                 <nav>
                     <a href="https://www.instagram.com/woodstone_ekb/" target="_blank">
-                        <img src="/quiz/img/instagram.svg">Наш инстаграм с отзывами и новостями
+                        <img src="/img/instagram.svg">Наш инстаграм с отзывами и новостями
                     </a>
                     <a href="https://www.facebook.com/woodstoneekb/" target="_blank">
-                        <img src="/quiz/img/yt.svg">Facebook с примерами нетиповых проектов
+                        <img src="/img/yt.svg">Facebook с примерами нетиповых проектов
                     </a>
                     <a href="https://youtu.be/-PvLnOFiFLU" target="_blank">
-                        <img src="/quiz/img/like.svg">Видеоотзывы наших клиентов
+                        <img src="/img/like.svg">Видеоотзывы наших клиентов
                     </a>
                 </nav>
             `;

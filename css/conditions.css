@@ -80,7 +80,7 @@ p {
     background-position: center;
     background-repeat: no-repeat;
     background-color: rgba(110, 188, 97, 0.1);
-    background-image: url("/quiz/img/right.arrow.svg");
+    background-image: url("/img/right.arrow.svg");
 }
 
 .plans .title:first-child {
@@ -118,7 +118,7 @@ p {
 
 .get-pdf:before {
     content: '';
-    background: url("/quiz/img/download.svg");
+    background: url("/img/download.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

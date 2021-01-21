@@ -28,7 +28,7 @@ header > img {
     height: 38px;
     background: #6EBC61;
     border-radius: 100px;
-    background-image: url("/quiz/img/call.svg");
+    background-image: url("/img/call.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 25px;

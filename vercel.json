@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/quiz/:match*",
-      "destination": "/quiz/index.html"
+      "source": "/:match*",
+      "destination": "/index.html"
     }
   ],
   "headers": [

@@ -27,21 +27,21 @@ loadStyles(import.meta.url).then(styles =>
                     Помимо строительства мы предлагаем уникальные условия приобретения загородной недвижимости.</p>
                 <p>Какой вариант подходит вам?</p>
                 <div class="plans">
-                    <a href="#contacts" style="background-image: url(/quiz/img/1.plans.conditions.png)"
+                    <a href="#contacts" style="background-image: url(/img/1.plans.conditions.png)"
                        @click="${() => quiz.setAnswer('interest', null, 2) && (quiz.contactSubject = 'Offer')}">
                         <h2 class="title">Обмен квартиры на дом</h2>
                         <p>Выкупим вашу квартиру по рыночной стоимости.</p>
                         <p>За 4 месяца построим готовый к жизни загородный дом.</p>
                         <p>Продолжайте жить в квартире, пока идет строительство.</p>
                     </a>
-                    <a href="#contacts" style="background-image: url(/quiz/img/2.plans.conditions.png)"
+                    <a href="#contacts" style="background-image: url(/img/2.plans.conditions.png)"
                        @click="${() => quiz.setAnswer('interest', null, 1) && (quiz.contactSubject = 'Offer')}">
                         <h2 class="title">Готовый дом за 10%</h2>
                         <p>Для начала строительства достаточно внести всего 10%.</p>
                         <p>За 4 месяца мы построим готовый к жизни загородный дом и поможем с оформлением ипотеки от
                             2.7% годовых.</p>
                     </a>
-                    <a href="#contacts" style="background-image: url(/quiz/img/1.plans.conditions.png)"
+                    <a href="#contacts" style="background-image: url(/img/1.plans.conditions.png)"
                        @click="${() => quiz.setAnswer('interest', null, 3) && (quiz.contactSubject = 'Offer')}">
                         <h2 class="title">Поэтапная оплата</h2>
                         <p>Строительство дома по договору подряда. Вносите оплату поэтапно за результат фактически
