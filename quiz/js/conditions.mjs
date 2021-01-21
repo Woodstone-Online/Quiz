@@ -42,7 +42,7 @@ loadStyles(import.meta.url).then(styles =>
                             2.7% годовых.</p>
                     </a>
                     <a href="#contacts" style="background-image: url(/quiz/img/1.plans.conditions.png)"
-                       @click="${() => quiz.setAnswer('interest', null, 3) && (quiz.contactSubject = null)}">
+                       @click="${() => quiz.setAnswer('interest', null, 3) && (quiz.contactSubject = 'Offer')}">
                         <h2 class="title">Поэтапная оплата</h2>
                         <p>Строительство дома по договору подряда. Вносите оплату поэтапно за результат фактически
                             выполненных работ.</p>
