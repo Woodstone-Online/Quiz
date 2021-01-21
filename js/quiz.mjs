@@ -20,7 +20,8 @@ export class Quiz {
             residents: {
                 adults: 0,
                 children: 0
-            }
+            },
+            budget: {}
         },
         selectedAreas: {}
     }
@@ -33,12 +34,20 @@ export class Quiz {
         return this;
     }
 
-    loadAllAnswers(initial) {
+    loadAllAnswers() {
         this.loadAnswers();
         this.loadAnswers('selectedAreas');
         this.loadAnswers('selectedVillages');
         this.loadAnswers('selectedHome', null, String);
         this.loadAnswers('profile');
+    }
+
+    parseAnswersFromParameters() {
+        const parameters = new URLSearchParams(location.search);
+        const answer = Object.fromEntries(['adults', 'children', 'budget'].filter(item => parameters.has(item)).map(item => [item, parameters.get(item)]))
+        if (answer.adults) this.preferences.residents.adults = answer.adults;
+        if (answer.children) this.preferences.residents.children = answer.children;
+        if (answer.budget) this.preferences.budget.to = answer.budget;
     }
 
     async init() {
@@ -51,6 +60,7 @@ export class Quiz {
                 return 0;
             }))
         ]);
+        this.parseAnswersFromParameters();
         this.loadAllAnswers();
         await this.renderQuiz();
         this.homes.forEach(this.loadHomeData.bind(this))
