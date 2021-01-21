@@ -59,6 +59,8 @@ loadStyles(import.meta.url).then(styles =>
                         ${this.subject && this.subject.caption ? html`<span
                                 style="margin: 10px 0">${this.subject.caption}</span>` : ''}
                         <!--                        <span>Предпочтения для связи</span>-->
+                    </div>
+                    <div>
                         <div class="communications">
                             <input type="checkbox" id="whathsapp" ?checked="${this.whatsapp}"
                                    onclick="this.getRootNode().host.checkCommunications(event)"
@@ -73,21 +75,24 @@ loadStyles(import.meta.url).then(styles =>
                                    onchange="this.getRootNode().host.toggleCommunication('email', this.checked, event)">
                             <label for="email">Email</label>
                         </div>
+                        <form>
+                            <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
+                            ${this.phone || this.whatsapp ? html`
+                                <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
+                                       onchange="app.updateProfile('phone',this.value)"
+                                       onfocus="window.disableScroll=false"
+                                       onblur="window.disableScroll=true">` : ''}
+                            <input type="text" placeholder="Ваше имя" .value="${quiz.getState('profile', 'name', '')}"
+                                   onchange="app.updateProfile('name',this.value)" onfocus="window.disableScroll=false"
+                                   onblur="window.disableScroll=true">
+                            ${this.email ? html`
+                                <input type="email" placeholder="E-mail"
+                                       .value="${quiz.getState('profile', 'email', '')}"
+                                       onchange="app.updateProfile('email',this.value)"
+                                       onfocus="window.disableScroll=false"
+                                       onblur="window.disableScroll=true">` : ''}
+                        </form>
                     </div>
-                    <form>
-                        <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
-                        ${this.phone || this.whatsapp ? html`
-                            <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
-                                   onchange="app.updateProfile('phone',this.value)" onfocus="window.disableScroll=false"
-                                   onblur="window.disableScroll=true">` : ''}
-                        <input type="text" placeholder="Ваше имя" .value="${quiz.getState('profile', 'name', '')}"
-                               onchange="app.updateProfile('name',this.value)" onfocus="window.disableScroll=false"
-                               onblur="window.disableScroll=true">
-                        ${this.email ? html`
-                            <input type="email" placeholder="E-mail" .value="${quiz.getState('profile', 'email', '')}"
-                                   onchange="app.updateProfile('email',this.value)" onfocus="window.disableScroll=false"
-                                   onblur="window.disableScroll=true">` : ''}
-                    </form>
                 </section>
                 <aside>
                     <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>

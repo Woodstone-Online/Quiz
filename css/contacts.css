@@ -15,7 +15,7 @@ input {
 :host {
     font-family: 'Montserrat', sans-serif;
     display: block;
-    height: calc(100% - 50px);
+    height: calc(100% - 70px);
     /*//max-height: 100%;*/
     /*//margin-bottom: 70px;*/
 }
@@ -43,10 +43,10 @@ section {
 section .header {
     /*position: sticky;*/
     /*top: 0;*/
-    display: flex;
-    flex-direction: column;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: space-between;*/
     padding: 0 15px;
-    justify-content: space-between;
     height: 100%;
 }
 
@@ -76,13 +76,15 @@ section .header span {
     flex-wrap: wrap;
     flex-direction: column;
     overflow-x: auto;
+    overflow-y: hidden;
     max-height: 50px;
     /*//padding: 15px;*/
-    margin: 15px -15px;
+    margin: 15px 0;
     margin-bottom: 0;
     scroll-snap-type: x mandatory;
     min-height: 56px;
-    margin-top: 0;
+    margin-top: 18px;
+    margin-bottom: 16px;
 }
 
 .communications:after {
@@ -96,6 +98,7 @@ section .header span {
 }
 
 .communications label {
+    box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     position: relative;
     /*border: 1px solid rgba(0, 0, 0, 0.12);*/
@@ -103,7 +106,7 @@ section .header span {
     padding: 8px 15px;
     padding-left: 43px;
     margin-left: 10px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     cursor: pointer;
     background: #FFFFFF;
     font-size: 14px;
