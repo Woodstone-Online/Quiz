@@ -24,7 +24,7 @@ loadStyles(import.meta.url).then(styles =>
 
         firstUpdated() {
             this.initIframe();
-            this.initMap();
+            // this.initMap();
         }
 
         initIframe() {
