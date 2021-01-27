@@ -3,14 +3,6 @@ import quiz, {loadStyles} from "./quiz.mjs";
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-location', class extends LitElement {
-        colors = [
-            '#FF9435',
-            '#6EBC61',
-            '#56CCF2',
-            '#BB6BD9',
-            '#F2C94C',
-            '#FF62C0',
-        ]
 
         static get styles() {
             return css([styles]);
@@ -20,6 +12,18 @@ loadStyles(import.meta.url).then(styles =>
             return {
                 polygons: {attribute: false}
             }
+        }
+
+        constructor() {
+            super();
+            this.colors = [
+                '#FF9435',
+                '#6EBC61',
+                '#56CCF2',
+                '#BB6BD9',
+                '#F2C94C',
+                '#FF62C0',
+            ]
         }
 
         firstUpdated() {
