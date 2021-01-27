@@ -1,33 +1,31 @@
 import './app.mjs';
 
 export class Quiz {
-    stage = {
-        needs: {next: 'location'},
-        location: {
-            next: 'home', title: 'Выбрать районы и направления'
-        },
-        home: {
-            next: 'conditions', title: 'Выбрать дом — готовое решение'
-        },
-        conditions: {
-            next: 'contacts', title: 'Доступные варианты  покупки'
-        },
-        contacts: {}
-    }
-
-    defaultAnswers = {
-        preferences: {
-            residents: {
-                adults: 0,
-                children: 0
-            },
-            budget: {}
-        },
-        selectedAreas: {}
-    }
-
     constructor({apiURL} = {}) {
         this.endpointURL = apiURL;
+        this.stage = {
+            needs: {next: 'location'},
+            location: {
+                next: 'home', title: 'Выбрать районы и направления'
+            },
+            home: {
+                next: 'conditions', title: 'Выбрать дом — готовое решение'
+            },
+            conditions: {
+                next: 'contacts', title: 'Доступные варианты  покупки'
+            },
+            contacts: {}
+        }
+        this.defaultAnswers = {
+            preferences: {
+                residents: {
+                    adults: 0,
+                    children: 0
+                },
+                budget: {}
+            },
+            selectedAreas: {}
+        }
         Object.assign(this, this.defaultAnswers);
         this.initStages();
         this.init();
