@@ -411,7 +411,7 @@ window.getVals = function () {
     price_from.innerText = numberFormat.format(slide1);
     price_to.innerText = slide2 < max ? numberFormat.format(slide2) : 'Неважно';
 
-    line.style.clipPath = `inset(0 ${((max - slide2) * 100) / (max - min)}% 0 ${((slide1 - min) * 100) / (max - min)}%)`;
+    line.style.webkitClipPath = line.style.clipPath = `inset(0 ${((max - slide2) * 100) / (max - min)}% 0 ${((slide1 - min) * 100) / (max - min)}%)`;
 }
 
 window.setVals = function () {
