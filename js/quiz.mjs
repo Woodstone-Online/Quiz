@@ -1,4 +1,6 @@
 import './app.mjs';
+import { Analytics } from './analytics.mjs'
+import { CONFIG } from './config.mjs'
 
 export class Quiz {
     stage = {
@@ -28,6 +30,7 @@ export class Quiz {
 
     constructor({apiURL} = {}) {
         this.endpointURL = apiURL;
+        this.analytics = new Analytics();
         Object.assign(this, this.defaultAnswers);
         this.initStages();
         this.init();
@@ -53,7 +56,7 @@ export class Quiz {
     async init() {
         await Promise.allSettled([
             this.loadConfiguration('quizSteps', 'quizStep', 'fieldname'),
-            this.loadConfiguration('areas', 'area', 'areaId').then(async () => this.areas.forEach(area => this.toggleArea(area.areaId, true, true))),
+            this.loadConfiguration('areas', 'area', 'areaId').then(async () => this.areas.forEach(area => this.toggleArea(area.areaId, true, true, true))),
             this.loadConfiguration('homes', 'home', 'homeId').then(() => this.homes.sort(function (a, b) {
                 if (a.space > b.space) return 1;
                 if (a.space < b.space) return -1;
@@ -217,11 +220,16 @@ export class Quiz {
         return value;
     }
 
-    toggleArea(id, state = !this.getState('selectedAreas', id), disableSync) {
+    sendEvent(eventCategory, eventAction) {
+        return this.analytics.sendEvent(eventCategory, eventAction);
+    }
+
+    toggleArea(id, state = !this.getState('selectedAreas', id), disableSync, disableAnalytics = false) {
         if (!id) return false;
         if (state) this.selectedAreas[id] = true;
         else this.selectedAreas[id] = false;
         if (!disableSync) this.saveAnswers('selectedAreas');
+        if (!disableAnalytics) app.sendEvent('InterestButton', state ? 'likeArea' : 'unlikeArea');
         return state;
     }
 
@@ -237,6 +245,7 @@ export class Quiz {
         if (!id) return false;
         this.selectedHome = id;
         this.saveAnswers('selectedHome');
+        this.sendEvent('InterestButton', 'likeHome');
         return true;
     }
 
@@ -244,6 +253,7 @@ export class Quiz {
         // if (!id) return false;
         this.selectedHome = null;
         this.saveAnswers('selectedHome');
+        this.sendEvent('InterestButton', 'unlikeHome');
         return true;
     }
 
@@ -325,6 +335,7 @@ export class Quiz {
             this.loadAllAnswers();
             location.href = '/final.html';
         }
+        this.sendEvent('Conversion', 'lead');
         return console.debug(response);
     }
 
@@ -388,7 +399,7 @@ export class Quiz {
 
 }
 
-export default window.app = new Quiz({apiURL: 'https://core.woodstone.online/api/'})
+export default window.app = new Quiz({apiURL: CONFIG.apiUrl})
 
 window.getVals = function () {
     // Get slider values
@@ -437,6 +448,7 @@ window.setVals = function () {
     // price_to.innerText = slide2 < max ? slide2 : 'Неважно';
     app.setAnswer(slides[0].dataset.step, 'from', slide1)
     app.setAnswer(slides[0].dataset.step, 'to', slide2)
+    app.sendEvent('Quiz', slides[0].dataset.step + 'Chosen')
 }
 
 function deepMerge(target, source) {

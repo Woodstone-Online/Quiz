@@ -174,7 +174,7 @@ loadStyles(import.meta.url).then(styles =>
                         <a href="#contacts" class="button">Пропустить шаг</a>
                     </div>
                     <a href="#contacts" class="button alternate"
-                       @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing')}">
+                       @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing') && quiz.sendEvent('LeadButton', 'showcase')}">
                         Записаться на просмотр
                     </a>
                 </section>
@@ -256,7 +256,7 @@ loadStyles(import.meta.url).then(styles =>
                             <span class="title">Запишитесь на просмотр выставочного дома</span>
                             <span class="description">так вы сможете оценить качество материалов и отделки а также осмотреть район и пообщаться с соседями</span>
                             <a href="#contacts" class="button"
-                               @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing')}">Записаться</a>
+                               @click="${() => quiz.setAnswer('interest', null, 4) && (quiz.contactSubject = 'Viewing') && quiz.sendEvent('LeadButton', 'showcase')}">Записаться</a>
                         </div>
                         ${quiz.home[this.selectedHome].images ? html`
                             <div class="image-slider">

@@ -17,7 +17,7 @@ loadStyles(import.meta.url).then(styles =>
                 <header>
                     <a href="https://woodstone.online"><img src="/img/Logo.svg" alt="Logo"></a>
                     <a href="#contacts" class="call-button"
-                       @click="${() => quiz.setAnswer('interest', null, 6) && (quiz.contactSubject = 'Consultation')}">Звонок</a>
+                       @click="${() => quiz.setAnswer('interest', null, 6) && (quiz.contactSubject = 'Consultation') && quiz.sendEvent('LeadButton', 'callback')}">Звонок</a>
                 </header>
                 <aside>
                     <nav>
