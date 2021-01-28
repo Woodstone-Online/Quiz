@@ -11,7 +11,12 @@ loadStyles(import.meta.url).then(styles =>
 
         constructor() {
             super();
-            this.home = {};
+            this.home = {
+                setSlide: (target, index, resetScroll) => {
+                    if (!target.slides || !target.slides[index]) return;
+                    return target.activeSlide === target.slides[index] ? this.selectHome() : this.setSlide(target, index, resetScroll);
+                }
+            };
             this.images = {};
             this.plans = {
                 setActiveSlide: (target, slide) => {
@@ -88,7 +93,7 @@ loadStyles(import.meta.url).then(styles =>
         updated() {
             if (this.images.slider) this.destroySlider(this.images);
             if (!this.selectedHome) this.setSlide(this.home, undefined, true);
-            console.debug('updated', this.selectedHome, quiz.home[this.selectedHome], quiz.home[this.selectedHome].images)
+            // console.debug('updated', this.selectedHome, quiz.home[this.selectedHome], quiz.home[this.selectedHome].images)
             if (this.selectedHome && quiz.home[this.selectedHome] && quiz.home[this.selectedHome].images) {
                 this.initSlider(this.images, '.image-slider .slides');
                 this.setSlide(this.images, undefined, true);
@@ -199,7 +204,7 @@ loadStyles(import.meta.url).then(styles =>
                     <div class="home-slider">
                         ${quiz.homes.map((home, i) => html`
                             <div class="slider-item"
-                                 @click="${() => this.setSlide(this.home, i)}"
+                                 @click="${() => this.home.setSlide(this.home, i)}"
                                  style=${styleMap({'background-image': home.image ? `url("${home.image.url}")` : 'none'})}>
                                 <div class="price">${this.numberFormat.format(home.price)}</div>
                             </div>`)}
@@ -263,7 +268,7 @@ loadStyles(import.meta.url).then(styles =>
                                 <h2 class="title">Галлерея</h2>
                                 <div class="slides">
                                     ${quiz.home[this.selectedHome].images.map((image, i) => html`
-                                        <div @click="${() => this.setSlide(this.images, i)}" tabindex="0">
+                                        <div tabindex="0">
                                             <img src="${image.url}">
                                         </div>`)}
                                 </div>

@@ -3,34 +3,32 @@ import { Analytics } from './analytics.mjs'
 import { CONFIG } from './config.mjs'
 
 export class Quiz {
-    stage = {
-        needs: {next: 'location'},
-        location: {
-            next: 'home', title: 'Выбрать районы и направления'
-        },
-        home: {
-            next: 'conditions', title: 'Выбрать дом — готовое решение'
-        },
-        conditions: {
-            next: 'contacts', title: 'Доступные варианты  покупки'
-        },
-        contacts: {}
-    }
-
-    defaultAnswers = {
-        preferences: {
-            residents: {
-                adults: 0,
-                children: 0
-            },
-            budget: {}
-        },
-        selectedAreas: {}
-    }
-
     constructor({apiURL} = {}) {
         this.endpointURL = apiURL;
         this.analytics = new Analytics();
+        this.stage = {
+            needs: {next: 'location'},
+            location: {
+                next: 'home', title: 'Выбрать районы и направления'
+            },
+            home: {
+                next: 'conditions', title: 'Выбрать дом — готовое решение'
+            },
+            conditions: {
+                next: 'contacts', title: 'Доступные варианты  покупки'
+            },
+            contacts: {}
+        }
+        this.defaultAnswers = {
+            preferences: {
+                residents: {
+                    adults: 0,
+                    children: 0
+                },
+                budget: {}
+            },
+            selectedAreas: {}
+        }
         Object.assign(this, this.defaultAnswers);
         this.initStages();
         this.init();
@@ -424,7 +422,7 @@ window.getVals = function () {
     price_from.innerText = numberFormat.format(slide1);
     price_to.innerText = slide2 < max ? numberFormat.format(slide2) : 'Неважно';
 
-    line.style.clipPath = `inset(0 ${((max - slide2) * 100) / (max - min)}% 0 ${((slide1 - min) * 100) / (max - min)}%)`;
+    line.style.webkitClipPath = line.style.clipPath = `inset(0 ${((max - slide2) * 100) / (max - min)}% 0 ${((slide1 - min) * 100) / (max - min)}%)`;
 }
 
 window.setVals = function () {

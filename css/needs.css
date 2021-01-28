@@ -239,6 +239,7 @@ section {
     margin: 0;
     padding: 0;
     top: 40px;
+    z-index: 10;
 }
 
 .range-slider input::-webkit-slider-thumb {
@@ -429,10 +430,12 @@ input[type=number] {
 .counters > div > div > input[type="number"] {
     font-family: Helvetica, sans-serif;
     -webkit-appearance: initial;
+    -moz-appearance: textfield;
     border: initial;
     font-size: 18px;
     font-weight: 500;
     margin: 0 10px;
+    width: 2em;
 }
 
 button.decrease:before,

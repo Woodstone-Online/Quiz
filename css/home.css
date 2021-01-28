@@ -214,7 +214,8 @@
     scroll-snap-align: center;
 }
 
-#summary .home-slider .slider-item:not(.active) {
+#summary .home-slider .slider-item /*:not(.active)*/
+{
     cursor: pointer;
 }
 
@@ -273,6 +274,7 @@
 #summary .bottom-line {
     display: flex;
     justify-content: space-between;
+    display: none;
 }
 
 .slider-navigation {
@@ -747,7 +749,7 @@
     scroll-snap-type: x mandatory;
     user-select: none;
     -webkit-user-select: none;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 #details .image-slider .slides:after {
@@ -788,7 +790,7 @@
     margin-right: 15px;
 }
 
-#details .image-slider:focus-within .slides {
+/*#details .image-slider:focus-within .slides {
     position: fixed;
     left: 0;
     top: 0;
@@ -816,15 +818,15 @@
 }
 
 #details .image-slider:focus-within .slides > div.active {
-    /*z-index: 99;*/
-    /*margin: unset;*/
-    /*width: 100vw;*/
+    !*z-index: 99;*!
+    !*margin: unset;*!
+    !*width: 100vw;*!
     opacity: initial;
     pointer-events: none;
 }
 
-#details .image-slider:focus-within .slides > div/*:not(.active)*/:before,
-#details .image-slider:focus-within .slides > div/*:not(.active)*/:after {
+#details .image-slider:focus-within .slides > div!*:not(.active)*!:before,
+#details .image-slider:focus-within .slides > div!*:not(.active)*!:after {
     content: '';
     display: block;
     background-color: black;
@@ -832,7 +834,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 5vw;
-    /*opacity: 0;*/
+    !*opacity: 0;*!
     opacity: .5;
     cursor: pointer;
     position: absolute;
@@ -843,7 +845,7 @@
     z-index: 200;
 }
 
-#details .image-slider:focus-within .slides > div/*:not(.active)*/:after {
+#details .image-slider:focus-within .slides > div!*:not(.active)*!:after {
     background-image: url("/img/left.navigation.arrow.svg");
     left: unset;
     right: -10vw;
@@ -866,10 +868,10 @@
     min-height: unset;
     max-height: unset;
     border-radius: unset;
-    /*margin: 0 -25vw;*/
-    /*z-index: 100;*/
-    /*opacity: 0;*/
-}
+    !*margin: 0 -25vw;*!
+    !*z-index: 100;*!
+    !*opacity: 0;*!
+}*/
 
 #details .plans {
     display: flex;
