@@ -66,13 +66,13 @@ loadStyles(import.meta.url).then(styles =>
                                 ${step.data.map(item => html`
                                     <div><label>${item.title}</label>
                                         <div>
-                                            <button onclick="this.nextElementSibling.stepDown();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.nextElementSibling.value))"
+                                            <button onclick="this.nextElementSibling.stepDown();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.nextElementSibling.value));window.app.sendEvent('Quiz', '${step.fieldname + 'Chosen'}');"
                                                     class="decrease"></button>
                                             <input type="number" min="0" step="1" maxlength="2" max="99" disabled
                                                    id="${item.fieldname}" name="${item.fieldname}"
                                                    .value="${quiz.getAnswer(step.fieldname, item.fieldname, 0)}"
                                                    onchange="window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.value))">
-                                            <button onclick=" this.previousElementSibling.stepUp();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.previousElementSibling.value))"
+                                            <button onclick=" this.previousElementSibling.stepUp();window.app.setAnswer('${step.fieldname}','${item.fieldname}',parseInt(this.previousElementSibling.value));window.app.sendEvent('Quiz', '${step.fieldname + 'Chosen'}');"
                                                     class="increase"></button>
                                         </div>
                                     </div>`)}
@@ -89,7 +89,7 @@ loadStyles(import.meta.url).then(styles =>
                                     <input type="radio" name="${step.fieldname}"
                                            id="${step.fieldname + '_' + item.value}"
                                            ?checked="${item.value === checkedValue}" .value="${item.value}"
-                                           onchange="app.setAnswer('${step.fieldname}',false,parseInt(Object.fromEntries(new FormData(this.form).entries()).${step.fieldname}))">
+                                           onchange="app.setAnswer('${step.fieldname}',false,parseInt(Object.fromEntries(new FormData(this.form).entries()).${step.fieldname}));window.app.sendEvent('Quiz', '${step.fieldname + 'Chosen'}');">
                                     <label for="${step.fieldname + '_' + item.value}">${item.title}</label>`)}
                             </form>
                         </section>`;
