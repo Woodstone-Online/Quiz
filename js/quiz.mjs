@@ -1,11 +1,13 @@
 import './app.mjs';
 import { Analytics } from './analytics.mjs'
+import { FacebookPixel } from './facebookPixel.mjs'
 import { CONFIG } from './config.mjs'
 
 export class Quiz {
     constructor({apiURL} = {}) {
         this.endpointURL = apiURL;
         this.analytics = new Analytics();
+        this.facebookPixel = new FacebookPixel();
         this.stage = {
             needs: {next: 'location'},
             location: {
