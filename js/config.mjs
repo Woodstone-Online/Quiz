@@ -7,6 +7,13 @@ function getGaTrackingId() {
     return 'UA-185924370-2';
 }
 
+function getFacebookPixelId() {
+    if (location.host === PRODUCTION_HOST) {
+        return '591649048293916';
+    }
+    return '';
+}
+
 function getApiUrl() {
     if (location.host === PRODUCTION_HOST) {
         return 'https://core.woodstone.online/api/';
@@ -17,5 +24,6 @@ function getApiUrl() {
 
 export const CONFIG = {
     gaTrackingId: getGaTrackingId(),
+    facebookPixelId: getFacebookPixelId(),
     apiUrl: getApiUrl(),
 };

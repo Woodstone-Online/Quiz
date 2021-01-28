@@ -41,6 +41,7 @@ loadStyles(import.meta.url).then(styles =>
         render() {
             quiz.analytics.setPage(this.stage);
             quiz.analytics.sendPageview();
+            quiz.facebookPixel.sendPageview();
             return html`
                 <!--<quiz-menu></quiz-menu>-->
                 <slot></slot>
