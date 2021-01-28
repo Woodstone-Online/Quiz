@@ -1,7 +1,7 @@
 import './app.mjs';
-import { Analytics } from './analytics.mjs'
-import { FacebookPixel } from './facebookPixel.mjs'
-import { CONFIG } from './config.mjs'
+import {Analytics} from './analytics.mjs'
+import {FacebookPixel} from './facebookPixel.mjs'
+import {CONFIG} from './config.mjs'
 
 export class Quiz {
     constructor({apiURL} = {}) {
@@ -55,7 +55,10 @@ export class Quiz {
 
     async init() {
         await Promise.allSettled([
-            this.loadConfiguration('quizSteps', 'quizStep', 'fieldname'),
+            this.loadConfiguration('quizSteps', 'quizStep', 'fieldname').then((data) => (data = this.quizStep.budget.data[0]) && Object.assign(this.preferences.budget, {
+                from: data.minValue,
+                to: data.maxValue
+            })),
             this.loadConfiguration('areas', 'area', 'areaId').then(async () => this.areas.forEach(area => this.toggleArea(area.areaId, true, true, true))),
             this.loadConfiguration('homes', 'home', 'homeId').then(() => this.homes.sort(function (a, b) {
                 if (a.space > b.space) return 1;
