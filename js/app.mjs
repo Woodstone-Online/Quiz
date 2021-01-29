@@ -29,7 +29,13 @@ loadStyles(import.meta.url).then(styles =>
 
         updateStage() {
             let targetStage = location.hash.substr(1)
-            if (targetStage && document.getElementById(targetStage)) return this.stage = targetStage;
+            if (targetStage && document.getElementById(targetStage)) {
+                this.stage = targetStage;
+                quiz.analytics.setPage(this.stage);
+                quiz.analytics.sendPageview();
+                quiz.facebookPixel.sendPageview();
+                return this.stage;
+            }
             return location.hash = 'needs'; // TODO: Popstate replace
         }
 
@@ -39,9 +45,6 @@ loadStyles(import.meta.url).then(styles =>
         }*/
 
         render() {
-            quiz.analytics.setPage(this.stage);
-            quiz.analytics.sendPageview();
-            quiz.facebookPixel.sendPageview();
             return html`
                 <!--<quiz-menu></quiz-menu>-->
                 <slot></slot>

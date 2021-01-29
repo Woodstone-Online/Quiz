@@ -1,19 +1,35 @@
-import { CONFIG } from './config.mjs';
+import {CONFIG} from './config.mjs';
 
 export class Analytics {
     constructor() {
-        ga('create', CONFIG.gaTrackingId, 'auto');
+        try {
+            ga('create', CONFIG.gaTrackingId, 'auto');
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     setPage(location) {
-        return ga('set', 'page', location);
+        try {
+            return ga('set', 'page', location);
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     sendPageview() {
-        return ga('send', 'pageview');
+        try {
+            return ga('send', 'pageview');
+        } catch (error) {
+            console.error(error)
+        }
     }
 
-    sendEvent (eventCategory, eventAction) {
-        return ga('send', 'event', eventCategory, eventAction);
+    sendEvent(eventCategory, eventAction) {
+        try {
+            return ga('send', 'event', eventCategory, eventAction);
+        } catch (error) {
+            console.error(error)
+        }
     }
 }

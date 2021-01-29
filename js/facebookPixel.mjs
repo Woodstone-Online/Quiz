@@ -1,11 +1,19 @@
-import { CONFIG } from './config.mjs';
+import {CONFIG} from './config.mjs';
 
 export class FacebookPixel {
     constructor() {
-        fbq('init', CONFIG.facebookPixelId);
+        try {
+            fbq('init', CONFIG.facebookPixelId);
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     sendPageview() {
-        return fbq('track', 'PageView');
+        try {
+            return fbq('track', 'PageView');
+        } catch (error) {
+            console.error(error)
+        }
     }
 }
