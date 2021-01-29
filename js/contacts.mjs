@@ -65,10 +65,6 @@ loadStyles(import.meta.url).then(styles =>
                                    onclick="this.getRootNode().host.checkCommunications(event)"
                                    onchange="this.getRootNode().host.toggleCommunication('whatsapp',this.checked)">
                             <label for="whathsapp">Whats App</label>
-                            <input type="checkbox" id="phone" ?checked="${this.phone}"
-                                   onclick="this.getRootNode().host.checkCommunications(event)"
-                                   onchange="this.getRootNode().host.toggleCommunication('phone',this.checked)">
-                            <label for="phone">Телефон</label>
                             <input type="checkbox" id="email" ?checked="${this.email}"
                                    onclick="this.getRootNode().host.checkCommunications(event)"
                                    onchange="this.getRootNode().host.toggleCommunication('email', this.checked, event)">
@@ -76,11 +72,10 @@ loadStyles(import.meta.url).then(styles =>
                         </div>
                         <form>
                             <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
-                            ${this.phone || this.whatsapp ? html`
-                                <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
-                                       onchange="app.updateProfile('phone',this.value)"
-                                       onfocus="window.disableScroll=false"
-                                       onblur="window.disableScroll=true">` : ''}
+                            <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
+                                   onchange="app.updateProfile('phone',this.value)"
+                                   onfocus="window.disableScroll=false"
+                                   onblur="window.disableScroll=true">
                             <input type="text" placeholder="Ваше имя" .value="${quiz.getState('profile', 'name', '')}"
                                    onchange="app.updateProfile('name',this.value)" onfocus="window.disableScroll=false"
                                    onblur="window.disableScroll=true">

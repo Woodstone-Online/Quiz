@@ -27,7 +27,8 @@ export class Quiz {
                     adults: 0,
                     children: 0
                 },
-                budget: {}
+                budget: {},
+                communication: {phone: true}
             },
             selectedAreas: {}
         }
