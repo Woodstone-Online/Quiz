@@ -246,13 +246,13 @@
     top: 13px;
     font-family: Montserrat, sans-serif;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 12px;
     color: white;
     background: #302F3A;
     border-radius: 100px;
     padding: 0 15px;
-    height: 44px;
-    line-height: 44px;
+    height: 34px;
+    line-height: 34px;
 }
 
 #summary .home-slider .slider-item * {
@@ -1157,6 +1157,12 @@
         min-height: 422px;
         max-height: 422px;
         padding: 22px 28px;
+    }
+
+    #summary .home-slider .slider-item.active:after {
+        font-size: 14px;
+        height: 44px;
+        line-height: 44px;
     }
 
     #summary .home-slider .slider-item .price {
