@@ -62,12 +62,10 @@ loadStyles(import.meta.url).then(styles =>
                     <div>
                         <div class="communications">
                             <input type="checkbox" id="whathsapp" ?checked="${this.whatsapp}"
-                                   onclick="this.getRootNode().host.checkCommunications(event)"
                                    onchange="this.getRootNode().host.toggleCommunication('whatsapp',this.checked)">
                             <label for="whathsapp">Whats App</label>
                             <input type="checkbox" id="email" ?checked="${this.email}"
-                                   onclick="this.getRootNode().host.checkCommunications(event)"
-                                   onchange="this.getRootNode().host.toggleCommunication('email', this.checked, event)">
+                                   onchange="this.getRootNode().host.toggleCommunication('email', this.checked)">
                             <label for="email">Email</label>
                         </div>
                         <form>
