@@ -26,11 +26,6 @@ loadStyles(import.meta.url).then(styles =>
             ]
         }
 
-        firstUpdated() {
-            this.initIframe();
-            // this.initMap();
-        }
-
         initIframe() {
             this.IFrame = this.shadowRoot.querySelector("iframe");
             this.IFrameDocument = this.IFrame.contentDocument;
@@ -81,7 +76,7 @@ loadStyles(import.meta.url).then(styles =>
         render() {
             return html`
                 <section>
-                    <iframe scrolling="no" frameborder="0"></iframe>
+                    <iframe scrolling="no" frameborder="0" @load="${this.initIframe}"></iframe>
                     <div class="areas">
                         ${quiz.areas.map((area, i) => html`
                             <input type="checkbox" id="${'area_' + area.areaId}"
