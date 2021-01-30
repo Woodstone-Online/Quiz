@@ -15,6 +15,15 @@
     margin-top: -16px;
     font-family: "Open Sans", sans-serif;
     padding-bottom: 70px;
+    position: relative;
+}
+
+h1 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+    color: #3F3E48;
 }
 
 .conditions {
@@ -49,33 +58,55 @@ p {
 }
 
 .plans {
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
 }
 
 .plans > a {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
     text-decoration: none;
-    background: #FFFFFF;
     border-radius: 16px;
     margin-bottom: 20px;
     padding: 30px;
-    background-repeat: no-repeat;
-    background-position: center right -350px;
-    background-size: 500px;
+    padding-bottom: 75px;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.05);
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+
+.plans > a:after {
+    content: 'Выбрать';
+    display: inline-flex;
+    justify-content: center;
+    align-content: center;
+    height: 42px;
+    line-height: 42px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #626364;
+    background: #E8E8E8;
+    border-radius: 4px;
+    padding: 0 42px;
+    /*margin-top: 15px;*/
+    position: absolute;
+    bottom: 25px;
+    left: 30px;
 }
 
 .plans .title {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size: 34px;
-    line-height: 42px;
-    color: #6EBC61;
+    font-size: 24px;
+    line-height: 30px;
+    color: white;
 }
 
 .plans .title:after {
-    content: '';
+    /*content: '';*/
     width: 29px;
     height: 29px;
     margin-left: 10px;
@@ -90,15 +121,40 @@ p {
 }
 
 .plans .title:first-child {
-    margin-top: unset;
+    margin: -30px;
+    margin-bottom: 0;
+    padding: 30px;
+    padding-bottom: 50px;
+    padding-right: calc(100% - 230px + 30px);
+}
+
+.plans > a:nth-child(1) .title:first-child {
+    background-image: url(/img/1.plans.conditions.svg), url(/img/1.background.plans.conditions.svg);
+    background-position: right 6px top 30px, center top;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 112px, 100% 130%;
+}
+
+.plans > a:nth-child(2) .title:first-child {
+    background-image: url(/img/2.plans.conditions.svg), url(/img/2.background.plans.conditions.svg);
+    background-position: right 12px top 35px, center top;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 134px, 100% 130%;
+}
+
+.plans > a:nth-child(3) .title:first-child {
+    background-image: url(/img/3.plans.conditions.svg), url(/img/3.background.plans.conditions.svg);
+    background-position: right 39px top 15px, center top;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 107px, 100% 100%;
 }
 
 .plans p {
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 20px;
-    color: rgba(63, 62, 72, .7);
-    max-width: 70%;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #3F3E48;
+    /*max-width: 70%;*/
     text-shadow: 0 0 5px white;
 }
 
@@ -107,8 +163,8 @@ p {
     font-weight: 600;
     font-size: 16px;
     line-height: 26px;
-    position: fixed;
     background: #302F3A;
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
@@ -142,6 +198,12 @@ p {
         padding-bottom: 60px;
     }
 
+    h1 {
+        font-weight: bold;
+        font-size: 42px;
+        line-height: 30px;
+    }
+
     .conditions {
         border-bottom: 1px solid rgba(81, 81, 89, .1);
         padding-bottom: 13px;
@@ -161,16 +223,17 @@ p {
     }
 
     .plans {
-        margin-top: 36px;
+        margin-top: 70px;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 
     .plans > a {
         width: 304px;
-        background-position: center bottom -60px;
-        background-size: contain;
-        padding-bottom: 80px;
+        /*background-position: center bottom -60px;*/
+        /*background-size: contain;*/
+        /*padding-bottom: 80px;*/
+        margin-right: 20px;
     }
 
     .plans .title {
@@ -180,6 +243,18 @@ p {
 
     .plans .title:after {
         content: unset;
+    }
+
+    .plans > a:nth-child(1) .title:first-child {
+        background-position: right -17px top 21px, center top;
+    }
+
+    .plans > a:nth-child(2) .title:first-child {
+        background-position: right -1px top 35px, center top;
+    }
+
+    .plans > a:nth-child(3) .title:first-child {
+        background-position: right 15px top 18px, center top;
     }
 
     .plans p {
@@ -194,8 +269,9 @@ p {
         border-radius: 100px;
         font-weight: bold;
         line-height: 22px;
+        position: fixed;
         left: 30px;
-        bottom: 30px;
+        bottom: 41px;
         right: unset;
         padding: 14px 33px;
     }
