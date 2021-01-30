@@ -277,6 +277,10 @@ aside {
         line-height: 20px;
     }
 
+    .communications label:first-of-type {
+        margin-left: 0;
+    }
+
     .communications label:before {
     }
 
