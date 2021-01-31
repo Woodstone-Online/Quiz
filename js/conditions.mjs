@@ -9,7 +9,7 @@ loadStyles(import.meta.url).then(styles =>
 
         render() {
             return html`
-                <h1>Варианты сотрудничества</h1>
+                <h1>Варианты покупки</h1>
                 <div class="plans">
                     <a href="#contacts"
                        @click="${() => quiz.setAnswer('interest', null, 2) && (quiz.contactSubject = 'Offer') && quiz.sendEvent('LeadButton', 'exchange')}">
@@ -41,7 +41,7 @@ loadStyles(import.meta.url).then(styles =>
                 </div>
                 <a href="#contacts" class="get-pdf"
                    @click="${() => quiz.setAnswer('interest', null, 5) && (quiz.contactSubject = 'WhatsApp') && quiz.sendEvent('LeadButton', 'pdf')}">
-                    Скачать проект дома в PDF
+                    Скачать проект в PDF
                 </a>
             `;
         }
