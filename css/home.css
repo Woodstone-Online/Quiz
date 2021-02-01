@@ -550,6 +550,14 @@
     margin-bottom: 19px;
 }
 
+#details .image-slider:before {
+    content: "";
+    inset: 0px;
+    position: absolute;
+    background: linear-gradient(214deg, rgba(48, 47, 58, 0) 75%, rgb(48, 47, 58));
+    pointer-events: none;
+}
+
 #details .grid .grid-item.wide-item img {
     top: unset;
     left: unset;
