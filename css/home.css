@@ -545,7 +545,6 @@
 }
 
 #details .grid .grid-item.wide-item span.title {
-    font-family: "Open Sans", sans-serif;
     font-size: 22px;
     color: #000000;
     margin-bottom: 19px;
@@ -1280,21 +1279,7 @@
         overflow: hidden;
         width: 100%;
         position: relative;
-        height: auto;
-    }
-
-    #details .image-slider:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: #302F3A;
-        opacity: 0.5;
-        pointer-events: none;
-        z-index: 1;
-        border-radius: 16px;
+        max-height: 506px;
     }
 
     #details .image-slider .title {
