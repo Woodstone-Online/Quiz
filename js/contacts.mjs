@@ -50,6 +50,10 @@ loadStyles(import.meta.url).then(styles =>
             return Array.from(this.shadowRoot.querySelectorAll('input[type="checkbox"]')).filter(input => input.checked).length < 1 ? event.preventDefault() : null;
         }
 
+        async createUser(e) {
+            return await quiz.createUser.call(quiz, e, this);
+        }
+
         render() {
             return html`
                 <section>
@@ -70,28 +74,28 @@ loadStyles(import.meta.url).then(styles =>
                                    onchange="this.getRootNode().host.toggleCommunication('email', this.checked)">
                             <label for="email">Email</label>
                         </div>
-                        <form>
+                        <form id="contacts">
                             <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
                             <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
-                                   onchange="app.updateProfile('phone',this.value)"
+                                   onchange="app.updateProfile('phone',this.value);this.setCustomValidity('')"
                                    onfocus="window.disableScroll=false"
-                                   onblur="window.disableScroll=true">
+                                   onblur="window.disableScroll=true" name="phone">
                             <input type="text" placeholder="Ваше имя" .value="${quiz.getState('profile', 'name', '')}"
-                                   onchange="app.updateProfile('name',this.value)" onfocus="window.disableScroll=false"
-                                   onblur="window.disableScroll=true">
+                                   onchange="app.updateProfile('name',this.value);this.setCustomValidity('')"
+                                   onfocus="window.disableScroll=false"
+                                   onblur="window.disableScroll=true" name="name">
                             ${this.email ? html`
-                                <input type="email" placeholder="E-mail"
+                                <input type="email" placeholder="E-mail" name="email"
                                        .value="${quiz.getState('profile', 'email', '')}"
-                                       onchange="app.updateProfile('email',this.value)"
-                                       onfocus="window.disableScroll=false"
-                                       onblur="window.disableScroll=true">` : ''}
+                                       onchange="app.updateProfile('email',this.value);this.setCustomValidity('')"
+                                       onfocus="window.disableScroll=false" onblur="window.disableScroll=true">` : ''}
                         </form>
                     </div>
                 </section>
                 <aside>
                     <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
                 </aside>
-                <button class="big-next-bottom-button" @click="${quiz.createUser.bind(quiz)}">
+                <button class="big-next-bottom-button" @click="${this.createUser}">
                     ${this.subject && this.subject.button ? this.subject.button : 'Оставить заявку'}
                 </button>`;
         }

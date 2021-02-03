@@ -306,7 +306,7 @@ export class Quiz {
         }
     }
 
-    async createUser(e) {
+    async createUser(e, target) {
         e.preventDefault();
         const preferences = Object.assign({}, this.preferences);
         for (let item in preferences) if (preferences.hasOwnProperty(item) && typeof preferences[item] !== "object")
@@ -324,7 +324,7 @@ export class Quiz {
                 "homeId": this.selectedHome
             }
         }, this.getState('profile'))
-        console.dir(data);
+        // console.dir(data);
         const response = await fetch(this.endpointURL + 'user', {
             method: 'POST',
             headers: {
@@ -332,15 +332,24 @@ export class Quiz {
             },
             body: JSON.stringify(data)
         }).then(r => r.json());
-        if (response.details) alert(response.details.pop().message);
+        if (response.details) {
+            response.details = response.details.filter(item => {
+                const field = item.path.pop();
+                const fieldNode = target.shadowRoot.querySelector(`[name="${field}"]`);
+                return fieldNode ? fieldNode.setCustomValidity(item.message) : true;
+            });
+            target.shadowRoot.querySelector('form').reportValidity();
+            if (response.details.length) alert(response.details.pop().message);
+        }
+        if (response.message) alert(response.message);
         if (response.user) {
             // alert('Пользователь успешно создан, ID: ' + response.user.userId)
+            this.sendEvent('Conversion', 'lead');
             localStorage.clear();
             this.loadAllAnswers();
             location.href = '/final.html';
         }
-        this.sendEvent('Conversion', 'lead');
-        return console.debug(response);
+        return false;
     }
 
     async showVillages() {
