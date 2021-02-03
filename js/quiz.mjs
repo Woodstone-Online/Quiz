@@ -331,7 +331,7 @@ export class Quiz {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        }).then(r => r.json());
+        });
         if (response.details) {
             response.details = response.details.filter(item => {
                 const field = item.path.pop();
@@ -342,8 +342,7 @@ export class Quiz {
             if (response.details.length) alert(response.details.pop().message);
         }
         if (response.message) alert(response.message);
-        if (response.user) {
-            // alert('Пользователь успешно создан, ID: ' + response.user.userId)
+        if (response.ok) {
             this.sendEvent('Conversion', 'lead');
             localStorage.clear();
             this.loadAllAnswers();
