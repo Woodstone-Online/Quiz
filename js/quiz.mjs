@@ -331,7 +331,7 @@ export class Quiz {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        }).then(r => r.json());
+        }).then(r => r.json().catch(() => new Object({ok: true})));
         if (response.details) {
             response.details = response.details.filter(item => {
                 const field = item.path.pop();
