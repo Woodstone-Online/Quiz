@@ -1,5 +1,4 @@
-import {LitElement, html, css} from 'https://cdn.skypack.dev/lit-element';
-import quiz, {loadStyles} from "./quiz.mjs";
+import quiz, {LitElement, html, css, loadStyles} from "./quiz.mjs";
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-location', class extends LitElement {
