@@ -1,7 +1,6 @@
-import {LitElement, html, css} from 'https://jspm.dev/lit-element';
-import {classMap} from "https://jspm.dev/lit-html/directives/class-map";
-import {styleMap} from "https://jspm.dev/lit-html/directives/style-map";
-import quiz, {loadStyles} from "./quiz.mjs";
+import {classMap} from "https://cdn.skypack.dev/pin/lit-html@v1.3.0-2YtGH1hJLnsTFiuAFuZK/mode=imports,min/optimized/lit-html/directives/class-map.js";
+import {styleMap} from "https://cdn.skypack.dev/pin/lit-html@v1.3.0-2YtGH1hJLnsTFiuAFuZK/mode=imports,min/optimized/lit-html/directives/style-map.js";
+import quiz, {LitElement, html, css, loadStyles} from "./quiz.mjs";
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-home', class extends LitElement {

@@ -1,5 +1,4 @@
-import quiz, {loadStyles} from './quiz.mjs';
-import {LitElement, html, css} from 'https://jspm.dev/lit-element';
+import quiz, {LitElement, html, css, loadStyles} from './quiz.mjs';
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-needs', class extends LitElement {

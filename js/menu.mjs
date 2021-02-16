@@ -1,5 +1,4 @@
-import {LitElement, html, css} from 'https://jspm.dev/lit-element';
-import quiz, {loadStyles} from "./quiz.mjs";
+import quiz, {LitElement, html, css, loadStyles} from "./quiz.mjs";
 import './link.js';
 
 loadStyles(import.meta.url).then(styles =>

@@ -1,3 +1,6 @@
+export {
+    LitElement, html, css
+} from 'https://cdn.skypack.dev/pin/lit-element@v2.4.0-wL9urDabdrJ7grkk3BAP/mode=imports,min/optimized/lit-element.js';
 import './app.mjs';
 import {Analytics} from './analytics.mjs'
 import {FacebookPixel} from './facebookPixel.mjs'

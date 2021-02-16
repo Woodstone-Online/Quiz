@@ -1,5 +1,4 @@
-import quiz, {loadStyles} from './quiz.mjs'
-import {LitElement, html, css} from 'https://jspm.dev/lit-element';
+import quiz, {LitElement, html, css, loadStyles} from './quiz.mjs'
 import './menu.mjs';
 import './needs.mjs';
 import './location.mjs';
