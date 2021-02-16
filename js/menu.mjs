@@ -1,4 +1,4 @@
-import {LitElement, html, css} from 'https://jspm.dev/lit-element';
+import {LitElement, html, css} from 'https://cdn.skypack.dev/lit-element';
 import quiz, {loadStyles} from "./quiz.mjs";
 import './link.js';
 

@@ -1,6 +1,6 @@
-import {LitElement, html, css} from 'https://jspm.dev/lit-element';
-import {classMap} from "https://jspm.dev/lit-html/directives/class-map";
-import {styleMap} from "https://jspm.dev/lit-html/directives/style-map";
+import {LitElement, html, css} from 'https://cdn.skypack.dev/lit-element';
+import {classMap} from "https://cdn.skypack.dev/lit-html/directives/class-map";
+import {styleMap} from "https://cdn.skypack.dev/lit-html/directives/style-map";
 import quiz, {loadStyles} from "./quiz.mjs";
 
 loadStyles(import.meta.url).then(styles =>

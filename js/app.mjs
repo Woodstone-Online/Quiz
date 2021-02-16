@@ -1,5 +1,5 @@
 import quiz, {loadStyles} from './quiz.mjs'
-import {LitElement, html, css} from 'https://jspm.dev/lit-element';
+import {LitElement, html, css} from 'https://cdn.skypack.dev/lit-element';
 import './menu.mjs';
 import './needs.mjs';
 import './location.mjs';
