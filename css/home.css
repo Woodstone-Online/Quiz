@@ -273,6 +273,11 @@
     align-items: center;
 }
 
+#summary .home-slider .slider-item .price:before, .home-price:before {
+    content: 'От ';
+    margin-right: 12px;
+}
+
 #summary .home-slider .slider-item .price:after, .home-price:after {
     content: '₽';
     font-size: 20px;
@@ -999,6 +1004,10 @@
     font-size: 27px;
     margin-top: 30px;
     color: #3F3E48;
+}
+
+#details .plans .item .summary span:before {
+    content: 'От ';
 }
 
 #details .plans .item .summary span:after {
