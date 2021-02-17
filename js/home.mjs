@@ -394,6 +394,4 @@ loadStyles(import.meta.url).then(styles =>
                         </div>` : ''}
                 </section>`;
         }
-
-
     }))
