@@ -579,9 +579,9 @@ details > p {
         width: var(--size);
         min-width: var(--size);
         max-width: var(--size);
-        height: var(--size);
-        min-height: var(--size);
-        max-height: var(--size);
+        height: 100%;
+        min-height: unset;
+        max-height: unset;
         object-fit: cover;
         object-position: center;
         margin: unset;
