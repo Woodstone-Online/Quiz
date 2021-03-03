@@ -3,6 +3,7 @@ import './menu.mjs';
 import './needs.mjs';
 import './location.mjs';
 import './home.mjs';
+import './contract.mjs';
 import './conditions.mjs';
 import './contacts.mjs';
 import './final.mjs';

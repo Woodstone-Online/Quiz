@@ -175,6 +175,10 @@ nav {
         --counter: '5';
     }
 
+    ::slotted(quiz-link:nth-of-type(6)) {
+        --counter: '6';
+    }
+
     ::slotted(quiz-link) {
         --beforeContent: "Шаг " var(--counter);
     }
