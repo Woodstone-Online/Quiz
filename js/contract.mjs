@@ -2,7 +2,9 @@ import {LitElement, html, css, loadStyles} from "./quiz.mjs";
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-contract', class extends LitElement {
-        static styles = css([styles]);
+        static get styles() {
+            return css([styles]);
+        }
 
         render() {
             return html`
