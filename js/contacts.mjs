@@ -1,4 +1,6 @@
 import quiz, {LitElement, html, css, loadStyles} from "./quiz.mjs";
+import parsePhoneNumber
+    from 'https://cdn.skypack.dev/pin/libphonenumber-js@v1.9.12-rsuXNvTsIuSwRucnHAdU/mode=imports,min/unoptimized/bundle/libphonenumber-min.js';
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-contacts', class extends LitElement {
@@ -41,6 +43,15 @@ loadStyles(import.meta.url).then(styles =>
             return this.requestUpdate();
         }
 
+        parsePhone(phone) {
+            try {
+                const parser = parsePhoneNumber(phone, 'RU');
+                return parser ? parser.number : phone;
+            } catch (e) {
+                return phone;
+            }
+        }
+
         toggleCommunication(item, value) {
             return this.setAnswer('communication', item, value)
         }
@@ -76,7 +87,7 @@ loadStyles(import.meta.url).then(styles =>
                         <form id="contacts">
                             <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
                             <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
-                                   onchange="app.updateProfile('phone',this.value);this.setCustomValidity('')"
+                                   onchange="app.updateProfile('phone',this.getRootNode().host.parsePhone(this.value));this.setCustomValidity('')"
                                    onfocus="window.disableScroll=false"
                                    onblur="window.disableScroll=true" name="phone">
                             <input type="text" placeholder="Ваше имя" .value="${quiz.getState('profile', 'name', '')}"
