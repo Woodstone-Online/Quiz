@@ -86,7 +86,7 @@ loadStyles(import.meta.url).then(styles =>
                         </div>
                         <form id="contacts">
                             <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
-                            <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
+                            <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '+7')}"
                                    onchange="app.updateProfile('phone',this.getRootNode().host.parsePhone(this.value));this.setCustomValidity('')"
                                    onfocus="window.disableScroll=false"
                                    onblur="window.disableScroll=true" name="phone">
