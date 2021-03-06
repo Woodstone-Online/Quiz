@@ -1,4 +1,5 @@
 import quiz, {LitElement, html, css, loadStyles} from "./quiz.mjs";
+import {AsYouType} from 'https://cdn.skypack.dev/libphonenumber-js';
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-contacts', class extends LitElement {
@@ -8,6 +9,7 @@ loadStyles(import.meta.url).then(styles =>
 
         constructor() {
             super();
+            this.AsYouType = AsYouType;
             this.subjects = {
                 Consultation: {
                     title: 'Консультация',
@@ -75,8 +77,10 @@ loadStyles(import.meta.url).then(styles =>
                         </div>
                         <form id="contacts">
                             <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
-                            <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
+                            <input type="text" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
                                    onchange="app.updateProfile('phone',this.value);this.setCustomValidity('')"
+                                   onkeydown="this.oldValue = this.value"
+                                   onkeyup="this.oldValue !== this.value ? (this.value = new (this.getRootNode().host.AsYouType)('RU').input(this.value)):null"
                                    onfocus="window.disableScroll=false"
                                    onblur="window.disableScroll=true" name="phone">
                             <input type="text" placeholder="Ваше имя" .value="${quiz.getState('profile', 'name', '')}"
