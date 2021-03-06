@@ -89,13 +89,13 @@ loadStyles(import.meta.url).then(styles =>
                             <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '+7')}"
                                    onchange="app.updateProfile('phone',this.getRootNode().host.parsePhone(this.value));this.setCustomValidity('')"
                                    onfocus="window.disableScroll=false"
-                                   onblur="window.disableScroll=true" name="phone">
+                                   onblur="window.disableScroll=true" name="phone" autocomplete="tel">
                             <input type="text" placeholder="Ваше имя" .value="${quiz.getState('profile', 'name', '')}"
                                    onchange="app.updateProfile('name',this.value);this.setCustomValidity('')"
                                    onfocus="window.disableScroll=false"
-                                   onblur="window.disableScroll=true" name="name">
+                                   onblur="window.disableScroll=true" name="name" autocomplete="name">
                             ${this.email ? html`
-                                <input type="email" placeholder="E-mail" name="email"
+                                <input type="email" placeholder="E-mail" name="email" autocomplete="email"
                                        .value="${quiz.getState('profile', 'email', '')}"
                                        onchange="app.updateProfile('email',this.value);this.setCustomValidity('')"
                                        onfocus="window.disableScroll=false" onblur="window.disableScroll=true">` : ''}
