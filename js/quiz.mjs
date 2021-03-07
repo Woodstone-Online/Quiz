@@ -20,7 +20,7 @@ export class Quiz {
                 next: 'contract', title: 'Выбрать дом — готовое решение'
             },
             contract: {
-                next: 'contacts', title: 'Условия по подряду'
+                next: 'conditions', title: 'Условия по подряду'
             },
             conditions: {
                 next: 'contacts', title: 'Доступные варианты  покупки'
@@ -410,6 +410,11 @@ export class Quiz {
                 case 'contract':
                     Object.defineProperty(data, 'skip', {
                         get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) === 1 : true
+                    })
+                    break;
+                case 'conditions':
+                    Object.defineProperty(data, 'skip', {
+                        get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) !== 1 : false
                     })
                     break;
             }
