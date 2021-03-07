@@ -17,7 +17,10 @@ export class Quiz {
                 next: 'home', title: 'Выбрать районы и направления'
             },
             home: {
-                next: 'conditions', title: 'Выбрать дом — готовое решение'
+                next: 'contract', title: 'Выбрать дом — готовое решение'
+            },
+            contract: {
+                next: 'conditions', title: 'Условия по подряду'
             },
             conditions: {
                 next: 'contacts', title: 'Доступные варианты  покупки'
@@ -402,6 +405,11 @@ export class Quiz {
                 case 'home':
                     Object.defineProperty(data, 'skip', {
                         get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) !== 1 : false
+                    })
+                    break;
+                case 'contract':
+                    Object.defineProperty(data, 'skip', {
+                        get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) === 1 : false
                     })
                     break;
             }

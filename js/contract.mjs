@@ -1,4 +1,4 @@
-import {LitElement, html, css, loadStyles} from "./quiz.mjs";
+import quiz, {LitElement, html, css, loadStyles} from "./quiz.mjs";
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-contract', class extends LitElement {
@@ -119,7 +119,10 @@ loadStyles(import.meta.url).then(styles =>
                 <section class="card offer">
                     <h3>Проектирование в подарок</h3>
                     <p>целая команда из дизайнеров и архитекторов ждет, чтобы начать работу над вашим проектом</p>
-                    <a href="" class="button">Оставить заявку</a>
+                    <a href="#contacts" class="button"
+                       @click="${() => quiz.setAnswer('interest', null, 9) && (quiz.contactSubject = 'Design')}">
+                        Оставить заявку
+                    </a>
                 </section>
                 <h2><span>Отзыв</span> счастливого владельца дома</h2>
                 <iframe class="video" height="auto" src="https://www.youtube.com/embed/-PvLnOFiFLU?controls=0"
@@ -211,6 +214,9 @@ loadStyles(import.meta.url).then(styles =>
                         Мы предоставляем гарантию на наши дома до 5 лет
                     </p>
                 </details>
+                <section class="navigation-buttons">
+                    <quiz-next-stage stage="contract"></quiz-next-stage>
+                </section>
             `;
         }
     }))
