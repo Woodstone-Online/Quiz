@@ -20,7 +20,7 @@ export class Quiz {
                 next: 'contract', title: 'Выбрать дом — готовое решение'
             },
             contract: {
-                next: 'conditions', title: 'Условия по подряду'
+                next: 'contacts', title: 'Условия по подряду'
             },
             conditions: {
                 next: 'contacts', title: 'Доступные варианты  покупки'
