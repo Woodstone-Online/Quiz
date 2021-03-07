@@ -409,7 +409,7 @@ export class Quiz {
                     break;
                 case 'contract':
                     Object.defineProperty(data, 'skip', {
-                        get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) === 1 : false
+                        get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) === 1 : true
                     })
                     break;
             }
