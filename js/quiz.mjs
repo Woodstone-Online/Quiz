@@ -25,7 +25,7 @@ export class Quiz {
             conditions: {
                 next: 'contacts', title: 'Доступные варианты  покупки'
             },
-            contacts: {}
+            contacts: {title: 'Оставить заявку'}
         }
         this.defaultAnswers = {
             preferences: {
