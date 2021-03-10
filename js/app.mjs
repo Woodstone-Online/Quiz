@@ -29,14 +29,15 @@ loadStyles(import.meta.url).then(styles =>
 
         updateStage() {
             let targetStage = location.hash.substr(1)
-            if (targetStage && document.getElementById(targetStage)) {
+            if (targetStage && quiz.stage[targetStage]) {
                 this.stage = targetStage;
+                document.title = (quiz.stage[targetStage].title.desktopMenu || quiz.stage[targetStage].title.menu) + ' | ' + quiz.title;
                 quiz.analytics.setPage(this.stage);
                 quiz.analytics.sendPageview();
                 quiz.facebookPixel.sendPageview();
                 return this.stage;
             }
-            return location.hash = 'needs'; // TODO: Popstate replace
+            return location.hash = quiz.initStage; // TODO: Popstate replace
         }
 
         /*firstUpdated() {

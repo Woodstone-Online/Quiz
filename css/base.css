@@ -39,6 +39,10 @@ quiz-link:target ~ quiz-link {
     --color: rgba(0, 0, 0, .2);
 }
 
+quiz-link[data-disabled]:not(:target) {
+    display: none;
+}
+
 @media (min-width: 1364px) {
     :root {
         background: #F5F6F8;

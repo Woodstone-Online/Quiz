@@ -47,7 +47,7 @@
     }
 
     :host > a:before {
-        content: "Шаг " var(--counter, '0');
+        content: "Шаг " attr(data-order);
         font-family: 'Montserrat', sans-serif;
         color: var(--beforeColor, #6EBC61);
         font-size: 18px;

@@ -1,9 +1,6 @@
 {
   "name": "woodstone",
   "version": "1.0.0",
-  "dependencies": {
-    "lit-element": "^2.4.0"
-  },
   "scripts": {
     "dev": "wds --node-resolve --watch --open --app-index index.html",
     "dev-tunnel": "wds --node-resolve --watch & vk-tunnel --insecure=1 --ws-protocol=wss --host=localhost --port=8000 --timeout=60000"

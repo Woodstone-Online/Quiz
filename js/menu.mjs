@@ -7,10 +7,6 @@ loadStyles(import.meta.url).then(styles =>
             return css([styles]);
         }
 
-        updated() {
-            this.classList.toggle('hidden', false);
-        }
-
         render() {
             return html`
                 <header>

@@ -24,6 +24,6 @@ loadStyles(import.meta.url).then(styles =>
         }
 
         render() {
-            return html`<a href="#${this.nextStage.id}">Далее<span>${this.nextStage.title || ''}</span></a>`
+            return html`<a href="#${this.nextStage.id}">Далее<span>${this.nextStage.title.button || ''}</span></a>`
         }
     }))

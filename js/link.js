@@ -5,7 +5,8 @@ loadStyles(import.meta.url).then(styles =>
         static get properties() {
             return {
                 href: {type: String},
-                "data-full-text": {type: String}
+                "data-full-text": {type: String},
+                "data-order": {type: Number},
             }
         }
 
@@ -16,6 +17,7 @@ loadStyles(import.meta.url).then(styles =>
         render() {
             return html`
                 <a href="${this.href}" data-full-text="${this['data-full-text']}"
+                   data-order="${this['data-order'] || 'не активен'}"
                    ?data-full-text-set="${this['data-full-text']}">
                     <slot></slot>
                 </a>`
