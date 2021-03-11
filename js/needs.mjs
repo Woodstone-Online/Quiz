@@ -47,11 +47,18 @@ loadStyles(import.meta.url).then(styles =>
             this.lastFocusedStep = event.target.matches('section') ? event.target : event.target.closest('section');
         }
 
+        setContractInterest() {
+            const homeAnswer = quiz.getAnswer('home', false, null);
+            if (typeof homeAnswer === "number" ? homeAnswer !== 1 : false)
+                quiz.setAnswer('interest', null, 3) && (quiz.contactSubject = 'Offer');
+            else quiz.setAnswer('interest', null, 1) && (quiz.contactSubject = 'Offer');
+        }
+
         render() {
             return html`${quiz.quizSteps.map(this.renderStep)}
             <div class="navigation-buttons">
                 <button id="nextStep" class="big-next-bottom-button">Далее</button>
-                <quiz-next-stage stage="needs"></quiz-next-stage>
+                <quiz-next-stage stage="needs" @click="${this.setContractInterest}"></quiz-next-stage>
             </div>`
         }
 

@@ -215,8 +215,7 @@ loadStyles(import.meta.url).then(styles =>
                     </p>
                 </details>
                 <section class="navigation-buttons">
-                    <quiz-next-stage stage="contract"
-                                     @click="${() => quiz.setAnswer('interest', null, 3) && (quiz.contactSubject = 'Offer')}"></quiz-next-stage>
+                    <quiz-next-stage stage="contract"></quiz-next-stage>
                 </section>
             `;
         }
