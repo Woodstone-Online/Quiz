@@ -502,14 +502,27 @@ details > p {
     }
 
     .process input:after {
+        --padding-left: calc(var(--padding) + var(--size) + 24px);
         content: attr(data-label);
         line-height: var(--size);
-        left: calc(var(--padding) + var(--size) + 24px);
+        left: var(--padding-left);
     }
 
     .process input:checked:after {
-        left: calc(var(--padding) + var(--size) + 24px);
+        --inner-padding: 12px;
+        left: var(--inner-padding);
         margin: unset;
+        margin-top: -16px;
+        background-color: white;
+        height: 72px;
+        line-height: 72px;
+        width: calc(440px - var(--padding-left) - (var(--inner-padding) * 1));
+        padding-left: calc(var(--padding-left) - var(--inner-padding));
+        text-align: left;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+        border-radius: 16px;
+        z-index: -1;
+
     }
 
     .process > div,
