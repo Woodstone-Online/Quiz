@@ -11,18 +11,35 @@ export class Quiz {
         this.endpointURL = apiURL;
         this.analytics = new Analytics();
         this.facebookPixel = new FacebookPixel();
+        this.title = 'Woodstone Online — начало загородной жизни';
+        this.initStage = 'needs';
         this.stage = {
-            needs: {next: 'location'},
+            needs: {next: 'location', title: {menu: 'Конфигуратор'}},
             location: {
-                next: 'home', title: 'Выбрать районы и направления'
+                next: 'home',
+                title: {
+                    menu: 'География',
+                    desktopMenu: 'Районы и направления',
+                    button: 'Выбрать районы и направления',
+                }
             },
             home: {
-                next: 'conditions', title: 'Выбрать дом — готовое решение'
+                next: 'contract',
+                title: {
+                    menu: 'Дома',
+                    desktopMenu: 'Дома, продуманные до мелочей',
+                    button: 'Выбрать дом — готовое решение'
+                }
+            },
+            contract: {
+                next: 'conditions',
+                title: {menu: 'Подряд', desktopMenu: 'Условия по подряду', button: 'Условия по подряду'}
             },
             conditions: {
-                next: 'contacts', title: 'Доступные варианты  покупки'
+                next: 'contacts',
+                title: {menu: 'Условия', desktopMenu: 'Возможности для покупки', button: 'Доступные варианты покупки'}
             },
-            contacts: {}
+            contacts: {title: {menu: 'Завершение', button: 'Оставить заявку'}}
         }
         this.defaultAnswers = {
             preferences: {
@@ -128,9 +145,16 @@ export class Quiz {
             e.preventDefault();
             window.scrollTo(0, 0);
         });
+        window.addEventListener('setAnswer', () => this.updateMenuLinks());
+        this.updateMenuLinks();
+        document.querySelector('quiz-menu').classList.toggle('hidden', false);
         if (document.querySelector('quiz-app')) await document.querySelector('quiz-app').updateStage();
-        // const element = document.createElement('quiz-app');
-        // document.body.appendChild(element);
+    }
+
+    updateMenuLinks() {
+        document.querySelectorAll('quiz-menu > quiz-link').forEach(link => (delete link.dataset.order, link.dataset.disabled = true))
+        this.getActiveStages().map(stage => document.querySelector(`quiz-menu > quiz-link#${stage.id}`))
+            .forEach((link, order) => (link.dataset.order = ++order, delete link.dataset.disabled))
     }
 
     async renderStep(step) {
@@ -404,12 +428,28 @@ export class Quiz {
                         get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) !== 1 : false
                     })
                     break;
+                case 'contract':
+                    Object.defineProperty(data, 'skip', {
+                        get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) === 1 : true
+                    })
+                    break;
+                case 'conditions':
+                    Object.defineProperty(data, 'skip', {
+                        get: () => typeof this.getAnswer('home', false, null) === "number" ? this.getAnswer('home', false, null) !== 1 : false
+                    })
+                    break;
             }
         })
     }
 
     getNextStage(stage) {
         if (stage && this.stage[stage]) return this.stage[stage].nextStage;
+    }
+
+    getActiveStages(initStage = this.initStage) {
+        let nextStage = this.stage[initStage], activeStages = [nextStage];
+        while (nextStage = this.getNextStage(nextStage.id)) activeStages.push(nextStage);
+        return activeStages;
     }
 
 }

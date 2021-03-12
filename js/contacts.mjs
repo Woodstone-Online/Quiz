@@ -1,4 +1,6 @@
 import quiz, {LitElement, html, css, loadStyles} from "./quiz.mjs";
+import parsePhoneNumber
+    from 'https://cdn.skypack.dev/pin/libphonenumber-js@v1.9.12-rsuXNvTsIuSwRucnHAdU/mode=imports,min/unoptimized/bundle/libphonenumber-min.js';
 
 loadStyles(import.meta.url).then(styles =>
     window.customElements.define('quiz-contacts', class extends LitElement {
@@ -23,6 +25,10 @@ loadStyles(import.meta.url).then(styles =>
                     caption: 'Посмотрите место, где в ближайшем будущем сможете жить вы сами. В удобное время.',
                     button: 'Записаться'
                 },
+                Design: {
+                    title: 'Проектирование в подарок',
+                    caption: 'Целая команда из дизайнеров и архитекторов ждет, чтобы начать работу над вашим проектом',
+                },
                 Offer: {
                     title: 'Отлично, мы поняли что вы хотите!',
                     caption: 'Сохраните проект и отправьте его на обработку менеджеру — в скором времени мы ознакомим вас с лучшими предложениями.',
@@ -39,6 +45,15 @@ loadStyles(import.meta.url).then(styles =>
             app.setAnswer(step, item, value);
             this[item] = value;
             return this.requestUpdate();
+        }
+
+        parsePhone(phone) {
+            try {
+                const parser = parsePhoneNumber(phone, 'RU');
+                return parser ? parser.number : phone;
+            } catch (e) {
+                return phone;
+            }
         }
 
         toggleCommunication(item, value) {
@@ -75,16 +90,16 @@ loadStyles(import.meta.url).then(styles =>
                         </div>
                         <form id="contacts">
                             <h2>Мы свяжемся с вами в течении <span>14 минут</span></h2>
-                            <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '')}"
-                                   onchange="app.updateProfile('phone',this.value);this.setCustomValidity('')"
+                            <input type="tel" placeholder="+7" .value="${quiz.getState('profile', 'phone', '+7')}"
+                                   onchange="app.updateProfile('phone',this.getRootNode().host.parsePhone(this.value));this.setCustomValidity('')"
                                    onfocus="window.disableScroll=false"
-                                   onblur="window.disableScroll=true" name="phone">
+                                   onblur="window.disableScroll=true" name="phone" autocomplete="tel">
                             <input type="text" placeholder="Ваше имя" .value="${quiz.getState('profile', 'name', '')}"
                                    onchange="app.updateProfile('name',this.value);this.setCustomValidity('')"
                                    onfocus="window.disableScroll=false"
-                                   onblur="window.disableScroll=true" name="name">
+                                   onblur="window.disableScroll=true" name="name" autocomplete="name">
                             ${this.email ? html`
-                                <input type="email" placeholder="E-mail" name="email"
+                                <input type="email" placeholder="E-mail" name="email" autocomplete="email"
                                        .value="${quiz.getState('profile', 'email', '')}"
                                        onchange="app.updateProfile('email',this.value);this.setCustomValidity('')"
                                        onfocus="window.disableScroll=false" onblur="window.disableScroll=true">` : ''}

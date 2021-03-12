@@ -198,10 +198,15 @@ section {
 
 .range-slider .money span {
     font-family: 'Montserrat', sans-serif;
+    font-variant-numeric: tabular-nums;
     font-weight: 600;
     color: black;
     margin-left: 10px;
     margin-right: 25px;
+}
+
+.range-slider .money span:last-of-type {
+    margin-right: unset;
 }
 
 .range-slider .slider-line {

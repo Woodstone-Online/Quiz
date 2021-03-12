@@ -14,7 +14,7 @@ loadStyles(import.meta.url).then(styles =>
                        @click="${() => quiz.setAnswer('interest', null, 2) && (quiz.contactSubject = 'Offer') && quiz.sendEvent('LeadButton', 'exchange')}">
                         <h2 class="title">Обмен квартиры на дом</h2>
                         <div>
-                            <p>Выкупим вашу квартиру по рыночной стоимости.</p>
+                            <p>Выкупим вашу квартиру в счет будущего дома.</p>
                             <p>За 4 месяца построим готовый к жизни загородный дом.</p>
                             <p>Продолжайте жить в квартире, пока идет строительство.</p>
                         </div>
