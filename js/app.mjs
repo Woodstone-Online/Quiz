@@ -40,10 +40,9 @@ loadStyles(import.meta.url).then(styles =>
             return location.hash = quiz.initStage; // TODO: Popstate replace
         }
 
-        /*firstUpdated() {
-            // quiz.initRouter(this.shadowRoot.querySelector('main'));
-            this.shadowRoot.insertBefore(document.createElement('quiz-menu'), this.shadowRoot.querySelector('main'));
-        }*/
+        async firstUpdated() {
+            return await quiz.updateInitState('app');
+        }
 
         render() {
             return html`

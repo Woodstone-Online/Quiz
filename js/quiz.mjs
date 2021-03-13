@@ -52,6 +52,8 @@ export class Quiz {
             },
             selectedAreas: {}
         }
+        this.state = {};
+        this.initStates = ['quiz', 'app'];
         Object.assign(this, this.defaultAnswers);
         this.initStages();
         this.init();
@@ -75,6 +77,7 @@ export class Quiz {
     }
 
     async init() {
+        window.addEventListener('init', () => this.updateInitState());
         await Promise.allSettled([
             this.loadConfiguration('quizSteps', 'quizStep', 'fieldname').then((data) => (data = this.quizStep.budget.data[0]) && Object.assign(this.preferences.budget, {
                 from: data.minValue,
@@ -87,10 +90,16 @@ export class Quiz {
                 return 0;
             }))
         ]);
-        this.parseAnswersFromParameters();
-        this.loadAllAnswers();
-        await this.renderQuiz();
-        this.homes.forEach(this.loadHomeData.bind(this))
+        await this.parseAnswersFromParameters();
+        await this.loadAllAnswers();
+        await this.homes.forEach(this.loadHomeData.bind(this));
+        return await this.updateInitState('quiz');
+    }
+
+    async updateInitState(state = null) {
+        if (!state) return state;
+        this.state[state] = true;
+        if (this.initStates.filter(state => this.state[state]).length === this.initStates.length) return await this.renderQuiz();
     }
 
     initRangesSlider() {
