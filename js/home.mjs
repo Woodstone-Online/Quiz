@@ -272,13 +272,13 @@ loadStyles(import.meta.url).then(styles =>
                                         </div>`)}
                                 </div>
                                 <div class="slider-navigation">
-                                    <button @click="${this.prevSlide.bind(this, this.images)}"><</button>
-                                    <button @click="${this.nextSlide.bind(this, this.images)}">></button>
+                                    <button @click="${this.prevSlide.bind(this, this.images)}"></button>
+                                    <button @click="${this.nextSlide.bind(this, this.images)}"></button>
                                 </div>
                             </div>` : null}
                         ${quiz.home[this.selectedHome].plan ? html`
+                            <h2 class="title">Чертеж</h2>
                             <div class="card image-full-width">
-                                <h2 class="title">Чертеж</h2>
                                 <img src="${quiz.home[this.selectedHome].plan.url}" style="margin-bottom: 0">
                             </div>` : null}
                         <div class="card">
