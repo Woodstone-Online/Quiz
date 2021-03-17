@@ -726,6 +726,24 @@
     border-bottom-right-radius: 16px;
 }
 
+#details .card.image-full-width {
+    padding: 0;
+    position: relative;
+}
+
+#details .card.image-full-width > img {
+    all: initial;
+    width: 100%;
+    border-radius: 16px;
+}
+
+#details .card.image-full-width > .title {
+    position: absolute;
+    left: 28px;
+    top: 38px;
+    text-shadow: white 0 0 10px;
+}
+
 #details .card#view {
     padding: 26px 24px;
 }
@@ -1408,18 +1426,12 @@
         border-bottom-right-radius: 16px;
     }
 
-    #details .card.image-full-width {
-        padding: 52px 71px;
-    }
-
     #details .card.image-full-width > *:not(img) {
-        position: absolute;
     }
 
-    #details .card.image-full-width > img {
-        width: 100%;
-        margin-top: 70px;
-        position: initial;
+    #details .card.image-full-width > .title {
+        left: 71px;
+        top: 52px;
     }
 
     #details .plans {
