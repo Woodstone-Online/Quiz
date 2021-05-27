@@ -9,23 +9,23 @@
     "images": [
       {
         "homeImageId": "b695bdc9-419c-410e-bc8d-3d078bc16c9f",
-        "url": "http://159.65.203.198/static/04f0a689-640a-4cfc-a832-fd3127849e1c.80-2.jpg"
+        "url": "/static/04f0a689-640a-4cfc-a832-fd3127849e1c.80-2.jpg"
       },
       {
         "homeImageId": "d49bcaf8-4ead-401f-ba28-2049fd8c4088",
-        "url": "http://159.65.203.198/static/2b234ec6-b2a2-4f6a-95cc-a509ded73af3.80-1.jpg"
+        "url": "/static/2b234ec6-b2a2-4f6a-95cc-a509ded73af3.80-1.jpg"
       },
       {
         "homeImageId": "06264d7d-6e22-4e65-a034-6dd4a60e075d",
-        "url": "http://159.65.203.198/static/ba8e6703-cc34-4f2d-8538-357c062557ed.80-3.jpg"
+        "url": "/static/ba8e6703-cc34-4f2d-8538-357c062557ed.80-3.jpg"
       },
       {
         "homeImageId": "23985d8d-6271-4846-a9d9-cad996836877",
-        "url": "http://159.65.203.198/static/b86a8c90-881f-415f-bdce-aca30f4d45c0.80-4.jpg"
+        "url": "/static/b86a8c90-881f-415f-bdce-aca30f4d45c0.80-4.jpg"
       },
       {
         "homeImageId": "b6af1f4f-f80c-471e-a361-2e125fb0a4cf",
-        "url": "http://159.65.203.198/static/30e05226-9c01-4ddb-8f9e-faa60bdd40cc.80-5.jpg"
+        "url": "/static/30e05226-9c01-4ddb-8f9e-faa60bdd40cc.80-5.jpg"
       }
     ]
   }
