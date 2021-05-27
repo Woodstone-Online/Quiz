@@ -1,0 +1,28 @@
+{
+  "home": {
+    "homeId": "21b5933d-def7-4f29-9354-41ee90e8df62",
+    "title": "110 м²",
+    "price": 3960000,
+    "totalPrice": 4510000,
+    "space": 110,
+    "data": null,
+    "images": [
+      {
+        "homeImageId": "e8a9256d-3fba-4802-ab95-ada6cf54a765",
+        "url": "http://159.65.203.198/static/8ab01a49-d9c4-4c96-9933-6f9991c82276.110-11.jpg"
+      },
+      {
+        "homeImageId": "1121a24c-40e6-4b1a-abfe-eefd65cba9b5",
+        "url": "http://159.65.203.198/static/864b24d9-2f27-469f-bf72-04356441334e.110-22.jpg"
+      },
+      {
+        "homeImageId": "283a8af9-037f-4fd5-bd09-bd3f7f0ecaf0",
+        "url": "http://159.65.203.198/static/45e7b4b3-3a47-4463-96be-d63cf394171c.110-32.jpg"
+      },
+      {
+        "homeImageId": "9085563a-5ece-4b98-ad51-b45c2513ccbe",
+        "url": "http://159.65.203.198/static/a0181876-0d1d-4364-9304-dd16c9712576.110-5.jpg"
+      }
+    ]
+  }
+}

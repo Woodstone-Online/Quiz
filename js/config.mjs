@@ -25,5 +25,5 @@ function getApiUrl() {
 export const CONFIG = {
     gaTrackingId: getGaTrackingId(),
     facebookPixelId: getFacebookPixelId(),
-    apiUrl: getApiUrl(),
+    apiUrl: '/api/',
 };

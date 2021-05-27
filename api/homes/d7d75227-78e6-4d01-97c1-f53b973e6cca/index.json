@@ -1,0 +1,32 @@
+{
+  "home": {
+    "homeId": "d7d75227-78e6-4d01-97c1-f53b973e6cca",
+    "title": "60 м²",
+    "price": 2280000,
+    "totalPrice": 2580000,
+    "space": 60,
+    "data": null,
+    "images": [
+      {
+        "homeImageId": "c58160d1-3cd7-420c-928c-62fc254832a3",
+        "url": "http://159.65.203.198/static/0c4d94f6-59a6-4ede-b493-0956bb26f5fe.60-2.jpg"
+      },
+      {
+        "homeImageId": "d2211c02-5835-4aa0-8660-80e23dd3710d",
+        "url": "http://159.65.203.198/static/68dc80ae-bd87-4407-86be-076a71beb04c.60-1.jpg"
+      },
+      {
+        "homeImageId": "25bde870-ed0d-423d-8a5e-ad7497a9f335",
+        "url": "http://159.65.203.198/static/fe6f979c-d00e-4425-8f1f-d7fe9b95031b.60-3.jpg"
+      },
+      {
+        "homeImageId": "98e9f464-0ebc-4c2d-b7b0-29bc30720584",
+        "url": "http://159.65.203.198/static/c61317c3-d82c-45bf-9cbf-78b5a4d3a7d7.60-4.jpg"
+      },
+      {
+        "homeImageId": "22cddd23-84d1-4973-9e1d-ed364a5758db",
+        "url": "http://159.65.203.198/static/e54ee7bf-44ea-4a74-ac27-00c51bbc1310.60-5.jpg"
+      }
+    ]
+  }
+}
