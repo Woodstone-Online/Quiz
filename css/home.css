@@ -10,6 +10,10 @@
     display: none;
 }
 
+button {
+    touch-action: manipulation;
+}
+
 .navigation-buttons {
     position: fixed;
     bottom: 0;
@@ -312,6 +316,17 @@
     border-radius: 100px;
     margin-right: 12px;
     cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+
+.slider-navigation button:first-of-type {
+    background-image: url("/img/left.button.arrow.svg");
+}
+
+.slider-navigation button:last-of-type {
+    background-image: url("/img/right.button.arrow.svg");
 }
 
 #summary .bottom-line .slider-navigation {
@@ -382,6 +397,7 @@
     line-height: 66px;
     justify-content: center;
     color: #F5F5F5;
+    flex-wrap: wrap;
 }
 
 #summary .home-cover .home-price:after {
@@ -726,6 +742,24 @@
     border-bottom-right-radius: 16px;
 }
 
+#details .card.image-full-width {
+    padding: 0;
+    position: relative;
+}
+
+#details .card.image-full-width > img {
+    all: initial;
+    width: 100%;
+    border-radius: 16px;
+}
+
+#details .card.image-full-width > .title {
+    position: absolute;
+    left: 28px;
+    top: 38px;
+    text-shadow: white 0 0 20px;
+}
+
 #details .card#view {
     padding: 26px 24px;
 }
@@ -760,6 +794,7 @@
     font-weight: bold;
     font-size: 32px;
     color: #302F3A;
+    text-shadow: black 0 0 20px;
 }
 
 #details .image-slider .slides {
@@ -1408,18 +1443,12 @@
         border-bottom-right-radius: 16px;
     }
 
-    #details .card.image-full-width {
-        padding: 52px 71px;
-    }
-
     #details .card.image-full-width > *:not(img) {
-        position: absolute;
     }
 
-    #details .card.image-full-width > img {
-        width: 100%;
-        margin-top: 70px;
-        position: initial;
+    #details .card.image-full-width > .title {
+        left: 71px;
+        top: 52px;
     }
 
     #details .plans {

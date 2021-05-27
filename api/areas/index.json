@@ -1,0 +1,64 @@
+{
+  "areas": [
+    {
+      "areaId": "567566c2-92ed-451e-a0c5-a381debc58e4",
+      "title": "Полевское направление",
+      "minutesToCityCenter": 30,
+      "point": [
+        56.681117119,
+        60.440909824
+      ],
+      "radius": 10000
+    },
+    {
+      "areaId": "5aefb70e-bf6a-4bd2-98e3-2483ff0b110e",
+      "title": "Челябинский тракт",
+      "minutesToCityCenter": 30,
+      "point": [
+        56.606571739,
+        60.827850208
+      ],
+      "radius": 13000
+    },
+    {
+      "areaId": "5c212045-6b0b-45d1-bd27-8137a590c7ea",
+      "title": "Тюменский тракт",
+      "minutesToCityCenter": 30,
+      "point": [
+        56.734658696,
+        61.119535084
+      ],
+      "radius": 14000
+    },
+    {
+      "areaId": "6135dc95-030e-4a85-900f-f0e827fd76c0",
+      "title": "Березовский тракт",
+      "minutesToCityCenter": 30,
+      "point": [
+        56.907947904,
+        60.811698398
+      ],
+      "radius": 8000
+    },
+    {
+      "areaId": "984bd5f3-9914-458d-b7a3-7cd95cda2654",
+      "title": "Балтым",
+      "minutesToCityCenter": 30,
+      "point": [
+        57.046250093,
+        60.582227476
+      ],
+      "radius": 8000
+    },
+    {
+      "areaId": "e24ece74-554c-4f40-a9cd-d30c4905d9e5",
+      "title": "Новомосковский тракт",
+      "minutesToCityCenter": 30,
+      "point": [
+        56.837258276,
+        60.11131998
+      ],
+      "radius": 12000
+    }
+  ]
+}
